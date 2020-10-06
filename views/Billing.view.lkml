@@ -52,6 +52,8 @@ view: billing
          bsa.total_billing_amount  ,
          brh.bill_run_number,
          brh.status,
+         bda.trx_number,
+         bda.trn_line_number,
          brh.bill_through_date,
          brh.invoice_date
     FROM adorb.order_header_all oha,
@@ -125,7 +127,6 @@ view: billing
          AND bsa.billing_sch_id=bda.billing_sch_id(+)
          AND bda.bill_run_id=brh.bill_run_id(+)
          AND bsa.bill_run_id=brh.bill_run_id(+)
-         and bsa.billing_status ='SCHEDULED'
 ORDER BY oha.order_number, ola.line_number
        ;;
   }
@@ -225,6 +226,14 @@ ORDER BY oha.order_number, ola.line_number
   dimension: line_billing_status
   {type: string
     sql:${TABLE}. line_billing_status;;}
+
+  dimension: trx_number
+  {type: string
+    sql:${TABLE}. trx_number;;}
+
+  dimension: trn_line_number
+  {type: number
+    sql:${TABLE}. trn_line_number;;}
 
   dimension_group: line_start_date
   {type: time
