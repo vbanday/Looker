@@ -446,6 +446,27 @@ ORDER BY oha.order_number, ola.line_number
 
 
 
+  measure: sum_total_quantity {
+    type: sum
+    sql: ${quantity} ;;
+  }
+
+  measure: sum_unit_price {
+    type: sum
+    sql: ${unit_price} ;;
+  }
+
+  measure: sum_total_amount {
+    type: sum
+    sql: ${total_amount} ;;
+  }
+
+  measure: sum_total_billing_amount {
+    type: sum
+    sql: ${total_billing_amount} ;;
+  }
+
+
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
   #
