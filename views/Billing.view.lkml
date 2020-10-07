@@ -746,7 +746,6 @@ ORDER BY oha.order_number, ola.line_number
     fields: [
          bill_run_number,
          status,
-         billing_id,
          invoice_number,
          invoice_line_number,
          bill_through_date,
