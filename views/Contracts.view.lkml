@@ -460,9 +460,6 @@ dimension: source
   {type: number
     sql:${TABLE}. total_billing_amount;;}
 
-
-
-
   measure: sum_total_quantity {
     type: sum
     sql: ${quantity} ;;
