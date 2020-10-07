@@ -461,6 +461,10 @@ dimension: source
   {type: number
     sql:${TABLE}. total_billing_amount;;}
 
+  measure: sum_order_total_amount {
+    type: sum
+    sql: ${total_amount} ;;
+  }
 
   measure: order_count {
     type: count_distinct
@@ -558,7 +562,7 @@ dimension: source
          ,price_list
          ,account_number
          ,account_name
-         ,sum_total_amount]
+         ,sum_order_total_amount]
  }
 
   set: lines {
