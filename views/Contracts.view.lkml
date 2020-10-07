@@ -131,7 +131,8 @@ dimension: source
 
   dimension: order_number
   {type: string
-    sql:${TABLE}. order_number;;}
+    sql:${TABLE}. order_number;;
+    drill_fields: [lines*]}
 
   dimension: order_id
   {type: string
@@ -203,7 +204,8 @@ dimension: source
 
   dimension: line_number
   {type: number
-    sql:${TABLE}. line_number;;}
+    sql:${TABLE}. line_number;;
+    drill_fields: [billsch*]}
 
   dimension: line_id
   {type: string
@@ -659,18 +661,3 @@ measure: sum_billschedule_total_amount {
          ,total_amount]
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
