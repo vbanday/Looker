@@ -466,20 +466,17 @@ dimension: source
     type: count_distinct
     sql: ${order_number} ;;
     drill_fields: [
-         line_number
-         ,line_type
-         ,line_status
-         ,item_name
-         ,item_description
-         ,line_billing_status
-         ,evergreen_flag
-         ,billing_cycle
-         ,billing_frequency
-         ,invoicing_rule
-         ,accountingrule
+          source
+         ,order_number
+         ,order_type
+         ,order_status
+         ,order_category
+         ,po_number
+         ,currency
+         ,intent
+         ,payment_term
          ,account_number
          ,account_name
-         ,site_number
          ,quantity
          ,sum_total_amount]
   }
