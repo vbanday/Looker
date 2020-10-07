@@ -4,6 +4,7 @@ view: contracts{
   derived_table: {
     sql:   SELECT source.meaning source,
          oha.order_number,
+         oha.order_id,
          otl.meaning  order_type,
           ohst.meaning order_status,
          category.meaning order_category,
@@ -17,6 +18,7 @@ view: contracts{
          inte.meaning intent,
          art.name payment_term,
          prl.name price_list,
+         ola.line_id,
          ola.line_number,
          llt.meaning line_type,
          olst.meaning line_status,
@@ -131,6 +133,10 @@ dimension: source
   {type: string
     sql:${TABLE}. order_number;;}
 
+  dimension: order_id
+  {type: string
+    sql:${TABLE}. order_id;;}
+
   dimension: order_type
   {type: string
     sql:${TABLE}. order_type;;}
@@ -207,6 +213,10 @@ dimension: source
   dimension: line_number
   {type: number
     sql:${TABLE}. line_number;;}
+
+  dimension: line_id
+  {type: string
+    sql:${TABLE}. line_id;;}
 
   dimension: line_type
   {type: string
@@ -542,13 +552,13 @@ dimension: source
 
   measure: order_count {
     type: count_distinct
-    sql: ${order_number} ;;
+    sql: ${order_id} ;;
     drill_fields: [orders*]
   }
 
   measure: line_count {
     type: count_distinct
-    sql: ${line_number} ;;
+    sql: ${line_id} ;;
     drill_fields: [lines*]
   }
 
