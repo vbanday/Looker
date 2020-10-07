@@ -35,6 +35,7 @@ view: contracts{
          lbcus.account_number,
          lbcus.account_name,
          lbsit.site_number,
+         bsa.billing_sch_id,
          bsa.billing_period_from,
          bsa.billing_period_to,
          bsa.invoice_date billing_date,
@@ -146,6 +147,15 @@ dimension: source
   {type: string
     sql:${TABLE}. po_number;;}
 
+  dimension: order_start_date
+  {type: date
+    sql:${TABLE}. order_start_date;;}
+
+  dimension: order_end_date
+  {type: date
+    sql:${TABLE}. order_end_date;;}
+
+
   dimension_group: order_start_date
   {type: time
     timeframes: [
@@ -218,6 +228,14 @@ dimension: source
   {type: string
     sql:${TABLE}. line_billing_status;;}
 
+  dimension: line_start_date
+  {type: date
+    sql:${TABLE}. line_start_date;;}
+
+  dimension: line_end_date
+  {type: date
+    sql:${TABLE}. line_end_date;;}
+
   dimension_group: line_start_date
   {type: time
     timeframes: [
@@ -278,6 +296,23 @@ dimension: source
   dimension: site_number
   {type: string
     sql:${TABLE}. site_number;;}
+
+  dimension: order_creation_date
+  {type: date
+    sql:${TABLE}. order_creation_date;;}
+
+  dimension: order_booked_date
+  {type: date
+    sql:${TABLE}. order_booked_date;;}
+
+  dimension: line_creation_date
+  {type: date
+    sql:${TABLE}. line_creation_date;;}
+
+  dimension: line_booked_date
+  {type: date
+    sql:${TABLE}. line_booked_date;;}
+
   dimension_group: order_creation_date
   {type: time
     timeframes: [
@@ -333,6 +368,32 @@ dimension: source
     convert_tz: no
     datatype: date
     sql:${TABLE}. line_booked_date;;}
+
+
+#billing
+  dimension: billing_sch_id
+  {type: number
+    sql:${TABLE}. billing_sch_id;;}
+
+  dimension: billing_period_from
+  {type: date
+    sql:${TABLE}. billing_period_from;;}
+
+  dimension: billing_period_to
+  {type: date
+    sql:${TABLE}. billing_period_to;;}
+
+  dimension: billing_date
+  {type: date
+    sql:${TABLE}. billing_date;;}
+
+  dimension: trx_date
+  {type: date
+    sql:${TABLE}. trx_date;;}
+
+  dimension: gl_date
+  {type: date
+    sql:${TABLE}. gl_date;;}
 
   dimension_group: billing_period_from
   {type: time
@@ -461,10 +522,22 @@ dimension: source
   {type: number
     sql:${TABLE}. total_billing_amount;;}
 
-  measure: sum_order_total_amount {
+              ##Measures##
+  ##==================================##
+
+  measure: sum_total_quantity {
+    type: sum
+    sql: ${quantity} ;;
+  }
+
+  measure: sum_total_amount {
     type: sum
     sql: ${total_amount} ;;
-    drill_fields: [lines*]
+  }
+
+  measure: sum_total_billing_amount {
+    type: sum
+    sql: ${total_billing_amount} ;;
   }
 
   measure: order_count {
@@ -472,72 +545,74 @@ dimension: source
     sql: ${order_number} ;;
     drill_fields: [orders*]
   }
-  measure: sum_order_number {
+
+  measure: line_count {
     type: count_distinct
-    sql: ${order_number} ;;
+    sql: ${line_number} ;;
     drill_fields: [lines*]
   }
 
-  measure: sum_total_quantity {
-    type: sum
-    sql: ${quantity} ;;
-    drill_fields: [source
-         ,business_unit
-         ,order_number
-         ,order_type
-         ,order_status
-         ,order_category
-         ,po_number
-         ,currency
-         ,intent
-         ,payment_term
-         ,item_name
-         ,item_description
-         ,account_number
-         ,account_name
-         ,quantity
-         ,sum_total_amount]
+  measure: billsch_count {
+    type: count_distinct
+    sql: ${billing_sch_id} ;;
+    drill_fields: [billsch*]
   }
 
-  measure: sum_total_amount {
+  measure: sum_order_total_amount {
     type: sum
     sql: ${total_amount} ;;
-    drill_fields: [source
-         ,business_unit
-         ,order_number
-         ,order_type
-         ,order_status
-         ,order_category
-         ,po_number
-         ,currency
-         ,intent
-         ,payment_term
-         ,account_number
-         ,account_name
-         ,quantity
-         ,sum_total_amount]
+    drill_fields: [orders*]
   }
 
-  measure: sum_total_billing_amount {
+measure: sum_line_total_amount {
+  type: sum
+  sql: ${total_amount} ;;
+  drill_fields: [lines*]
+}
+
+measure: sum_billschedule_total_amount {
     type: sum
-    sql: ${total_billing_amount} ;;
-    drill_fields: [source
+    sql: ${total_amount} ;;
+    drill_fields: [billsch*]
+  }
+
+
+                    ##Sets##
+  ##=====================================##
+  set: orders {
+    fields: [
+          source
          ,business_unit
          ,order_number
          ,order_type
          ,order_status
          ,order_category
          ,po_number
+         ,order_start_date
+         ,order_end_date
+         ,order_creation_date
+         ,order_booked_date
          ,currency
          ,intent
          ,payment_term
+         ,price_list
+         ,sum_total_amount]
+ }
+
+  set: lines {
+    fields: [
+         order_number
          ,line_number
          ,line_type
          ,line_status
          ,item_name
          ,item_description
          ,line_billing_status
+         ,line_start_date
+         ,line_end_date
          ,evergreen_flag
+         ,line_creation_date
+         ,line_booked_date
          ,billing_cycle
          ,billing_frequency
          ,invoicing_rule
@@ -548,111 +623,29 @@ dimension: source
          ,sum_total_amount]
   }
 
-
-  set: orders {
-    fields: [ source
-         ,business_unit
-         ,order_number
-         ,order_type
-         ,order_status
-         ,order_category
-         ,po_number
-         ,currency
-         ,intent
-         ,payment_term
-         ,price_list
-         ,account_number
-         ,account_name
-         ,sum_order_total_amount]
- }
-
-  set: lines {
-    fields: [line_number
-         ,line_type
-         ,line_status
-         ,item_name
-         ,item_description
-         ,line_billing_status
-         ,evergreen_flag
-         ,billing_cycle
-         ,billing_frequency
-         ,invoicing_rule
-         ,accountingrule
-         ,account_number
-         ,account_name
-         ,site_number
-         ,sum_total_amount]
+  set: billsch {
+    fields: [
+          order_number
+         ,line_number
+         ,billing_sch_id
+         ,billing_period_from
+         ,billing_period_to
+         ,billing_date
+         ,trx_date
+         ,gl_date
+         ,trx_type
+         ,billing_line_type
+         ,billing_sch_status
+         ,period_month
+         ,fiscal_year
+         ,fiscal_quarter
+         ,fiscal_month
+         ,cal_year
+         ,cal_quarter
+         ,cal_month
+         ,quantity
+         ,unit_price
+         ,total_amount
+         ,total_billing_amount]
   }
-
-
-
-    #contract, customer
-
-  # # You can specify the table name if it's different from the view name:
-  # sql_table_name: my_schema_name.tester ;;
-  #
-  # # Define your dimensions and measures here, like this:
-  # dimension: user_id {
-  #   description: "Unique ID for each user that has ordered"
-  #   type: number
-  #   sql: ${TABLE}.user_id ;;
-  # }
-  #
-  # dimension: lifetime_orders {
-  #   description: "The total number of orders for each user"
-  #   type: number
-  #   sql: ${TABLE}.lifetime_orders ;;
-  # }
-  #
-  # dimension_group: most_recent_purchase {
-  #   description: "The date when each user last ordered"
-  #   type: time
-  #   timeframes: [date, week, month, year]
-  #   sql: ${TABLE}.most_recent_purchase_at ;;
-  # }
-  #
-  # measure: total_lifetime_orders {
-  #   description: "Use this for counting lifetime orders across many users"
-  #   type: sum
-  #   sql: ${lifetime_orders} ;;
-  # }
 }
-
-# view: contract_management {
-#   # Or, you could make this view a derived table, like this:
-#   derived_table: {
-#     sql: SELECT
-#         user_id as user_id
-#         , COUNT(*) as lifetime_orders
-#         , MAX(orders.created_at) as most_recent_purchase_at
-#       FROM orders
-#       GROUP BY user_id
-#       ;;
-#   }
-#
-#   # Define your dimensions and measures here, like this:
-#   dimension: user_id {
-#     description: "Unique ID for each user that has ordered"
-#     type: number
-#     sql: ${TABLE}.user_id ;;
-#   }
-#
-#   dimension: lifetime_orders {
-#     description: "The total number of orders for each user"
-#     type: number
-#     sql: ${TABLE}.lifetime_orders ;;
-#   }
-#
-#   dimension_group: most_recent_purchase {
-#     description: "The date when each user last ordered"
-#     type: time
-#     timeframes: [date, week, month, year]
-#     sql: ${TABLE}.most_recent_purchase_at ;;
-#   }
-#
-#   measure: total_lifetime_orders {
-#     description: "Use this for counting lifetime orders across many users"
-#     type: sum
-#     sql: ${lifetime_orders} ;;
-#   }
-# }

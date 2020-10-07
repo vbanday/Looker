@@ -160,6 +160,15 @@ ORDER BY oha.order_number, ola.line_number
   {type: string
     sql:${TABLE}. po_number;;}
 
+  dimension: order_start_date
+  {type: date
+    sql:${TABLE}. order_start_date;;}
+
+  dimension: order_end_date
+  {type: date
+    sql:${TABLE}. order_end_date;;}
+
+
   dimension_group: order_start_date
   {type: time
     timeframes: [
@@ -240,6 +249,14 @@ ORDER BY oha.order_number, ola.line_number
   {type: number
     sql:${TABLE}. trn_line_number;;}
 
+  dimension: line_start_date
+  {type: date
+    sql:${TABLE}. line_start_date;;}
+
+  dimension: line_end_date
+  {type: date
+    sql:${TABLE}. line_end_date;;}
+
   dimension_group: line_start_date
   {type: time
     timeframes: [
@@ -301,6 +318,23 @@ ORDER BY oha.order_number, ola.line_number
   {type: string
     sql:${TABLE}. site_number;;}
 
+
+  dimension: order_creation_date
+  {type: date
+    sql:${TABLE}. order_creation_date;;}
+
+  dimension: order_booked_date
+  {type: date
+    sql:${TABLE}. order_booked_date;;}
+
+  dimension: line_creation_date
+  {type: date
+    sql:${TABLE}. line_creation_date;;}
+
+  dimension: line_booked_date
+  {type: date
+    sql:${TABLE}. line_booked_date;;}
+
   dimension_group: order_creation_date
   {type: time
     timeframes: [
@@ -356,6 +390,27 @@ ORDER BY oha.order_number, ola.line_number
     convert_tz: no
     datatype: date
     sql:${TABLE}. line_booked_date;;}
+
+#billing
+  dimension: billing_period_from
+  {type: date
+    sql:${TABLE}. billing_period_from;;}
+
+  dimension: billing_period_to
+  {type: date
+    sql:${TABLE}. billing_period_to;;}
+
+  dimension: billing_date
+  {type: date
+    sql:${TABLE}. billing_date;;}
+
+  dimension: trx_date
+  {type: date
+    sql:${TABLE}. trx_date;;}
+
+  dimension: gl_date
+  {type: date
+    sql:${TABLE}. gl_date;;}
 
   dimension_group: billing_period_from
   {type: time
@@ -519,7 +574,13 @@ ORDER BY oha.order_number, ola.line_number
     datatype: date
     sql:${TABLE}. invoice_date;;}
 
+  dimension: bill_through_date
+  {type: date
+    sql:${TABLE}. bill_through_date;;}
 
+  dimension: invoice_date
+  {type: date
+    sql:${TABLE}. invoice_date;;}
 
   measure: sum_total_quantity {
     type: sum
