@@ -464,6 +464,7 @@ dimension: source
   measure: sum_order_total_amount {
     type: sum
     sql: ${total_amount} ;;
+    drill_fields: [lines*]
   }
 
   measure: order_count {
