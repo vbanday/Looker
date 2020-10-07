@@ -543,6 +543,7 @@ dimension: source
   measure: sum_total_amount {
     type: sum
     sql: ${total_amount} ;;
+    drill_fields: [orders*]
   }
 
   measure: sum_total_billing_amount {
