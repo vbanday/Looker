@@ -652,6 +652,19 @@ ORDER BY oha.order_number, ola.line_number
     drill_fields: [billrun*]
   }
 
+
+  measure: sum_billrun_total_amount {
+    type: sum
+    sql: ${total_amount} ;;
+    drill_fields: [billrun*]
+  }
+
+  measure: sum_invoice_total_amount {
+    type: sum
+    sql: ${total_amount} ;;
+    drill_fields: [billrun*]
+  }
+
   measure: sum_order_total_amount {
     type: sum
     sql: ${total_amount} ;;
@@ -673,7 +686,26 @@ ORDER BY oha.order_number, ola.line_number
 
   ##Sets##
   ##=====================================##
-  set: orders {
+
+  set: billrun {
+    fields: [
+      bill_run_number,
+      status,
+      bill_through_date,
+      sum_total_amount]
+  }
+
+  set: invoice {
+    fields: [
+      bill_run_number,
+      billing_id,
+      invoice_number,
+      invoice_line_number,
+      sum_total_amount]
+  }
+
+
+ set: orders {
     fields: [
       source
       ,business_unit
@@ -742,14 +774,5 @@ ORDER BY oha.order_number, ola.line_number
       ,total_amount]
   }
 
-  set: billrun {
-    fields: [
-         bill_run_number,
-         status,
-         invoice_number,
-         bill_through_date,
-         invoice_date,
-         sum_total_amount]
-  }
 
 }
