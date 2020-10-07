@@ -649,7 +649,7 @@ ORDER BY oha.order_number, ola.line_number
   measure: billrun_count {
     type: count_distinct
     sql: ${bill_run_id} ;;
-    drill_fields: [billsch*]
+    drill_fields: [billrun*]
   }
 
   measure: sum_order_total_amount {
@@ -740,6 +740,18 @@ ORDER BY oha.order_number, ola.line_number
       ,quantity
       ,unit_price
       ,total_amount]
+  }
+
+  set: billrun {
+    fields: [
+         bill_run_number,
+         status,
+         billing_id,
+         invoice_number,
+         invoice_line_number,
+         bill_through_date,
+         invoice_date,
+         sum_total_amount]
   }
 
 }
