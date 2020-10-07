@@ -662,7 +662,7 @@ ORDER BY oha.order_number, ola.line_number
   measure: sum_invoice_total_amount {
     type: sum
     sql: ${total_amount} ;;
-    drill_fields: [billrun*]
+    drill_fields: [invoice*]
   }
 
   measure: sum_order_total_amount {
@@ -692,7 +692,7 @@ ORDER BY oha.order_number, ola.line_number
       bill_run_number,
       status,
       bill_through_date,
-      sum_total_amount]
+      sum_invoice_total_amount]
   }
 
   set: invoice {
@@ -701,7 +701,7 @@ ORDER BY oha.order_number, ola.line_number
       billing_id,
       invoice_number,
       invoice_line_number,
-      sum_total_amount]
+      sum_billschedule_total_amount]
   }
 
 
