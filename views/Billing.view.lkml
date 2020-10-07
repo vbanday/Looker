@@ -11,6 +11,8 @@ view: billing
          oha.customer_po_number po_number,
          oha.effective_start_date order_start_date,
          oha.effective_end_date order_end_date,
+         oha.creation_date order_creation_date,
+         oha.booked_date order_booked_date,
          bu.name business_unit,
          curr.name currency,
          inte.meaning intent,
@@ -24,6 +26,9 @@ view: billing
          libs.meaning line_billing_status,
          ola.effective_start_date line_start_date,
          ola.effective_start_date line_end_date,
+         ola.evergreen_flag,
+         ola.creation_date line_creation_date,
+         ola.booked_date line_booked_date,
          lbcy.meaning billing_cycle,
          lbfr.meaning billing_frequency,
          lir.description invoicing_rule,
@@ -263,6 +268,11 @@ ORDER BY oha.order_number, ola.line_number
     datatype: date
     sql:${TABLE}. line_end_date;;}
 
+  dimension: evergreen_flag
+  {type: string
+    sql:${TABLE}. evergreen_flag;;}
+
+
   dimension: billing_cycle
   {type: string
     sql:${TABLE}. billing_cycle;;}
@@ -290,6 +300,62 @@ ORDER BY oha.order_number, ola.line_number
   dimension: site_number
   {type: string
     sql:${TABLE}. site_number;;}
+
+  dimension_group: order_creation_date
+  {type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql:${TABLE}. order_creation_date;;}
+
+  dimension_group: order_booked_date
+  {type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql:${TABLE}. order_booked_date;;}
+
+  dimension_group: line_creation_date
+  {type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql:${TABLE}. line_creation_date;;}
+
+  dimension_group: line_booked_date
+  {type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql:${TABLE}. line_booked_date;;}
 
   dimension_group: billing_period_from
   {type: time
