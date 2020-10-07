@@ -465,7 +465,23 @@ dimension: source
   measure: order_count {
     type: count_distinct
     sql: ${order_number} ;;
-    drill_fields: [order_number,order_type,account_name,account_number]
+    drill_fields: [
+         line_number
+         ,line_type
+         ,line_status
+         ,item_name
+         ,item_description
+         ,line_billing_status
+         ,evergreen_flag
+         ,billing_cycle
+         ,billing_frequency
+         ,invoicing_rule
+         ,accountingrule
+         ,account_number
+         ,account_name
+         ,site_number
+         ,quantity
+         ,sum_total_amount]
   }
 
   measure: sum_total_quantity {
