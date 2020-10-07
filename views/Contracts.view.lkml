@@ -395,8 +395,12 @@ dimension: source
   {type: number
     sql:${TABLE}. total_billing_amount;;}
 
-
-
+  measure: order_count_by_bu {
+    label: "Order Count By BU"
+    type: count_distinct
+    sql: ${order_number} ;;
+    drill_fields: [order_number,order_type,account_name,account_number]
+  }
 
   measure: sum_total_quantity {
     type: sum
