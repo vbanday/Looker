@@ -747,7 +747,6 @@ ORDER BY oha.order_number, ola.line_number
          bill_run_number,
          status,
          invoice_number,
-         invoice_line_number,
          bill_through_date,
          invoice_date,
          sum_total_amount]
