@@ -158,7 +158,7 @@ dimension: source
     ]
     convert_tz: no
     datatype: date
-    sql:${TABLE}. order_start_date;;}
+    sql:${TABLE}.order_start_date;;}
 
   dimension_group: order_end_date
   {type: time
@@ -471,7 +471,20 @@ dimension: source
   measure: sum_total_quantity {
     type: sum
     sql: ${quantity} ;;
-    drill_fields: [order_number,order_type,account_name,account_number]
+    drill_fields: [source
+         ,business_unit
+         ,order_number
+         ,order_type
+         ,order_status
+         ,order_category
+         ,po_number
+         ,currency
+         ,intent
+         ,payment_term
+         ,account_number
+         ,account_name
+         ,quantity
+         ,sum_total_amount]
   }
 
   measure: sum_total_amount {
