@@ -153,7 +153,7 @@ dimension: source
   {type: string
     sql:${TABLE}. po_number;;}
 
-  dimension_group: order_start_date
+  dimension_group: order_start_date_grp
   {type: time
     timeframes: [
       raw,
@@ -167,7 +167,7 @@ dimension: source
     datatype: date
     sql:${TABLE}.order_start_date;;}
 
-  dimension_group: order_end_date
+  dimension_group: order_end_date_grp
   {type: time
     timeframes: [
       raw,
@@ -230,7 +230,7 @@ dimension: source
     sql:${TABLE}. line_billing_status;;}
 
 
-  dimension_group: line_start_date
+  dimension_group: line_start_date_grp
   {type: time
     timeframes: [
       raw,
@@ -244,7 +244,7 @@ dimension: source
     datatype: date
     sql:${TABLE}. line_start_date;;}
 
-  dimension_group: line_end_date
+  dimension_group: line_end_date_grp
   {type: time
     timeframes: [
       raw,
@@ -291,7 +291,7 @@ dimension: source
   {type: string
     sql:${TABLE}. site_number;;}
 
-  dimension_group: order_creation_date
+  dimension_group: order_creation_date_grp
   {type: time
     timeframes: [
       raw,
@@ -305,7 +305,7 @@ dimension: source
     datatype: date
     sql:${TABLE}. order_creation_date;;}
 
-  dimension_group: order_booked_date
+  dimension_group: order_booked_date_grp
   {type: time
     timeframes: [
       raw,
@@ -319,7 +319,7 @@ dimension: source
     datatype: date
     sql:${TABLE}. order_booked_date;;}
 
-  dimension_group: line_creation_date
+  dimension_group: line_creation_date_grp
   {type: time
     timeframes: [
       raw,
@@ -333,7 +333,7 @@ dimension: source
     datatype: date
     sql:${TABLE}. line_creation_date;;}
 
-  dimension_group: line_booked_date
+  dimension_group: line_booked_date_grp
   {type: time
     timeframes: [
       raw,
@@ -353,7 +353,7 @@ dimension: source
   {type: number
     sql:${TABLE}. billing_sch_id;;}
 
-  dimension_group: billing_period_from
+  dimension_group: billing_period_from_grp
   {type: time
     timeframes: [
       raw,
@@ -367,7 +367,7 @@ dimension: source
     datatype: date
     sql:${TABLE}. billing_period_from;;}
 
-  dimension_group: billing_period_to
+  dimension_group: billing_period_to_grp
   {type: time
     timeframes: [
       raw,
@@ -381,7 +381,7 @@ dimension: source
     datatype: date
     sql:${TABLE}. billing_period_to;;}
 
-  dimension_group: billing_date
+  dimension_group: billing_date_grp
   {type: time
     timeframes: [
       raw,
@@ -395,7 +395,7 @@ dimension: source
     datatype: date
     sql:${TABLE}. billing_date;;}
 
-  dimension_group: trx_date
+  dimension_group: trx_date_grp
   {type: time
     timeframes: [
       raw,
@@ -409,7 +409,7 @@ dimension: source
     datatype: date
     sql:${TABLE}. trx_date;;}
 
-  dimension_group: gl_date
+  dimension_group: gl_date_grp
   {type: time
     timeframes: [
       raw,
@@ -480,6 +480,58 @@ dimension: source
   {type: number
     sql:${TABLE}. total_billing_amount;;}
 
+  dimension: order_start_date
+  {type: date
+    sql:${TABLE}. order_start_date;;}
+
+  dimension: order_end_date
+  {type: date
+    sql:${TABLE}. order_end_date;;}
+
+  dimension: order_creation_date
+  {type: date
+    sql:${TABLE}. order_creation_date;;}
+
+  dimension: order_booked_date
+  {type: date
+    sql:${TABLE}. order_booked_date;;}
+
+  dimension: line_start_date
+  {type: date
+    sql:${TABLE}. line_start_date;;}
+
+  dimension: line_end_date
+  {type: date
+    sql:${TABLE}. line_end_date;;}
+
+  dimension: line_creation_date
+  {type: date
+    sql:${TABLE}. line_creation_date;;}
+
+  dimension: line_booked_date
+  {type: date
+    sql:${TABLE}. line_booked_date;;}
+
+  dimension: billing_period_from
+  {type: date
+    sql:${TABLE}. billing_period_from;;}
+
+  dimension: billing_period_to
+  {type: date
+    sql:${TABLE}. billing_period_to;;}
+
+  dimension: billing_date
+  {type: date
+    sql:${TABLE}. billing_date;;}
+
+  dimension: trx_date
+  {type: date
+    sql:${TABLE}. trx_date;;}
+
+  dimension: gl_date
+  {type: date
+    sql:${TABLE}. gl_date;;}
+
               ##Measures##
   ##==================================##
 
@@ -547,10 +599,10 @@ measure: sum_billschedule_total_amount {
          ,order_status
          ,order_category
          ,po_number
-         ,order_start_date_date
-         ,order_end_date_date
-         ,order_creation_date_date
-         ,order_booked_date_date
+         ,order_start_date
+         ,order_end_date
+         ,order_creation_date
+          ,order_booked_date
          ,currency
          ,intent
          ,payment_term
@@ -567,11 +619,11 @@ measure: sum_billschedule_total_amount {
          ,item_name
          ,item_description
          ,line_billing_status
-         ,line_start_date_date
-         ,line_end_date_date
+        ,line_start_date
+         ,line_end_date
          ,evergreen_flag
-         ,line_creation_date_date
-         ,line_booked_date_date
+         ,line_creation_date
+         ,line_booked_date
          ,billing_cycle
          ,billing_frequency
          ,invoicing_rule
@@ -587,11 +639,11 @@ measure: sum_billschedule_total_amount {
           order_number
          ,line_number
          ,billing_sch_id
-         ,billing_period_from_date
-         ,billing_period_to_date
-         ,billing_date_date
-         ,trx_date_date
-         ,gl_date_date
+         ,billing_period_from
+         ,billing_period_to
+         ,billing_date
+         ,trx_date
+         ,gl_date
          ,trx_type
          ,billing_line_type
          ,billing_sch_status
@@ -607,3 +659,18 @@ measure: sum_billschedule_total_amount {
          ,total_amount]
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
