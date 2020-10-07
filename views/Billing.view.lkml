@@ -5,7 +5,7 @@ view: billing
   derived_table: {
     sql:   SELECT source.meaning source,
          oha.order_number,
-         oha.order_id
+         oha.order_id,
          otl.meaning  order_type,
          ohst.meaning order_status,
          category.meaning order_category,
@@ -20,7 +20,7 @@ view: billing
          art.name payment_term,
          prl.name price_list,
          ola.line_number,
-         ola.line_id
+         ola.line_id,
          llt.meaning line_type,
          olst.meaning line_status,
          prd.item_name,
@@ -58,7 +58,7 @@ view: billing
          bsa.unit_price,
          bsa.total_amount,
          bsa.total_billing_amount,
-         brh.bill_run_id
+         brh.bill_run_id,
          brh.bill_run_number,
          brh.status,
          bda.billing_id,
