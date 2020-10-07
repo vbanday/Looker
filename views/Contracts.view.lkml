@@ -465,20 +465,7 @@ dimension: source
   measure: order_count {
     type: count_distinct
     sql: ${order_number} ;;
-    drill_fields: [
-          source
-         ,order_number
-         ,order_type
-         ,order_status
-         ,order_category
-         ,po_number
-         ,currency
-         ,intent
-         ,payment_term
-         ,account_number
-         ,account_name
-         ,quantity
-         ,sum_total_amount]
+    drill_fields: [orders*]
   }
 
   measure: sum_total_quantity {
@@ -494,6 +481,8 @@ dimension: source
          ,currency
          ,intent
          ,payment_term
+         ,item_name
+         ,item_description
          ,account_number
          ,account_name
          ,quantity
@@ -538,6 +527,29 @@ dimension: source
          ,sum_total_amount]
   }
 
+
+  set: orders {
+    fields: [ source
+         ,business_unit
+         ,order_number
+         ,order_type
+         ,order_status
+         ,order_category
+         ,po_number
+         ,currency
+         ,intent
+         ,payment_term
+         ,price_list
+         ,account_number
+         ,account_name
+         ,sum_total_amount]
+ }
+
+
+
+
+
+    #contract, customer
 
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
