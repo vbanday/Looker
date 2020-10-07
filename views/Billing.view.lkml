@@ -147,7 +147,8 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: order_number
   {type: string
-    sql:${TABLE}. order_number;;}
+    sql:${TABLE}. order_number;;
+    drill_fields: [lines*]}
 
   dimension: order_id
   {type: string
@@ -219,7 +220,8 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: line_number
   {type: number
-    sql:${TABLE}. line_number;;}
+    sql:${TABLE}. line_number;;
+    drill_fields: [billsch*]}
 
   dimension: line_id
   {type: string
@@ -508,7 +510,8 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: bill_run_number
   {type: string
-    sql:${TABLE}. bill_run_number;;}
+    sql:${TABLE}. bill_run_number;;
+    drill_fields: [invoice*]}
 
   dimension: bill_run_id
   {type: string
