@@ -467,6 +467,11 @@ dimension: source
     sql: ${order_number} ;;
     drill_fields: [orders*]
   }
+  measure: sum_order_number {
+    type: count_distinct
+    sql: ${order_number} ;;
+    drill_fields: [lines*]
+  }
 
   measure: sum_total_quantity {
     type: sum
@@ -521,9 +526,20 @@ dimension: source
          ,currency
          ,intent
          ,payment_term
+         ,line_number
+         ,line_type
+         ,line_status
+         ,item_name
+         ,item_description
+         ,line_billing_status
+         ,evergreen_flag
+         ,billing_cycle
+         ,billing_frequency
+         ,invoicing_rule
+         ,accountingrule
          ,account_number
          ,account_name
-         ,quantity
+         ,site_number
          ,sum_total_amount]
   }
 
@@ -545,7 +561,23 @@ dimension: source
          ,sum_total_amount]
  }
 
-
+  set: lines {
+    fields: [line_number
+         ,line_type
+         ,line_status
+         ,item_name
+         ,item_description
+         ,line_billing_status
+         ,evergreen_flag
+         ,billing_cycle
+         ,billing_frequency
+         ,invoicing_rule
+         ,accountingrule
+         ,account_number
+         ,account_name
+         ,site_number
+         ,sum_total_amount]
+  }
 
 
 
