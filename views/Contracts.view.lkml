@@ -454,30 +454,36 @@ dimension: source
 
   dimension: total_amount
   {type: number
-    sql:${TABLE}. total_amount;;}
+    sql:${TABLE}. total_amount;;
+    }
 
   dimension: total_billing_amount
   {type: number
     sql:${TABLE}. total_billing_amount;;}
 
+
+  measure: order_count {
+    type: count_distinct
+    sql: ${order_number} ;;
+    drill_fields: [order_number,order_type,account_name,account_number]
+  }
+
   measure: sum_total_quantity {
     type: sum
     sql: ${quantity} ;;
-  }
-
-  measure: sum_unit_price {
-    type: sum
-    sql: ${unit_price} ;;
+    drill_fields: [order_number,order_type,account_name,account_number]
   }
 
   measure: sum_total_amount {
     type: sum
     sql: ${total_amount} ;;
+    drill_fields: [order_number,order_type,account_name,account_number]
   }
 
   measure: sum_total_billing_amount {
     type: sum
     sql: ${total_billing_amount} ;;
+    drill_fields: [order_number,order_type,account_name,account_number]
   }
 
 
