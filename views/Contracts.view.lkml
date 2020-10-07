@@ -606,7 +606,7 @@ measure: sum_billschedule_total_amount {
          ,intent
          ,payment_term
          ,price_list
-         ,sum_total_amount]
+         ,sum_line_total_amount]
  }
 
   set: lines {
@@ -630,7 +630,7 @@ measure: sum_billschedule_total_amount {
          ,account_number
          ,account_name
          ,site_number
-         ,sum_total_amount]
+         ,sum_billschedule_total_amount]
   }
 
   set: billsch {
@@ -655,7 +655,6 @@ measure: sum_billschedule_total_amount {
          ,cal_month
          ,quantity
          ,unit_price
-         ,total_amount
-         ,total_billing_amount]
+         ,total_amount]
   }
 }
