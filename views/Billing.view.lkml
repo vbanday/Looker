@@ -254,14 +254,6 @@ ORDER BY oha.order_number, ola.line_number
   {type: string
     sql:${TABLE}. line_billing_status;;}
 
-  dimension: line_start_date
-  {type: date
-    sql:${TABLE}. line_start_date;;}
-
-  dimension: line_end_date
-  {type: date
-    sql:${TABLE}. line_end_date;;}
-
   dimension_group: line_start_date
   {type: time
     timeframes: [
@@ -322,23 +314,6 @@ ORDER BY oha.order_number, ola.line_number
   dimension: site_number
   {type: string
     sql:${TABLE}. site_number;;}
-
-
-  dimension: order_creation_date
-  {type: date
-    sql:${TABLE}. order_creation_date;;}
-
-  dimension: order_booked_date
-  {type: date
-    sql:${TABLE}. order_booked_date;;}
-
-  dimension: line_creation_date
-  {type: date
-    sql:${TABLE}. line_creation_date;;}
-
-  dimension: line_booked_date
-  {type: date
-    sql:${TABLE}. line_booked_date;;}
 
   dimension_group: order_creation_date
   {type: time
@@ -401,26 +376,6 @@ ORDER BY oha.order_number, ola.line_number
   dimension: billing_sch_id
   {type: string
     sql:${TABLE}. billing_sch_id;;}
-
-  dimension: billing_period_from
-  {type: date
-    sql:${TABLE}. billing_period_from;;}
-
-  dimension: billing_period_to
-  {type: date
-    sql:${TABLE}. billing_period_to;;}
-
-  dimension: billing_date
-  {type: date
-    sql:${TABLE}. billing_date;;}
-
-  dimension: trx_date
-  {type: date
-    sql:${TABLE}. trx_date;;}
-
-  dimension: gl_date
-  {type: date
-    sql:${TABLE}. gl_date;;}
 
   dimension_group: billing_period_from
   {type: time
@@ -600,14 +555,6 @@ ORDER BY oha.order_number, ola.line_number
     datatype: date
     sql:${TABLE}. invoice_date;;}
 
-  dimension: bill_through_date
-  {type: date
-    sql:${TABLE}. bill_through_date;;}
-
-  dimension: invoice_date
-  {type: date
-    sql:${TABLE}. invoice_date;;}
-
 
              ##Measures##
   ##==================================##
@@ -691,7 +638,7 @@ ORDER BY oha.order_number, ola.line_number
     fields: [
       bill_run_number,
       status,
-      bill_through_date,
+      bill_through_date_date,
       sum_invoice_total_amount]
   }
 
@@ -716,8 +663,8 @@ ORDER BY oha.order_number, ola.line_number
       ,po_number
       ,order_start_date
       ,order_end_date
-      ,order_creation_date
-      ,order_booked_date
+      ,order_creation_date_date
+      ,order_booked_date_date
       ,currency
       ,intent
       ,payment_term
@@ -734,11 +681,11 @@ ORDER BY oha.order_number, ola.line_number
       ,item_name
       ,item_description
       ,line_billing_status
-      ,line_start_date
-      ,line_end_date
+      ,line_start_date_date
+      ,line_end_date_date
       ,evergreen_flag
-      ,line_creation_date
-      ,line_booked_date
+      ,line_creation_date_date
+      ,line_booked_date_date
       ,billing_cycle
       ,billing_frequency
       ,invoicing_rule
@@ -751,14 +698,14 @@ ORDER BY oha.order_number, ola.line_number
 
   set: billsch {
     fields: [
-      order_number
+       order_number
       ,line_number
       ,billing_sch_id
-      ,billing_period_from
-      ,billing_period_to
-      ,billing_date
-      ,trx_date
-      ,gl_date
+      ,billing_period_from_date
+      ,billing_period_to_date
+      ,billing_date_date
+      ,trx_date_date
+      ,gl_date_date
       ,trx_type
       ,billing_line_type
       ,billing_sch_status
@@ -773,6 +720,4 @@ ORDER BY oha.order_number, ola.line_number
       ,unit_price
       ,total_amount]
   }
-
-
 }

@@ -153,15 +153,6 @@ dimension: source
   {type: string
     sql:${TABLE}. po_number;;}
 
-  dimension: order_start_date
-  {type: date
-    sql:${TABLE}. order_start_date;;}
-
-  dimension: order_end_date
-  {type: date
-    sql:${TABLE}. order_end_date;;}
-
-
   dimension_group: order_start_date
   {type: time
     timeframes: [
@@ -238,13 +229,6 @@ dimension: source
   {type: string
     sql:${TABLE}. line_billing_status;;}
 
-  dimension: line_start_date
-  {type: date
-    sql:${TABLE}. line_start_date;;}
-
-  dimension: line_end_date
-  {type: date
-    sql:${TABLE}. line_end_date;;}
 
   dimension_group: line_start_date
   {type: time
@@ -307,22 +291,6 @@ dimension: source
   {type: string
     sql:${TABLE}. site_number;;}
 
-  dimension: order_creation_date
-  {type: date
-    sql:${TABLE}. order_creation_date;;}
-
-  dimension: order_booked_date
-  {type: date
-    sql:${TABLE}. order_booked_date;;}
-
-  dimension: line_creation_date
-  {type: date
-    sql:${TABLE}. line_creation_date;;}
-
-  dimension: line_booked_date
-  {type: date
-    sql:${TABLE}. line_booked_date;;}
-
   dimension_group: order_creation_date
   {type: time
     timeframes: [
@@ -384,26 +352,6 @@ dimension: source
   dimension: billing_sch_id
   {type: number
     sql:${TABLE}. billing_sch_id;;}
-
-  dimension: billing_period_from
-  {type: date
-    sql:${TABLE}. billing_period_from;;}
-
-  dimension: billing_period_to
-  {type: date
-    sql:${TABLE}. billing_period_to;;}
-
-  dimension: billing_date
-  {type: date
-    sql:${TABLE}. billing_date;;}
-
-  dimension: trx_date
-  {type: date
-    sql:${TABLE}. trx_date;;}
-
-  dimension: gl_date
-  {type: date
-    sql:${TABLE}. gl_date;;}
 
   dimension_group: billing_period_from
   {type: time
@@ -599,10 +547,10 @@ measure: sum_billschedule_total_amount {
          ,order_status
          ,order_category
          ,po_number
-         ,order_start_date
-         ,order_end_date
-         ,order_creation_date
-         ,order_booked_date
+         ,order_start_date_date
+         ,order_end_date_date
+         ,order_creation_date_date
+         ,order_booked_date_date
          ,currency
          ,intent
          ,payment_term
@@ -619,11 +567,11 @@ measure: sum_billschedule_total_amount {
          ,item_name
          ,item_description
          ,line_billing_status
-         ,line_start_date
-         ,line_end_date
+         ,line_start_date_date
+         ,line_end_date_date
          ,evergreen_flag
-         ,line_creation_date
-         ,line_booked_date
+         ,line_creation_date_date
+         ,line_booked_date_date
          ,billing_cycle
          ,billing_frequency
          ,invoicing_rule
@@ -639,11 +587,11 @@ measure: sum_billschedule_total_amount {
           order_number
          ,line_number
          ,billing_sch_id
-         ,billing_period_from
-         ,billing_period_to
-         ,billing_date
-         ,trx_date
-         ,gl_date
+         ,billing_period_from_date
+         ,billing_period_to_date
+         ,billing_date_date
+         ,trx_date_date
+         ,gl_date_date
          ,trx_type
          ,billing_line_type
          ,billing_sch_status
