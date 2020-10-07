@@ -6,7 +6,7 @@ view: contracts{
          oha.order_number,
          oha.order_id,
          otl.meaning  order_type,
-          ohst.meaning order_status,
+         ohst.meaning order_status,
          category.meaning order_category,
          oha.customer_po_number po_number,
          oha.effective_start_date order_start_date,

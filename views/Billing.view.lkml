@@ -4,9 +4,10 @@ view: billing
    # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:   SELECT source.meaning source,
-             oha.order_number,
+         oha.order_number,
+         oha.order_id
          otl.meaning  order_type,
-          ohst.meaning order_status,
+         ohst.meaning order_status,
          category.meaning order_category,
          oha.customer_po_number po_number,
          oha.effective_start_date order_start_date,
@@ -19,9 +20,10 @@ view: billing
          art.name payment_term,
          prl.name price_list,
          ola.line_number,
+         ola.line_id
          llt.meaning line_type,
          olst.meaning line_status,
-         prd.item_name ,
+         prd.item_name,
          prd.item_description,
          libs.meaning line_billing_status,
          ola.effective_start_date line_start_date,
@@ -36,6 +38,7 @@ view: billing
          lbcus.account_number,
          lbcus.account_name,
          lbsit.site_number,
+         bsa.billing_sch_id,
          bsa.billing_period_from,
          bsa.billing_period_to,
          bsa.invoice_date billing_date,
@@ -54,11 +57,13 @@ view: billing
          bsa.quantity,
          bsa.unit_price,
          bsa.total_amount,
-         bsa.total_billing_amount  ,
+         bsa.total_billing_amount,
+         brh.bill_run_id
          brh.bill_run_number,
          brh.status,
-         bda.trx_number,
-         bda.trn_line_number,
+         bda.billing_id,
+         bda.trx_number invoice_number,
+         bda.trn_line_number invoice_line_number,
          brh.bill_through_date,
          brh.invoice_date
     FROM adorb.order_header_all oha,
@@ -144,6 +149,10 @@ ORDER BY oha.order_number, ola.line_number
   {type: string
     sql:${TABLE}. order_number;;}
 
+  dimension: order_id
+  {type: string
+    sql:${TABLE}. order_id;;}
+
   dimension: order_type
   {type: string
     sql:${TABLE}. order_type;;}
@@ -221,6 +230,10 @@ ORDER BY oha.order_number, ola.line_number
   {type: number
     sql:${TABLE}. line_number;;}
 
+  dimension: line_id
+  {type: string
+    sql:${TABLE}. line_id;;}
+
   dimension: line_type
   {type: string
     sql:${TABLE}. line_type;;}
@@ -240,14 +253,6 @@ ORDER BY oha.order_number, ola.line_number
   dimension: line_billing_status
   {type: string
     sql:${TABLE}. line_billing_status;;}
-
-  dimension: trx_number
-  {type: string
-    sql:${TABLE}. trx_number;;}
-
-  dimension: trn_line_number
-  {type: number
-    sql:${TABLE}. trn_line_number;;}
 
   dimension: line_start_date
   {type: date
@@ -392,6 +397,11 @@ ORDER BY oha.order_number, ola.line_number
     sql:${TABLE}. line_booked_date;;}
 
 #billing
+
+  dimension: billing_sch_id
+  {type: string
+    sql:${TABLE}. billing_sch_id;;}
+
   dimension: billing_period_from
   {type: date
     sql:${TABLE}. billing_period_from;;}
@@ -538,9 +548,25 @@ ORDER BY oha.order_number, ola.line_number
   {type: number
     sql:${TABLE}. total_billing_amount;;}
 
+  dimension: billing_id
+  {type: string
+    sql:${TABLE}. billing_id;;}
+
+  dimension: invoice_number
+  {type: string
+    sql:${TABLE}. invoice_number;;}
+
+  dimension: invoice_line_number
+  {type: number
+    sql:${TABLE}. invoice_line_number;;}
+
   dimension: bill_run_number
   {type: string
     sql:${TABLE}. bill_run_number;;}
+
+  dimension: bill_run_id
+  {type: string
+    sql:${TABLE}. bill_run_id;;}
 
   dimension: status
   {type: string
@@ -582,19 +608,19 @@ ORDER BY oha.order_number, ola.line_number
   {type: date
     sql:${TABLE}. invoice_date;;}
 
+
+             ##Measures##
+  ##==================================##
+
   measure: sum_total_quantity {
     type: sum
     sql: ${quantity} ;;
   }
 
-  measure: sum_unit_price {
-    type: sum
-    sql: ${unit_price} ;;
-  }
-
   measure: sum_total_amount {
     type: sum
     sql: ${total_amount} ;;
+    drill_fields: [orders*]
   }
 
   measure: sum_total_billing_amount {
@@ -602,73 +628,118 @@ ORDER BY oha.order_number, ola.line_number
     sql: ${total_billing_amount} ;;
   }
 
+  measure: order_count {
+    type: count_distinct
+    sql: ${order_id} ;;
+    drill_fields: [orders*]
+  }
 
-  # # You can specify the table name if it's different from the view name:
-  # sql_table_name: my_schema_name.tester ;;
-  #
-  # # Define your dimensions and measures here, like this:
-  # dimension: user_id {
-  #   description: "Unique ID for each user that has ordered"
-  #   type: number
-  #   sql: ${TABLE}.user_id ;;
-  # }
-  #
-  # dimension: lifetime_orders {
-  #   description: "The total number of orders for each user"
-  #   type: number
-  #   sql: ${TABLE}.lifetime_orders ;;
-  # }
-  #
-  # dimension_group: most_recent_purchase {
-  #   description: "The date when each user last ordered"
-  #   type: time
-  #   timeframes: [date, week, month, year]
-  #   sql: ${TABLE}.most_recent_purchase_at ;;
-  # }
-  #
-  # measure: total_lifetime_orders {
-  #   description: "Use this for counting lifetime orders across many users"
-  #   type: sum
-  #   sql: ${lifetime_orders} ;;
-  # }
+  measure: line_count {
+    type: count_distinct
+    sql: ${line_id} ;;
+    drill_fields: [lines*]
+  }
+
+  measure: billsch_count {
+    type: count_distinct
+    sql: ${billing_sch_id} ;;
+    drill_fields: [billsch*]
+  }
+
+  measure: billrun_count {
+    type: count_distinct
+    sql: ${bill_run_id} ;;
+    drill_fields: [billsch*]
+  }
+
+  measure: sum_order_total_amount {
+    type: sum
+    sql: ${total_amount} ;;
+    drill_fields: [orders*]
+  }
+
+  measure: sum_line_total_amount {
+    type: sum
+    sql: ${total_amount} ;;
+    drill_fields: [lines*]
+  }
+
+  measure: sum_billschedule_total_amount {
+    type: sum
+    sql: ${total_amount} ;;
+    drill_fields: [billsch*]
+  }
+
+
+  ##Sets##
+  ##=====================================##
+  set: orders {
+    fields: [
+      source
+      ,business_unit
+      ,order_number
+      ,order_type
+      ,order_status
+      ,order_category
+      ,po_number
+      ,order_start_date
+      ,order_end_date
+      ,order_creation_date
+      ,order_booked_date
+      ,currency
+      ,intent
+      ,payment_term
+      ,price_list
+      ,sum_line_total_amount]
+  }
+
+  set: lines {
+    fields: [
+      order_number
+      ,line_number
+      ,line_type
+      ,line_status
+      ,item_name
+      ,item_description
+      ,line_billing_status
+      ,line_start_date
+      ,line_end_date
+      ,evergreen_flag
+      ,line_creation_date
+      ,line_booked_date
+      ,billing_cycle
+      ,billing_frequency
+      ,invoicing_rule
+      ,accountingrule
+      ,account_number
+      ,account_name
+      ,site_number
+      ,sum_billschedule_total_amount]
+  }
+
+  set: billsch {
+    fields: [
+      order_number
+      ,line_number
+      ,billing_sch_id
+      ,billing_period_from
+      ,billing_period_to
+      ,billing_date
+      ,trx_date
+      ,gl_date
+      ,trx_type
+      ,billing_line_type
+      ,billing_sch_status
+      ,period_month
+      ,fiscal_year
+      ,fiscal_quarter
+      ,fiscal_month
+      ,cal_year
+      ,cal_quarter
+      ,cal_month
+      ,quantity
+      ,unit_price
+      ,total_amount]
+  }
 
 }
-
-# view: billing {
-#   # Or, you could make this view a derived table, like this:
-#   derived_table: {
-#     sql: SELECT
-#         user_id as user_id
-#         , COUNT(*) as lifetime_orders
-#         , MAX(orders.created_at) as most_recent_purchase_at
-#       FROM orders
-#       GROUP BY user_id
-#       ;;
-#   }
-#
-#   # Define your dimensions and measures here, like this:
-#   dimension: user_id {
-#     description: "Unique ID for each user that has ordered"
-#     type: number
-#     sql: ${TABLE}.user_id ;;
-#   }
-#
-#   dimension: lifetime_orders {
-#     description: "The total number of orders for each user"
-#     type: number
-#     sql: ${TABLE}.lifetime_orders ;;
-#   }
-#
-#   dimension_group: most_recent_purchase {
-#     description: "The date when each user last ordered"
-#     type: time
-#     timeframes: [date, week, month, year]
-#     sql: ${TABLE}.most_recent_purchase_at ;;
-#   }
-#
-#   measure: total_lifetime_orders {
-#     description: "Use this for counting lifetime orders across many users"
-#     type: sum
-#     sql: ${lifetime_orders} ;;
-#   }
-# }
