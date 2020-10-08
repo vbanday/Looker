@@ -556,6 +556,10 @@ dimension: source
               ##Measures##
   ##==================================##
 
+  measure: order_type_max {
+    type: max
+    sql: ${order_type} ;;
+  }
 
   measure: sum_total_quantity {
     type: sum
