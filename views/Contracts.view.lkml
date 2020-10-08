@@ -1,5 +1,4 @@
 view: contracts{
-
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:   SELECT source.meaning source,
@@ -537,6 +536,7 @@ dimension: source
               ##Measures##
   ##==================================##
 
+
   measure: sum_total_quantity {
     type: sum
     sql: ${quantity} ;;
@@ -545,7 +545,6 @@ dimension: source
   measure: sum_total_amount {
     type: sum
     sql: ${total_amount} ;;
-    drill_fields: [orders*]
   }
 
   measure: sum_total_billing_amount {
@@ -577,13 +576,13 @@ dimension: source
     drill_fields: [orders*]
   }
 
-measure: sum_line_total_amount {
+  measure: sum_line_total_amount {
   type: sum
   sql: ${total_amount} ;;
   drill_fields: [lines*]
-}
+  }
 
-measure: sum_billschedule_total_amount {
+  measure: sum_billschedule_total_amount {
     type: sum
     sql: ${total_amount} ;;
     drill_fields: [billsch*]
@@ -604,7 +603,7 @@ measure: sum_billschedule_total_amount {
          ,order_start_date
          ,order_end_date
          ,order_creation_date
-          ,order_booked_date
+         ,order_booked_date
          ,currency
          ,intent
          ,payment_term
@@ -621,7 +620,7 @@ measure: sum_billschedule_total_amount {
          ,item_name
          ,item_description
          ,line_billing_status
-        ,line_start_date
+         ,line_start_date
          ,line_end_date
          ,evergreen_flag
          ,line_creation_date
@@ -650,14 +649,15 @@ measure: sum_billschedule_total_amount {
          ,billing_line_type
          ,billing_sch_status
          ,period_month
+         ,quantity
+         ,unit_price
          ,fiscal_year
          ,fiscal_quarter
          ,fiscal_month
          ,cal_year
          ,cal_quarter
          ,cal_month
-         ,quantity
-         ,unit_price
-         ,total_amount]
-  }
+         ,total_billing_amount
+         ]
+         }
 }
