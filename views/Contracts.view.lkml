@@ -35,6 +35,7 @@ view: contracts{
          ola.accounting_rule accountingrule,
          lbcus.account_number,
          lbcus.account_name,
+         lbcus.creation_date account_creation_date,
          lbsit.site_number,
          bsa.billing_sch_id,
          bsa.billing_period_from,
@@ -424,6 +425,20 @@ dimension: source
     datatype: date
     sql:${TABLE}. gl_date;;}
 
+  dimension_group: account_creation_date_grp
+  {type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql:${TABLE}. account_creation_date;;}
+
   dimension: trx_type
   {type: string
     sql:${TABLE}. trx_type;;}
@@ -532,6 +547,11 @@ dimension: source
   dimension: gl_date
   {type: date
     sql:${TABLE}. gl_date;;}
+
+  dimension: account_creation_date
+  {type: date
+    sql:${TABLE}. account_creation_date;;}
+
 
               ##Measures##
   ##==================================##
