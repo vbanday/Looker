@@ -765,12 +765,6 @@ ORDER BY oha.order_number, ola.line_number
       ,billing_line_type
       ,billing_sch_status
       ,period_month
-      ,fiscal_year
-      ,fiscal_quarter
-      ,fiscal_month
-      ,cal_year
-      ,cal_quarter
-      ,cal_month
       ,quantity
       ,unit_price
       ,total_amount]
