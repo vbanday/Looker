@@ -1,4 +1,4 @@
-connection: "recvue_demo"
+connection: "recvue_preview"
 
 # include all the views
 include: "/views/**/*.view"
