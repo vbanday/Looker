@@ -60,6 +60,7 @@ view: billing
          bsa.total_billing_amount,
          brh.bill_run_id,
          brh.bill_run_number,
+         brh.creation_date billrun_creation_date,
          brh.status,
          bda.billing_id,
          bda.trx_number invoice_number,
@@ -610,6 +611,23 @@ ORDER BY oha.order_number, ola.line_number
     sql:${TABLE}. invoice_date;;}
 
 
+  dimension_group: billrun_creation_date_grp
+  { type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql:${TABLE}. billrun_creation_date;;}
+
+  dimension: billrun_creation_date
+  {type: date
+    sql:${TABLE}. billrun_creation_date;;}
 
              ##Measures##
   ##==================================##
