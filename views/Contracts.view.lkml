@@ -2,8 +2,8 @@ view: contracts{
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:   SELECT source.meaning source,
-         oha.order_number,
          oha.order_id,
+         oha.order_number,
          otl.meaning  order_type,
          ohst.meaning order_status,
          category.meaning order_category,
@@ -129,14 +129,16 @@ dimension: source
   {type: string
     sql:${TABLE}. source;;}
 
-  dimension: order_number
-  {type: string
-    sql:${TABLE}. order_number;;
-    drill_fields: [lines*]}
-
   dimension: order_id
   {type: string
     sql:${TABLE}. order_id;;}
+
+  dimension: order_number
+  {type: string
+    sql:${TABLE}. order_number;;
+    html:
+    <a href="https://icann-test.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}">{{order_number}}</a>;;
+   }
 
   dimension: order_type
   {type: string
