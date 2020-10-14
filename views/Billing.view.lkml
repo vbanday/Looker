@@ -454,7 +454,13 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: billing_sch_status
   {type: string
-    sql:${TABLE}. billing_sch_status;;}
+    sql:${TABLE}. billing_sch_status;;
+    html: {% if {{value}} ='Billed' %}
+    <p style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ billing_period_to }}</p>
+    {% else %}
+    <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ billing_period_to }}</p>
+    {% endif %};;
+    }
 
   dimension: period_month
   {type: string
@@ -591,7 +597,14 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: billing_period_to
   {type: date
-    sql:${TABLE}. billing_period_to;;}
+    sql:${TABLE}.billing_period_to;;
+    html: {% if {{billing_sch_status}} ='Billed' %}
+          <p style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ billing_period_to }}</p>
+          {% else %}
+          <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ billing_period_to }}</p>
+          {% endif %};;
+
+    }
 
   dimension: billing_date
   {type: date
