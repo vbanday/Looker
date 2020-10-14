@@ -137,7 +137,7 @@ dimension: source
   {type: string
     sql:${TABLE}. order_number;;
     html:
-    <a href="https://icann-test.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}">{{order_number}}</a>;;
+    <a href="https://icann-test.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}" target="_blank">{{order_number}}</a>;;
    }
 
   dimension: order_type
