@@ -58,6 +58,7 @@ view: billing
          bsa.unit_price,
          bsa.total_amount,
          bsa.total_billing_amount,
+         decode(bss.meaning,'Billed',bsa.total_billing_amount,0) actual_billing_amount,
          brh.bill_run_id,
          brh.bill_run_number,
          brh.creation_date billrun_creation_date,
@@ -454,12 +455,7 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: billing_sch_status
   {type: string
-    sql:${TABLE}. billing_sch_status;;
-    html: {% if {{value}} ='Billed' %}
-    <p style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ billing_period_to }}</p>
-    {% else %}
-    <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ billing_period_to }}</p>
-    {% endif %};;
+    sql:${TABLE}.billing_sch_status;;
     }
 
   dimension: period_month
@@ -500,7 +496,11 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: total_amount
   {type: number
-    sql:${TABLE}. total_amount;;}
+    sql:${TABLE}.total_amount;;}
+
+  dimension: actual_billing_amount
+  {type: number
+    sql:${TABLE}.actual_billing_amount;;}
 
   dimension: total_billing_amount
   {type: number
@@ -598,12 +598,6 @@ ORDER BY oha.order_number, ola.line_number
   dimension: billing_period_to
   {type: date
     sql:${TABLE}.billing_period_to;;
-    html: {% if {{billing_sch_status}} ='Billed' %}
-          <p style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ billing_period_to }}</p>
-          {% else %}
-          <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ billing_period_to }}</p>
-          {% endif %};;
-
     }
 
   dimension: billing_date
@@ -716,6 +710,12 @@ ORDER BY oha.order_number, ola.line_number
   measure: sum_billschedule_total_amount {
     type: sum
     sql: ${total_amount} ;;
+    drill_fields: [billsch*]
+  }
+
+  measure: sum_actual_billing_amount {
+    type: sum
+    sql: ${actual_billing_amount} ;;
     drill_fields: [billsch*]
   }
 
