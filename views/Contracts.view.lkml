@@ -2,8 +2,8 @@ view: contracts{
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:   SELECT source.meaning source,
-         oha.order_number,
          oha.order_id,
+         oha.order_number,
          otl.meaning  order_type,
          ohst.meaning order_status,
          category.meaning order_category,
@@ -56,7 +56,9 @@ view: contracts{
          bsa.quantity,
          bsa.unit_price,
          bsa.total_amount,
-         bsa.total_billing_amount
+         bsa.total_billing_amount,
+         prd.product_group,
+         prd.attribute1 Product_type
     FROM adorb.order_header_all oha,
          adorb.order_lines_all ola,
          adorb.business_units bu,
@@ -125,18 +127,20 @@ ORDER BY oha.order_number, ola.line_number
        ;;
   }
 
-dimension: source
+  dimension: source
   {type: string
     sql:${TABLE}. source;;}
-
-  dimension: order_number
-  {type: string
-    sql:${TABLE}. order_number;;
-    drill_fields: [lines*]}
 
   dimension: order_id
   {type: string
     sql:${TABLE}. order_id;;}
+
+  dimension: order_number
+  {type: string
+    sql:${TABLE}. order_number;;
+    html:
+    <a href="https://icann-test.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}" target="_blank">{{order_number}}</a>;;
+  }
 
   dimension: order_type
   {type: string
@@ -490,7 +494,7 @@ dimension: source
   dimension: total_amount
   {type: number
     sql:${TABLE}. total_amount;;
-    }
+  }
 
   dimension: total_billing_amount
   {type: number
@@ -552,8 +556,16 @@ dimension: source
   {type: date
     sql:${TABLE}. account_creation_date;;}
 
+  dimension: product_group
+  {type: string
+    sql:${TABLE}.product_group;;}
 
-              ##Measures##
+  dimension: Product_type
+  {type: string
+    sql:${TABLE}.Product_type;;}
+
+
+  ##Measures##
   ##==================================##
 
   measure: order_type_max {
@@ -601,9 +613,9 @@ dimension: source
   }
 
   measure: sum_line_total_amount {
-  type: sum
-  sql: ${total_amount} ;;
-  drill_fields: [lines*]
+    type: sum
+    sql: ${total_amount} ;;
+    drill_fields: [lines*]
   }
 
   measure: sum_billschedule_total_amount {
@@ -613,75 +625,75 @@ dimension: source
   }
 
 
-                    ##Sets##
+  ##Sets##
   ##=====================================##
   set: orders {
     fields: [
-          source
-         ,business_unit
-         ,order_number
-         ,order_type
-         ,order_status
-         ,order_category
-         ,po_number
-         ,order_start_date
-         ,order_end_date
-         ,order_creation_date
-         ,order_booked_date
-         ,currency
-         ,intent
-         ,payment_term
-         ,price_list
-         ,sum_line_total_amount]
- }
+      source
+      ,business_unit
+      ,order_number
+      ,order_type
+      ,order_status
+      ,order_category
+      ,po_number
+      ,order_start_date
+      ,order_end_date
+      ,order_creation_date
+      ,order_booked_date
+      ,currency
+      ,intent
+      ,payment_term
+      ,price_list
+      ,sum_line_total_amount]
+  }
 
   set: lines {
     fields: [
-         order_number
-         ,line_number
-         ,line_type
-         ,line_status
-         ,item_name
-         ,item_description
-         ,line_billing_status
-         ,line_start_date
-         ,line_end_date
-         ,evergreen_flag
-         ,line_creation_date
-         ,line_booked_date
-         ,billing_cycle
-         ,billing_frequency
-         ,invoicing_rule
-         ,accountingrule
-         ,account_number
-         ,account_name
-         ,site_number
-         ,sum_billschedule_total_amount]
+      order_number
+      ,line_number
+      ,line_type
+      ,line_status
+      ,item_name
+      ,item_description
+      ,line_billing_status
+      ,line_start_date
+      ,line_end_date
+      ,evergreen_flag
+      ,line_creation_date
+      ,line_booked_date
+      ,billing_cycle
+      ,billing_frequency
+      ,invoicing_rule
+      ,accountingrule
+      ,account_number
+      ,account_name
+      ,site_number
+      ,sum_billschedule_total_amount]
   }
 
   set: billsch {
     fields: [
-          order_number
-         ,line_number
-         ,billing_sch_id
-         ,billing_period_from
-         ,billing_period_to
-         ,billing_date
-         ,trx_date
-         ,gl_date
-         ,trx_type
-         ,billing_line_type
-         ,billing_sch_status
-         ,period_month
-         ,quantity
-         ,unit_price
-         ,fiscal_year
-         ,fiscal_quarter
-         ,fiscal_month
-         ,cal_year
-         ,cal_quarter
-         ,cal_month
-         ,total_billing_amount
-         ]
-         }
+      order_number
+      ,line_number
+      ,billing_sch_id
+      ,billing_period_from
+      ,billing_period_to
+      ,billing_date
+      ,trx_date
+      ,gl_date
+      ,trx_type
+      ,billing_line_type
+      ,billing_sch_status
+      ,period_month
+      ,quantity
+      ,unit_price
+      ,fiscal_year
+      ,fiscal_quarter
+      ,fiscal_month
+      ,cal_year
+      ,cal_quarter
+      ,cal_month
+      ,total_billing_amount
+    ]
+  }
 }

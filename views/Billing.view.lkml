@@ -1,11 +1,10 @@
 view: billing
 {
-
-   # Or, you could make this view a derived table, like this:
+  # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:   SELECT source.meaning source,
-         oha.order_number,
          oha.order_id,
+         oha.order_number,
          otl.meaning  order_type,
          ohst.meaning order_status,
          category.meaning order_category,
@@ -58,6 +57,7 @@ view: billing
          bsa.unit_price,
          bsa.total_amount,
          bsa.total_billing_amount,
+         decode(bss.meaning,'Billed',bsa.total_amount,0) actual_billing_amount,
          brh.bill_run_id,
          brh.bill_run_number,
          brh.creation_date billrun_creation_date,
@@ -66,7 +66,9 @@ view: billing
          bda.trx_number invoice_number,
          bda.trn_line_number invoice_line_number,
          brh.bill_through_date,
-         brh.invoice_date
+         brh.invoice_date,
+         prd.product_group,
+         prd.attribute1 Product_type
     FROM adorb.order_header_all oha,
          adorb.order_lines_all ola,
          adorb.business_units bu,
@@ -146,14 +148,17 @@ ORDER BY oha.order_number, ola.line_number
   {type: string
     sql:${TABLE}. source;;}
 
+  dimension: order_id
+  {type: string
+    sql:${TABLE}. order_id;;
+  }
+
   dimension: order_number
   {type: string
     sql:${TABLE}. order_number;;
-    drill_fields: [lines*]}
-
-  dimension: order_id
-  {type: string
-    sql:${TABLE}. order_id;;}
+    html:
+    <a href="https://icann-test.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}" target="_blank">{{order_number}}</a>;;
+  }
 
   dimension: order_type
   {type: string
@@ -451,7 +456,8 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: billing_sch_status
   {type: string
-    sql:${TABLE}. billing_sch_status;;}
+    sql:${TABLE}.billing_sch_status;;
+  }
 
   dimension: period_month
   {type: string
@@ -491,7 +497,11 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: total_amount
   {type: number
-    sql:${TABLE}. total_amount;;}
+    sql:${TABLE}.total_amount;;}
+
+  dimension: actual_billing_amount
+  {type: number
+    sql:${TABLE}.actual_billing_amount;;}
 
   dimension: total_billing_amount
   {type: number
@@ -588,7 +598,8 @@ ORDER BY oha.order_number, ola.line_number
 
   dimension: billing_period_to
   {type: date
-    sql:${TABLE}. billing_period_to;;}
+    sql:${TABLE}.billing_period_to;;
+  }
 
   dimension: billing_date
   {type: date
@@ -629,7 +640,15 @@ ORDER BY oha.order_number, ola.line_number
   {type: date
     sql:${TABLE}. billrun_creation_date;;}
 
-             ##Measures##
+  dimension: product_group
+  {type: string
+    sql:${TABLE}.product_group;;}
+
+  dimension: Product_type
+  {type: string
+    sql:${TABLE}.Product_type;;}
+
+  ##Measures##
   ##==================================##
 
   measure: sum_total_quantity {
@@ -703,6 +722,12 @@ ORDER BY oha.order_number, ola.line_number
     drill_fields: [billsch*]
   }
 
+  measure: sum_actual_billing_amount {
+    type: sum
+    sql: ${actual_billing_amount} ;;
+    drill_fields: [billsch*]
+  }
+
 
   ##Sets##
   ##=====================================##
@@ -725,7 +750,7 @@ ORDER BY oha.order_number, ola.line_number
   }
 
 
- set: orders {
+  set: orders {
     fields: [
       source
       ,business_unit
@@ -771,7 +796,7 @@ ORDER BY oha.order_number, ola.line_number
 
   set: billsch {
     fields: [
-       order_number
+      order_number
       ,line_number
       ,billing_sch_id
       ,billing_period_from

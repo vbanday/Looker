@@ -1,4 +1,4 @@
-connection: "recvue_preview"
+connection: "icann_test"
 
 # include all the views
 include: "/views/**/*.view"
@@ -15,3 +15,4 @@ explore: usages {}
 explore: billing {}
 explore: revenue {}
 explore: payments {}
+explore: geturl {}
