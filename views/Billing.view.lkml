@@ -67,7 +67,9 @@ view: billing
          bda.trx_number invoice_number,
          bda.trn_line_number invoice_line_number,
          brh.bill_through_date,
-         brh.invoice_date
+         brh.invoice_date,
+         prd.product_group,
+         prd.attribute1 Product_type
     FROM adorb.order_header_all oha,
          adorb.order_lines_all ola,
          adorb.business_units bu,
@@ -638,6 +640,14 @@ ORDER BY oha.order_number, ola.line_number
   dimension: billrun_creation_date
   {type: date
     sql:${TABLE}. billrun_creation_date;;}
+
+  dimension: product_group
+  {type: string
+    sql:${TABLE}.product_group;;}
+
+  dimension: Product_type
+  {type: string
+    sql:${TABLE}.Product_type;;}
 
              ##Measures##
   ##==================================##

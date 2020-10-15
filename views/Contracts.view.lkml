@@ -56,7 +56,9 @@ view: contracts{
          bsa.quantity,
          bsa.unit_price,
          bsa.total_amount,
-         bsa.total_billing_amount
+         bsa.total_billing_amount,
+         prd.product_group,
+         prd.attribute1 Product_type
     FROM adorb.order_header_all oha,
          adorb.order_lines_all ola,
          adorb.business_units bu,
@@ -553,6 +555,14 @@ dimension: source
   dimension: account_creation_date
   {type: date
     sql:${TABLE}. account_creation_date;;}
+
+  dimension: product_group
+  {type: string
+    sql:${TABLE}.product_group;;}
+
+  dimension: Product_type
+  {type: string
+    sql:${TABLE}.Product_type;;}
 
 
               ##Measures##
