@@ -57,7 +57,7 @@ view: billing
          bsa.unit_price,
          bsa.total_amount,
          bsa.total_billing_amount,
-         decode(bss.meaning,'Billed',bsa.total_billing_amount,0) actual_billing_amount,
+         decode(bss.meaning,'Billed',bsa.total_amount,0) actual_billing_amount,
          brh.bill_run_id,
          brh.bill_run_number,
          brh.creation_date billrun_creation_date,
