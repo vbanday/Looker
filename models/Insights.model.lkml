@@ -15,4 +15,3 @@ explore: usages {}
 explore: billing {}
 explore: revenue {}
 explore: payments {}
-explore: geturl {}
