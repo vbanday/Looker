@@ -1,6 +1,6 @@
 view: billing
 {
-   # Or, you could make this view a derived table, like this:
+  # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:   SELECT source.meaning source,
          oha.order_id,
@@ -151,7 +151,7 @@ ORDER BY oha.order_number, ola.line_number
   dimension: order_id
   {type: string
     sql:${TABLE}. order_id;;
-    }
+  }
 
   dimension: order_number
   {type: string
@@ -457,7 +457,7 @@ ORDER BY oha.order_number, ola.line_number
   dimension: billing_sch_status
   {type: string
     sql:${TABLE}.billing_sch_status;;
-    }
+  }
 
   dimension: period_month
   {type: string
@@ -599,7 +599,7 @@ ORDER BY oha.order_number, ola.line_number
   dimension: billing_period_to
   {type: date
     sql:${TABLE}.billing_period_to;;
-    }
+  }
 
   dimension: billing_date
   {type: date
@@ -648,7 +648,7 @@ ORDER BY oha.order_number, ola.line_number
   {type: string
     sql:${TABLE}.Product_type;;}
 
-             ##Measures##
+  ##Measures##
   ##==================================##
 
   measure: sum_total_quantity {
@@ -750,7 +750,7 @@ ORDER BY oha.order_number, ola.line_number
   }
 
 
- set: orders {
+  set: orders {
     fields: [
       source
       ,business_unit
@@ -796,7 +796,7 @@ ORDER BY oha.order_number, ola.line_number
 
   set: billsch {
     fields: [
-       order_number
+      order_number
       ,line_number
       ,billing_sch_id
       ,billing_period_from
