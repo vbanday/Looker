@@ -1,4 +1,4 @@
-connection: "icann_test"
+connection: "recvue_preview"
 
 # include all the views
 include: "/views/**/*.view"
