@@ -48,6 +48,99 @@ WHERE   oha.legal_entity_id = le.legal_entity_id
   {type: string
     sql:${TABLE}.supplier_name;;}
 
+  dimension: Supplier_Site_Address
+  {type: string
+    sql:${TABLE}.Supplier_Site_Address;;}
+
+  dimension_group: trx_date {
+    type: time
+    timeframes: [date, week, month, year]
+    sql: ${TABLE}.trx_date ;;
+  }
+
+  dimension: Currency
+  {type: string
+    sql:${TABLE}.Currency;;}
+
+  dimension: trx_type
+  {type: string
+    sql:${TABLE}.trx_type;;}
+
+  dimension: attribute1
+  {type: string
+    sql:${TABLE}.attribute1;;}
+
+  dimension: item_name
+  {type: string
+    sql:${TABLE}.item_name;;}
+
+  dimension: quantity
+  {type: number
+    sql:${TABLE}.quantity;;}
+
+  dimension: cost_price
+  {type: number
+    sql:${TABLE}.cost_price;;}
+
+  dimension: total_amount
+  {type: number
+    sql:${TABLE}.total_amount;;}
+
+
+  dimension: legal_entity_name
+  {type: string
+    sql:${TABLE}.legal_entity_name;;}
+
+  dimension: order_id
+  {type: number
+    sql:${TABLE}.order_id;;}
+  dimension: order_number
+  {type: string
+    sql:${TABLE}.order_number;;
+    html:
+    <a href="https://wwt-test.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}" target="_blank">{{order_number}}</a>;;
+  }
+
+  dimension: reference_number
+  {type: string
+    sql:${TABLE}.reference_number;;}
+
+  dimension: deal_number
+  {type: string
+    sql:${TABLE}.deal_number;;}
+
+  dimension: order_category
+  {type: string
+    sql:${TABLE}.order_category;;}
+
+  dimension: order_type
+  {type: string
+    sql:${TABLE}.order_type;;}
+
+  dimension: payment_status
+  {type: string
+    sql:${TABLE}.payment_status;;}
+
+  measure: order_count {
+    type: count_distinct
+    sql: ${order_id} ;;
+  }
+
+  measure: sum_total_quantity {
+    type: sum
+    sql: ${quantity} ;;
+  }
+
+  measure: sum_cost_price {
+    type: sum
+    sql: ${cost_price} ;;
+  }
+
+  measure: sum_total_amount {
+    type: sum
+    sql: ${total_amount} ;;
+  }
+
 
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
@@ -78,41 +171,3 @@ WHERE   oha.legal_entity_id = le.legal_entity_id
   #   sql: ${lifetime_orders} ;;
   # }
 }
-# view: partner_payments {
-#   # Or, you could make this view a derived table, like this:
-#   derived_table: {
-#     sql: SELECT
-#         user_id as user_id
-#         , COUNT(*) as lifetime_orders
-#         , MAX(orders.created_at) as most_recent_purchase_at
-#       FROM orders
-#       GROUP BY user_id
-#       ;;
-#   }
-#
-#   # Define your dimensions and measures here, like this:
-#   dimension: user_id {
-#     description: "Unique ID for each user that has ordered"
-#     type: number
-#     sql: ${TABLE}.user_id ;;
-#   }
-#
-#   dimension: lifetime_orders {
-#     description: "The total number of orders for each user"
-#     type: number
-#     sql: ${TABLE}.lifetime_orders ;;
-#   }
-#
-#   dimension_group: most_recent_purchase {
-#     description: "The date when each user last ordered"
-#     type: time
-#     timeframes: [date, week, month, year]
-#     sql: ${TABLE}.most_recent_purchase_at ;;
-#   }
-#
-#   measure: total_lifetime_orders {
-#     description: "Use this for counting lifetime orders across many users"
-#     type: sum
-#     sql: ${lifetime_orders} ;;
-#   }
-# }
