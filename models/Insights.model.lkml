@@ -10,9 +10,9 @@ datagroup: recvue_analytics_default_datagroup {
 
 persist_with: recvue_analytics_default_datagroup
 
-explore: contracts{}
-explore: usages{}
-explore: billing{}
-explore: revenue{}
-explore: payments{}
-explore: geturl{}
+explore: contracts {}
+explore: usages {}
+explore: billing {}
+explore: revenue {}
+explore: payments {}
+explore: geturl {}
