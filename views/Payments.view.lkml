@@ -52,12 +52,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id
   {type: string
     sql:${TABLE}.Supplier_Site_Address;;}
 
-  dimension_group: trx_date {
-    type: time
-    timeframes: [date, week, month, year]
-    sql: ${TABLE}.trx_date ;;
-  }
-
   dimension: trx_date
   {type: date
     sql:${TABLE}.trx_date;;}
