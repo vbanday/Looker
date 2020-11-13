@@ -52,7 +52,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id
   {type: string
     sql:${TABLE}.Supplier_Site_Address;;}
 
-
   dimension_group: trx_date {
     type: time
     timeframes: [date, week, month, year]
@@ -122,22 +121,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id
     type: count_distinct
     sql: ${order_id} ;;
   }
-
-  measure: sum_total_quantity {
-    type: sum
-    sql: ${quantity} ;;
-  }
-
-  measure: sum_cost_price {
-    type: sum
-    sql: ${cost_price} ;;
-  }
-
-  measure: sum_total_amount {
-    type: number
-    sql:${TABLE}.total_amount ;;
-  }
-
 
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
