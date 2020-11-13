@@ -1,4 +1,4 @@
-connection: "wwt_dev"
+connection: "wwt_test"
 
 # include all the views
 include: "/views/*.view"
