@@ -1,7 +1,7 @@
 connection: "wwt_test"
 
 # include all the views
-include: "/views/**/*.view"
+include: "/views/*.view"
 
 datagroup: recvue_analytics_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -10,9 +10,9 @@ datagroup: recvue_analytics_default_datagroup {
 
 persist_with: recvue_analytics_default_datagroup
 
-explore: contracts {}
-explore: usages {}
-explore: billing {}
-explore: revenue {}
-explore: payments {}
-explore: geturl {}
+explore: contracts{}
+explore: usages{}
+explore: billing{}
+explore: revenue{}
+explore: payments{}
+explore: geturl{}
