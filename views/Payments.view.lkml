@@ -3,24 +3,27 @@ view: payments {
     # Or, you could make this view a derived table, like this:
   derived_table: {
     sql: SELECT pla.payment_line_id,
-          sup.supplier_name,
-          ssa.address1 Supplier_Site_Address,
-          pla.trx_date trx_date,
-          pla.Currency,
-          pla.trx_type,
-          pma.attribute1,
-          pma.item_name,
-          pla.quantity,
-          pla.cost_price,
-          pla.total_amount,
-          le.legal_entity_name,
-          oha.order_id,
-          oha.order_number,
-          oha.reference_number,
-          oha.deal_number,
-          oha.order_category,
-          oha.order_type,
-          pla.payment_status
+  sup.supplier_name,
+  ssa.address1 Supplier_Site_Address,
+  pla.trx_date trx_date,
+  pla.Currency,
+  pla.trx_type,
+  pma.attribute1,
+  pma.item_name,
+  pla.quantity,
+  pla.cost_price,
+  pla.total_amount,
+  le.legal_entity_name,
+  oha.order_id,
+  oha.order_number,
+  oha.reference_number,
+  oha.deal_number,
+  category.meaning order_category,
+  otl.meaning  order_type,
+  pla.payment_status,
+  llt.meaning line_type,
+  olst.meaning line_status,
+  ohst.meaning order_status
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -28,8 +31,22 @@ FROM adorb.payment_lines_all pla,
      adorb.legal_entity le,
      adorb.order_payment_lines_all opla,
      adorb.suppliers sup,
-     adorb.supplier_sites_all ssa
+     adorb.supplier_sites_all ssa,
+     adorb.core_lookup_values category,
+     adorb.core_lookup_values llt,
+     adorb.order_types_all otl,
+     adorb.core_lookup_values olst,
+     adorb.core_lookup_values ohst
 WHERE   oha.legal_entity_id = le.legal_entity_id
+  AND category.lookup_type = 'ORDER_CATEGORY'   --
+  AND category.lookup_code = oha.order_category
+  AND llt.lookup_type = 'LINE_TYPE'
+  AND ola.line_type = llt.lookup_code
+  AND oha.order_type = otl.order_type
+  AND olst.lookup_type = 'ORDER_LINE_STATUS'
+   AND ola.status = olst.lookup_code
+  AND ohst.lookup_type = 'ORDER_STATUS'
+  AND oha.status = ohst.lookup_code
   AND pla.order_id=oha.order_id
   AND oha.order_id=ola.order_id
   AND pla.order_id=ola.order_id
@@ -132,6 +149,19 @@ WHERE   oha.legal_entity_id = le.legal_entity_id
   dimension: payment_status
   {type: string
     sql:${TABLE}.payment_status;;}
+
+  dimension: line_type
+  {type: string
+    sql:${TABLE}.line_type;;}
+
+  dimension: line_status
+  {type: string
+    sql:${TABLE}.line_status;;}
+
+  dimension: order_status
+  {type: string
+    sql:${TABLE}.order_status;;}
+
 
   measure: order_count {
     type: count_distinct
