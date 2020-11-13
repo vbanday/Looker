@@ -58,6 +58,24 @@ WHERE   oha.legal_entity_id = le.legal_entity_id
     sql: ${TABLE}.trx_date ;;
   }
 
+  dimension: trx_date
+  {type: date
+    sql:${TABLE}.trx_date;;}
+
+  dimension_group: trx_date_grp
+  {type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql:${TABLE}.trx_date;;}
+
   dimension: Currency
   {type: string
     sql:${TABLE}.Currency;;}
