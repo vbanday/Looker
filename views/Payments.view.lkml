@@ -2,31 +2,136 @@ view: payments {
 
     # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql: SELECT
-         order_type as Order_Type
-         , COUNT(1) as lifetime_orders
-         , MAX(creation_date) as creation_date
-       FROM ADORB.ORDER_HEADER_ALL
-       GROUP BY order_type
-       ;;
+    sql: SELECT pla.payment_line_id,
+  sup.supplier_name,
+  ssa.address1 Supplier_Site_Address,
+  pla.trx_date trx_date,
+  pla.Currency,
+  pla.trx_type,
+  pma.attribute1,
+  pma.item_name,
+  pla.quantity,
+  pla.cost_price,
+  pla.total_amount,
+  le.legal_entity_name,
+  oha.order_id,
+  oha.order_number,
+  oha.reference_number,
+  oha.deal_number,
+  oha.order_category,
+  oha.order_type,
+  pla.payment_status
+FROM adorb.payment_lines_all pla,
+     adorb.product_master_all pma,
+     adorb.order_lines_all ola,
+     adorb.order_header_all oha,
+     adorb.legal_entity le,
+     adorb.order_payment_lines_all opla,
+     adorb.suppliers sup,
+     adorb.supplier_sites_all ssa
+WHERE   oha.legal_entity_id = le.legal_entity_id
+  AND pla.order_id=oha.order_id
+  AND oha.order_id=ola.order_id
+  AND pla.order_id=ola.order_id
+  AND pla.line_id=ola.line_id
+  AND ola.item_id=pma.item_id
+  AND opla.line_id = ola.line_id
+  AND sup.supplier_id=pla.supplier_id
+  AND ssa.supplier_site_id=pla.supplier_site_id;;
   }
 
-  dimension: Order_Type {
-    type: string
-    sql: ${TABLE}.Order_Type ;;
-  }
+  dimension: payment_line_id
+  {type: number
+    sql:${TABLE}.payment_line_id;;}
 
-  dimension_group: creation_date {
-    description: "The date when each Order last ordered"
+  dimension: supplier_name
+  {type: string
+    sql:${TABLE}.supplier_name;;}
+
+  dimension: Supplier_Site_Address
+  {type: string
+    sql:${TABLE}.Supplier_Site_Address;;}
+
+
+  dimension_group: trx_date {
     type: time
     timeframes: [date, week, month, year]
-    sql: ${TABLE}.creation_date ;;
+    sql: ${TABLE}.trx_date ;;
   }
 
-  measure: lifetime_orders {
-    description: "Use this for counting orders types"
-    type: count_distinct
-    sql: ${TABLE}.lifetime_orders ;;
+  dimension: Currency
+  {type: string
+    sql:${TABLE}.Currency;;}
+
+  dimension: trx_type
+  {type: string
+    sql:${TABLE}.trx_type;;}
+
+  dimension: attribute1
+  {type: string
+    sql:${TABLE}.attribute1;;}
+
+  dimension: item_name
+  {type: string
+    sql:${TABLE}.item_name;;}
+
+  dimension: quantity
+  {type: number
+    sql:${TABLE}.quantity;;}
+
+  dimension: cost_price
+  {type: number
+    sql:${TABLE}.cost_price;;}
+
+  dimension: legal_entity_name
+  {type: string
+    sql:${TABLE}.legal_entity_name;;}
+
+  dimension: order_id
+  {type: number
+    sql:${TABLE}.order_id;;}
+
+  dimension: order_number
+  {type: string
+    sql:${TABLE}.order_number;;
+    html:
+    <a href="https://wwt-test.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}" target="_blank">{{order_number}}</a>;;
+  }
+
+  dimension: reference_number
+  {type: string
+    sql:${TABLE}.reference_number;;}
+
+  dimension: deal_number
+  {type: string
+    sql:${TABLE}.deal_number;;}
+
+  dimension: order_category
+  {type: string
+    sql:${TABLE}.order_category;;}
+
+  dimension: order_type
+  {type: string
+    sql:${TABLE}.order_type;;}
+
+  dimension: payment_status
+  {type: string
+    sql:${TABLE}.payment_status;;}
+
+
+  measure: sum_total_quantity {
+    type: sum
+    sql: ${quantity} ;;
+  }
+
+  measure: sum_cost_price {
+    type: sum
+    sql: ${cost_price} ;;
+  }
+
+  measure: sum_total_amount {
+    type: number
+    sql:${TABLE}.total_amount ;;
   }
 
 
@@ -58,7 +163,9 @@ view: payments {
   #   type: sum
   #   sql: ${lifetime_orders} ;;
   # }
+
 }
+
 
 # view: partner_payments {
 #   # Or, you could make this view a derived table, like this:
