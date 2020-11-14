@@ -170,6 +170,11 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     sql: ${order_id} ;;
   }
 
+  measure: payment_line_id_count {
+    type: count_distinct
+    sql: ${payment_line_id} ;;
+  }
+
   measure: sum_total_quantity {
     type: sum
     sql: ${quantity} ;;
