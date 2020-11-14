@@ -1,5 +1,4 @@
 view: payments {
-
     # Or, you could make this view a derived table, like this:
   derived_table: {
     sql: SELECT pla.payment_line_id,
