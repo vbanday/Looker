@@ -21,10 +21,8 @@ view: payments {
   otl.meaning  order_type,
   pla.payment_status,
   llt.meaning line_type,
-  ola.status line_status,
-  oha.status order_status
- -- olst.meaning line_status,
- -- ohst.meaning order_status
+  olst.meaning line_status,
+  ohst.meaning order_status
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -35,25 +33,25 @@ FROM adorb.payment_lines_all pla,
      adorb.supplier_sites_all ssa,
      adorb.core_lookup_values category,
      adorb.core_lookup_values llt,
-     adorb.order_types_all otl
-    -- adorb.core_lookup_values olst,
-    -- adorb.core_lookup_values ohst
+     adorb.order_types_all otl,
+     adorb.core_lookup_values olst,
+     adorb.core_lookup_values ohst
 WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND category.lookup_type = 'ORDER_CATEGORY'
   AND category.lookup_code = oha.order_category
   AND llt.lookup_type = 'LINE_TYPE'
   AND ola.line_type = llt.lookup_code
   AND oha.order_type = otl.order_type
- -- AND olst.lookup_type = 'ORDER_LINE_STATUS'
-  -- AND ola.status = olst.lookup_code
-  --AND ohst.lookup_type = 'ORDER_STATUS'
-  --AND oha.status = ohst.lookup_code
+  AND olst.lookup_type = 'ORDER_LINE_STATUS'
+  AND ola.status = olst.lookup_code
+  AND ohst.lookup_type = 'ORDER_STATUS'
+  AND oha.status = ohst.lookup_code
   AND pla.order_id=oha.order_id
-  AND oha.order_id=ola.order_id
-  AND pla.order_id=ola.order_id
+  --AND oha.order_id=ola.order_id
   AND pla.line_id=ola.line_id
+  AND pla.order_id=ola.order_id
   AND ola.item_id=pma.item_id
-  AND opla.line_id = ola.line_id
+  AND opla.line_id (+) = ola.line_id
   AND sup.supplier_id=pla.supplier_id
   AND ssa.supplier_site_id=pla.supplier_site_id;;
   }
