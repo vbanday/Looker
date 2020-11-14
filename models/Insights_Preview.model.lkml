@@ -15,4 +15,4 @@ datagroup: recvue_analytics_default_datagroup {
 #explore: usages {}
 #explore: billing {}
 #explore: revenue {}
-explore: payments {}
+#explore: payments {}
