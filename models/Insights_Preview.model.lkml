@@ -9,7 +9,7 @@ datagroup: recvue_analytics_default_datagroup {
   max_cache_age: "1 hour"
 }
 
-persist_with: recvue_analytics_default_datagroup
+#persist_with: recvue_analytics_default_datagroup
 
 #explore: contracts {}
 #explore: usages {}
