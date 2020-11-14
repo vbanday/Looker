@@ -229,8 +229,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   set: payments {
     fields: [
       supplier_name
-      ,trx_date
-      ,trx_type
       ,order_number
       ,order_status
       ,order_category
