@@ -35,10 +35,9 @@ view: geturl {
 
   dimension: instance_url
   {type: string
-    sql:${TABLE}. url;;}
+    sql:${TABLE}.url;;}
 
 }
-
 # view: geturl {
 #   # Or, you could make this view a derived table, like this:
 #   derived_table: {
