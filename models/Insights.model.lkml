@@ -1,7 +1,7 @@
 connection: "wwt_dev"
 
 # include all the views
-include: "/views/*.view"
+include: "/views/*.view.lkml"
 
 datagroup: recvue_analytics_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;

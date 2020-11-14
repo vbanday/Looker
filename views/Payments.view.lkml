@@ -167,26 +167,31 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   measure: order_count {
     type: count_distinct
     sql: ${order_id} ;;
+    drill_fields: [payments*]
   }
 
   measure: payment_line_id_count {
     type: count_distinct
     sql: ${payment_line_id} ;;
+    drill_fields: [payments*]
   }
 
   measure: sum_total_quantity {
     type: sum
     sql: ${quantity} ;;
+    drill_fields: [payments*]
   }
 
   measure: sum_cost_price {
     type: sum
     sql: ${cost_price} ;;
+    drill_fields: [payments*]
   }
 
   measure: sum_total_amount {
     type: sum
     sql: ${total_amount} ;;
+    drill_fields: [payments*]
   }
 
 
@@ -218,4 +223,28 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   #   type: sum
   #   sql: ${lifetime_orders} ;;
   # }
+
+  ##Sets##
+  ##=====================================##
+  set: payments {
+    fields: [
+      supplier_name
+      ,trx_date
+      ,trx_type
+      ,order_number
+      ,order_status
+      ,order_category
+      ,deal_number
+      ,item_name
+      ,line_type
+      ,line_status
+      ,payment_status
+      ,quantity
+      ,cost_price
+      ,total_amount
+      ,Currency
+      ]
+  }
+
+
 }
