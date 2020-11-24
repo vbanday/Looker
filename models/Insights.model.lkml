@@ -1,4 +1,4 @@
-connection: "wwt_dev"
+connection: "recvue_preview"
 
 # include all the views
 include: "/views/*.view.lkml"
