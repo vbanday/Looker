@@ -23,11 +23,7 @@ view: payments {
   llt.meaning line_type,
   olst.meaning line_status,
   ohst.meaning order_status,
-  ola.line_number,
-  oda.cost,
-  oda.payment_status d_payment_status,
-  oda.delivered_quantity,
-  oda.bill_amount
+  ola.line_number
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -41,7 +37,6 @@ FROM adorb.payment_lines_all pla,
      adorb.order_types_all otl,
      adorb.core_lookup_values olst,
      adorb.core_lookup_values ohst
-    ,adorb.order_deliveries_all oda
 WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND category.lookup_type = 'ORDER_CATEGORY'
   AND category.lookup_code = oha.order_category
@@ -56,7 +51,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND pla.line_id(+)=ola.line_id
   AND pla.order_id(+)=ola.order_id
   AND ola.item_id=pma.item_id
-  AND oda.line_id(+) =ola.line_id
   AND opla.line_id(+)= ola.line_id
   AND sup.supplier_id(+)=pla.supplier_id
   AND ssa.supplier_site_id(+)=pla.supplier_site_id;;
@@ -170,22 +164,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   {type: string
     sql:${TABLE}.order_status;;}
 
-  dimension: delivery_payment_status
-  {type: string
-    sql:${TABLE}.d_payment_status;;}
-
-  dimension: cost
-  {type: number
-    sql:${TABLE}.cost;;}
-
-  dimension: delivered_quantity
-  {type: number
-    sql:${TABLE}.delivered_quantity;;}
-
-  dimension: bill_amount
-  {type: number
-    sql:${TABLE}.bill_amount;;}
-
   measure: order_count {
     type: count_distinct
     sql: ${order_id} ;;
@@ -207,7 +185,7 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   measure: sum_cost_price {
     type: sum
     sql: ${cost_price} ;;
-    drill_fields: [delivery_payments*]
+    drill_fields: [payments*]
   }
 
   measure: sum_total_amount {
@@ -263,27 +241,7 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
       ,cost_price
       ,total_amount
       ,Currency
-      ,sum_cost_price
       ]
   }
-
-  set: delivery_payments {
-    fields: [
-      line_number
-      ,item_name
-      ,line_type
-      ,line_status
-      ,payment_status
-      ,delivery_payment_status
-      ,cost
-      ,delivered_quantity
-      ,bill_amount
-      ,quantity
-      ,cost_price
-      ,total_amount
-      ,Currency
-    ]
-  }
-
 
 }
