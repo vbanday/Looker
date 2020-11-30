@@ -54,11 +54,11 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND oha.status = ohst.lookup_code
   --AND pla.order_id=oha.order_id
   --AND oha.order_id=ola.order_id
-  AND pla.line_id(+)=ola.line_id
-  AND pla.order_id(+)=ola.order_id
+  AND pla.line_id=ola.line_id
+  AND pla.order_id=ola.order_id
   AND ola.item_id=pma.item_id
-  AND oda.line_id(+)=ola.line_id
-  AND opla.line_id (+) = ola.line_id
+  AND oda.line_id(+) =ola.line_id
+  AND opla.line_id(+)= ola.line_id
   AND sup.supplier_id=pla.supplier_id
   AND ssa.supplier_site_id=pla.supplier_site_id;;
   }
