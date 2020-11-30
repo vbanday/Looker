@@ -23,6 +23,7 @@ view: payments {
   llt.meaning line_type,
   olst.meaning line_status,
   ohst.meaning order_status,
+  ola.line_number,
   oda.cost,
   oda.payment_status d_payment_status,
   oda.delivered_quantity,
@@ -112,6 +113,10 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   {type: number
     sql:${TABLE}.quantity;;}
 
+  dimension: line_number
+  {type: string
+    sql:${TABLE}.line_number;;}
+
   dimension: cost_price
   {type: number
     sql:${TABLE}.cost_price;;}
@@ -119,7 +124,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   dimension: total_amount
   {type: number
     sql:${TABLE}.total_amount;;}
-
 
   dimension: legal_entity_name
   {type: string
@@ -186,19 +190,19 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   measure: order_count {
     type: count_distinct
     sql: ${order_id} ;;
-    drill_fields: [delivery_payments*]
+    drill_fields: [payments*]
   }
 
   measure: payment_line_id_count {
     type: count_distinct
     sql: ${payment_line_id} ;;
-    drill_fields: [delivery_payments*]
+    drill_fields: [payments*]
   }
 
   measure: sum_total_quantity {
     type: sum
     sql: ${quantity} ;;
-    drill_fields: [delivery_payments*]
+    drill_fields: [payments*]
   }
 
   measure: sum_cost_price {
@@ -210,7 +214,7 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   measure: sum_total_amount {
     type: sum
     sql: ${total_amount} ;;
-    drill_fields: [delivery_payments*]
+    drill_fields: [payments*]
   }
 
 
@@ -260,16 +264,13 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
       ,cost_price
       ,total_amount
       ,Currency
+      ,sum_cost_price
       ]
   }
 
   set: delivery_payments {
     fields: [
-      supplier_name
-      ,order_number
-      ,order_status
-      ,order_category
-      ,deal_number
+      line_number
       ,item_name
       ,line_type
       ,line_status
