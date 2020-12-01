@@ -1,7 +1,8 @@
 view: usages {
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql: SELECT pla.payment_line_id,
+    sql: SELECT opp.partner_payment_id,
+        pla.payment_line_id,
         sup.supplier_name,
         ssa.address1 Supplier_Site_Address,
         pla.trx_date trx_date,
@@ -38,7 +39,7 @@ FROM adorb.payment_lines_all pla,
      adorb.order_lines_all ola,
      adorb.order_header_all oha,
      adorb.legal_entity le,
-     adorb.order_payment_lines_all opla,
+    -- adorb.order_payment_lines_all opla,
      adorb.suppliers sup,
      adorb.supplier_sites_all ssa,
      adorb.core_lookup_values category,
@@ -63,11 +64,16 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND pla.order_id(+)=ola.order_id
   AND ola.item_id=pma.item_id
   AND oda.line_id(+) =ola.line_id
-  AND opla.line_id(+)= ola.line_id
+ -- AND opla.line_id(+)= ola.line_id
   AND opp.line_id(+)=ola.line_id
   AND sup.supplier_id(+)=opp.supplier_id
   AND ssa.supplier_site_id(+)=opp.supplier_site_id;;
   }
+
+
+  dimension: partner_payment_id
+  {type: number
+    sql:${TABLE}.partner_payment_id;;}
 
   dimension: payment_line_id
   {type: number
