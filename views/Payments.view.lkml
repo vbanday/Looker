@@ -194,7 +194,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     drill_fields: [payments*]
   }
 
-
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
   #
@@ -233,6 +232,7 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
       ,order_status
       ,order_category
       ,deal_number
+      ,line_number
       ,item_name
       ,line_type
       ,line_status
