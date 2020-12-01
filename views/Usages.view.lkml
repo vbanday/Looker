@@ -47,6 +47,7 @@ FROM adorb.payment_lines_all pla,
      adorb.core_lookup_values olst,
      adorb.core_lookup_values ohst
     ,adorb.order_deliveries_all oda
+    ,adorb.order_partner_payments opp
 WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND category.lookup_type = 'ORDER_CATEGORY'
   AND category.lookup_code = oha.order_category
@@ -63,8 +64,9 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND ola.item_id=pma.item_id
   AND oda.line_id(+) =ola.line_id
   AND opla.line_id(+)= ola.line_id
-  AND sup.supplier_id(+)=pla.supplier_id
-  AND ssa.supplier_site_id(+)=pla.supplier_site_id;;
+  AND opp.line_id(+)=ola.line_id
+  AND sup.supplier_id(+)=opp.supplier_id
+  AND ssa.supplier_site_id(+)=opp.supplier_site_id;;
   }
 
   dimension: payment_line_id
@@ -300,16 +302,10 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
       ,order_number
       ,order_status
       ,order_category
-      ,deal_number
       ,line_number
       ,item_name
       ,line_type
       ,line_status
-      ,payment_status
-      ,quantity
-      ,cost_price
-      ,total_amount
-      ,Currency
       ,Delivery_Reference
       ,delivery_payment_status
       ,Delivery_Source
