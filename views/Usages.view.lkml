@@ -308,7 +308,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
       ,line_status
       ,Delivery_Reference
       ,delivery_payment_status
-      ,Delivery_Source
       ,Delivery_Date_From
       ,Delivery_Date_To
       ,TRX_NUMBER
