@@ -32,7 +32,7 @@ view: usages {
         NVL(oda.cost,pla.cost_price) cost,
         NVL(oda.delivered_quantity, pla.quantity) delivered_quantity,
         NVL(oda.payable_amt,pla.total_amount) payable_amt,
-        oda.payment_status delivery_payment_status
+        NVL(oda.payment_status,pla.payment_status) delivery_payment_status
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
