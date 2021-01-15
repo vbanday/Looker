@@ -16,7 +16,9 @@ view: forecast {
           ,gur_earning_rate
           ,forecast_to
           ,base_to_gre
-          ,forecast_to_per
+          ,case when base_to_gre > 0 then
+                   (forecast_to - base_to_gre)/base_to_gre
+           else 0 end forecast_to_per
           ,curr_grw_tier_ind
           ,forecast_grw_tier
           ,forecast_grw_earning_rt
