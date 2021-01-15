@@ -1,4 +1,6 @@
-view: geturl {
+view: forecast {
+
+
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
   #
@@ -27,18 +29,9 @@ view: geturl {
   #   type: sum
   #   sql: ${lifetime_orders} ;;
   # }
-
-    # Or, you could make this view a derived table, like this:
-    derived_table: {
-      sql:   SELECT url FROM adorb.CORE_INTEGRATION_USERS WHERE full_name = 'Recvue Operations';;
-      }
-
-  dimension: instance_url
-  {type: string
-    sql:${TABLE}.url;;}
-
 }
-# view: geturl {
+
+# view: forecast {
 #   # Or, you could make this view a derived table, like this:
 #   derived_table: {
 #     sql: SELECT

@@ -1,231 +1,97 @@
 view: usages {
-
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql:  SELECT source.meaning source,
-    oha.order_number,
-    otl.meaning  order_type,
-    ohst.meaning order_status,
-    category.meaning order_category,
-    oha.customer_po_number po_number,
-    oha.effective_start_date order_start_date,
-    oha.effective_end_date order_end_date,
-    bu.name business_unit,
-    curr.name currency,
-    inte.meaning intent,
-    art.name payment_term,
-    prl.name price_list,
-    ola.line_number,
-    llt.meaning line_type,
-    olst.meaning line_status,
-    prd.item_name ,
-    prd.item_description,
-    libs.meaning line_billing_status,
-    ola.effective_start_date line_start_date,
-    ola.effective_start_date line_end_date,
-    lbcy.meaning billing_cycle,
-    lbfr.meaning billing_frequency,
-    lir.description invoicing_rule,
-    ola.accounting_rule accountingrule,
-    lbcus.account_number,
-    lbcus.account_name,
-    lbsit.site_number,
-    bsa.billing_period_from,
-    bsa.billing_period_to,
-    bsa.invoice_date billing_date,
-    bsa.trx_date,
-    bsa.gl_date,
-    bsa.trx_type,
-    blt.meaning billing_line_type,
-    bss.meaning billing_sch_status,
-    bsa.period_month,
-    bsa.fiscal_year,
-    bsa.fiscal_quarter,
-    bsa.fiscal_month,
-    bsa.cal_year,
-    bsa.cal_quarter,
-    bsa.cal_month,
-    bsa.quantity,
-    bsa.unit_price,
-    bsa.total_amount,
-    bsa.total_billing_amount  ,
-    brh.bill_run_number,
-    brh.status,
-    brh.bill_through_date,
-    brh.invoice_date
-    FROM adorb.order_header_all oha,
-    adorb.order_lines_all ola,
-    adorb.business_units bu,
-    adorb.core_lookup_values source,
-    adorb.core_currencies_tl curr,
-    adorb.price_list_headers prl,
-    adorb.core_lookup_values category,
-    adorb.order_types_all otl,
-    adorb.core_lookup_values inte,
-    adorb.ar_terms_tl art,
-    adorb.core_lookup_values olst,
-    adorb.core_lookup_values ohst,
-    adorb.product_master_all prd,
-    adorb.core_lookup_values llt,
-    adorb.core_lookup_values libs,
-    adorb.core_lookup_values lbcy,
-    adorb.core_lookup_values lbfr,
-    adorb.core_lookup_values blt,
-    adorb.core_lookup_values bss,
-    adorb.cust_accounts lbcus,
-    adorb.cust_acct_sites_all lbsit,
-    adorb.ar_invoicing_rule_v lir,
-    adorb.billing_schedules_all bsa,
-    adorb.order_billing_details_all bda,
-    adorb.bill_run_header brh
-    WHERE  1=1
-    AND oha.order_id = ola.order_id
-    AND oha.org_id = bu.org_id
-    AND ola.org_id = bu.org_id
-    AND oha.orig_order_id IS NULL
-    AND oha.cr IS NULL
-    AND source.lookup_code = oha.source_id
-    AND source.lookup_type = 'SOURCE_TYPES'
-    AND oha.currency = curr.currency_code
-    AND prl.price_list_id = oha.price_list_id(+)
-    AND category.lookup_code = oha.order_category
-    AND category.lookup_type = 'ORDER_CATEGORY'
-    AND oha.order_type = otl.order_type
-    AND olst.lookup_type = 'ORDER_LINE_STATUS'
-    AND ola.status = olst.lookup_code
-    AND ohst.lookup_type = 'ORDER_STATUS'
-    AND oha.status = ohst.lookup_code
-    AND inte.lookup_type = 'INTENT'
-    AND oha.intent = inte.lookup_code
-    AND oha.payment_term = art.term_id
-    AND ola.item_id = prd.item_id
-    AND llt.lookup_type = 'LINE_TYPE'
-    AND ola.line_type = llt.lookup_code
-    AND libs.lookup_type = 'LINE_BILLING_STATUS'
-    AND ola.billing_status = libs.lookup_code
-    AND lbcy.lookup_type = 'BILLING_CYCLE'
-    AND ola.billing_cycle = lbcy.lookup_code
-    AND lbfr.lookup_type = 'BILLING_FREQUENCY'
-    AND ola.billing_frequency = lbfr.lookup_code
-    AND blt.lookup_type = 'BILLING_LINE_TYPE'
-    AND bsa.billing_line_type = blt.lookup_code
-    AND bss.lookup_type = 'BILL_SCH_STATUS'
-    AND bsa.billing_status = bss.lookup_code
-    AND ola.bill_to_customer_id = lbcus.cust_account_id
-    AND lbcus.cust_account_id = lbsit.cust_account_id
-    AND ola.bill_to_site_id = lbsit.cust_acct_site_id
-    AND lbsit.purpose = 'BILL_TO'
-    AND lir.invoicing_rule = ola.invoicing_rule
-    AND lir.tenant_id = ola.tenant_id
-    AND oha.order_id=bsa.order_id
-    AND ola.line_id=bsa.line_id
-    AND oha.order_id=bda.order_id(+)
-    AND ola.line_id=bda.line_id(+)
-    AND bsa.billing_sch_id=bda.billing_sch_id(+)
-    AND bda.bill_run_id=brh.bill_run_id(+)
-    AND bsa.bill_run_id=brh.bill_run_id(+)
-    and bsa.billing_status ='SCHEDULED'
-    ORDER BY oha.order_number, ola.line_number
-       ;;
+    sql: SELECT opp.partner_payment_id,
+        pla.payment_line_id,
+        sup.supplier_name,
+        ssa.address1 Supplier_Site_Address,
+        pla.trx_date trx_date,
+        pla.Currency,
+        pla.trx_type,
+        pma.attribute1,
+        pma.item_name,
+        pla.quantity,
+        pla.cost_price,
+        pla.total_amount,
+        le.legal_entity_name,
+        oha.order_id,
+        oha.order_number,
+        oha.reference_number,
+        oha.deal_number,
+        category.meaning order_category,
+        otl.meaning  order_type,
+        pla.payment_status,
+        llt.meaning line_type,
+        olst.meaning line_status,
+        ohst.meaning order_status,
+        ola.line_number,
+        oda.SOURCE Delivery_Source,
+        oda.DELIVERY_DATE_FROM  Delivery_Date_From,
+        oda.DELIVERY_DATE_TO  Delivery_Date_To,
+        oda.DELIVERY_REFERENCE Delivery_Reference,
+        pla.TRX_NUMBER,
+        NVL(oda.cost,pla.cost_price) cost,
+        NVL(oda.delivered_quantity, pla.quantity) delivered_quantity,
+        NVL(oda.payable_amt,pla.total_amount) payable_amt,
+        oda.payment_status delivery_payment_status
+FROM adorb.payment_lines_all pla,
+     adorb.product_master_all pma,
+     adorb.order_lines_all ola,
+     adorb.order_header_all oha,
+     adorb.legal_entity le,
+    -- adorb.order_payment_lines_all opla,
+     adorb.suppliers sup,
+     adorb.supplier_sites_all ssa,
+     adorb.core_lookup_values category,
+     adorb.core_lookup_values llt,
+     adorb.order_types_all otl,
+     adorb.core_lookup_values olst,
+     adorb.core_lookup_values ohst
+    ,adorb.order_deliveries_all oda
+    ,adorb.order_partner_payments opp
+WHERE   oha.legal_entity_id = le.legal_entity_id (+)
+  AND category.lookup_type = 'ORDER_CATEGORY'
+  AND category.lookup_code = oha.order_category
+  AND llt.lookup_type = 'LINE_TYPE'
+  AND ola.line_type = llt.lookup_code
+  AND oha.order_type = otl.order_type
+  AND olst.lookup_type = 'ORDER_LINE_STATUS'
+  AND ola.status = olst.lookup_code
+  AND ohst.lookup_type = 'ORDER_STATUS'
+  AND oha.status = ohst.lookup_code
+  AND oha.order_id=ola.order_id
+  AND pla.line_id(+)=ola.line_id
+  AND pla.order_id(+)=ola.order_id
+  AND ola.item_id=pma.item_id
+  AND oda.line_id(+) =ola.line_id
+ -- AND opla.line_id(+)= ola.line_id
+  AND opp.line_id(+)=ola.line_id
+  AND sup.supplier_id(+)=opp.supplier_id
+  AND ssa.supplier_site_id(+)=opp.supplier_site_id;;
   }
 
-  dimension: source
-  {type: string
-    sql:${TABLE}. source;;}
 
-  dimension: order_number
-  {type: string
-    sql:${TABLE}. order_number;;}
-
-  dimension: order_type
-  {type: string
-    sql:${TABLE}. order_type;;}
-
-  dimension: order_status
-  {type: string
-    sql:${TABLE}. order_status;;}
-
-  dimension: order_category
-  {type: string
-    sql:${TABLE}. order_category;;}
-
-  dimension: po_number
-  {type: string
-    sql:${TABLE}. po_number;;}
-
-  dimension_group: order_start_date
-  {type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. order_start_date;;}
-
-  dimension_group: order_end_date
-  {type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. order_end_date;;}
-
-  dimension: business_unit
-  {type: string
-    sql:${TABLE}. business_unit;;}
-
-  dimension: currency
-  {type: string
-    sql:${TABLE}. currency;;}
-
-  dimension: intent
-  {type: string
-    sql:${TABLE}. intent;;}
-
-  dimension: payment_term
-  {type: string
-    sql:${TABLE}. payment_term;;}
-
-  dimension: price_list
-  {type: string
-    sql:${TABLE}. price_list;;}
-
-  dimension: line_number
+  dimension: partner_payment_id
   {type: number
-    sql:${TABLE}. line_number;;}
+    sql:${TABLE}.partner_payment_id;;}
 
-  dimension: line_type
+  dimension: payment_line_id
+  {type: number
+    sql:${TABLE}.payment_line_id;;}
+
+  dimension: supplier_name
   {type: string
-    sql:${TABLE}. line_type;;}
+    sql:${TABLE}.supplier_name;;}
 
-  dimension: line_status
+  dimension: Supplier_Site_Address
   {type: string
-    sql:${TABLE}. line_status;;}
+    sql:${TABLE}.Supplier_Site_Address;;}
 
-  dimension: item_name
-  {type: string
-    sql:${TABLE}. item_name;;}
+  dimension: trx_date
+  {type: date
+    sql:${TABLE}.trx_date;;}
 
-  dimension: item_description
-  {type: string
-    sql:${TABLE}. item_description;;}
-
-  dimension: line_billing_status
-  {type: string
-    sql:${TABLE}. line_billing_status;;}
-
-  dimension_group: line_start_date
+  dimension_group: trx_date_grp
   {type: time
     timeframes: [
       raw,
@@ -237,233 +103,172 @@ view: usages {
     ]
     convert_tz: no
     datatype: date
-    sql:${TABLE}. line_start_date;;}
+    sql:${TABLE}.trx_date;;}
 
-  dimension_group: line_end_date
-  {type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. line_end_date;;}
-
-  dimension: billing_cycle
+  dimension: Currency
   {type: string
-    sql:${TABLE}. billing_cycle;;}
-
-  dimension: billing_frequency
-  {type: string
-    sql:${TABLE}. billing_frequency;;}
-
-  dimension: invoicing_rule
-  {type: string
-    sql:${TABLE}. invoicing_rule;;}
-
-  dimension: accountingrule
-  {type: string
-    sql:${TABLE}. accountingrule;;}
-
-  dimension: account_number
-  {type: string
-    sql:${TABLE}. account_number;;}
-
-  dimension: account_name
-  {type: string
-    sql:${TABLE}. account_name;;}
-
-  dimension: site_number
-  {type: string
-    sql:${TABLE}. site_number;;}
-
-  dimension_group: billing_period_from
-  {type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. billing_period_from;;}
-
-  dimension_group: billing_period_to
-  {type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. billing_period_to;;}
-
-  dimension_group: billing_date
-  {type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. billing_date;;}
-
-  dimension_group: trx_date
-  {type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. trx_date;;}
-
-  dimension_group: gl_date
-  {type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. gl_date;;}
+    sql:${TABLE}.Currency;;}
 
   dimension: trx_type
   {type: string
-    sql:${TABLE}. trx_type;;}
+    sql:${TABLE}.trx_type;;}
 
-  dimension: billing_line_type
+  dimension: attribute1
   {type: string
-    sql:${TABLE}. billing_line_type;;}
+    sql:${TABLE}.attribute1;;}
 
-  dimension: billing_sch_status
+  dimension: item_name
   {type: string
-    sql:${TABLE}. billing_sch_status;;}
-
-  dimension: period_month
-  {type: string
-    sql:${TABLE}. period_month;;}
-
-  dimension: fiscal_year
-  {type: number
-    sql:${TABLE}. fiscal_year;;}
-
-  dimension: fiscal_quarter
-  {type: number
-    sql:${TABLE}. fiscal_quarter;;}
-
-  dimension: fiscal_month
-  {type: number
-    sql:${TABLE}. fiscal_month;;}
-
-  dimension: cal_year
-  {type: number
-    sql:${TABLE}. cal_year;;}
-
-  dimension: cal_quarter
-  {type: number
-    sql:${TABLE}. cal_quarter;;}
-
-  dimension: cal_month
-  {type: number
-    sql:${TABLE}. cal_month;;}
+    sql:${TABLE}.item_name;;}
 
   dimension: quantity
   {type: number
-    sql:${TABLE}. quantity;;}
+    sql:${TABLE}.quantity;;}
 
-  dimension: unit_price
+  dimension: line_number
+  {type: string
+    sql:${TABLE}.line_number;;}
+
+  dimension: Delivery_Source
+  {type: string
+    sql:${TABLE}.Delivery_Source;;}
+
+  dimension: Delivery_Date_From
+  {type: string
+    sql:${TABLE}.Delivery_Date_From;;}
+
+  dimension: Delivery_Date_To
+  {type: string
+    sql:${TABLE}.Delivery_Date_To;;}
+
+  dimension: Delivery_Reference
+  {type: string
+    sql:${TABLE}.Delivery_Reference;;}
+
+  dimension: TRX_NUMBER
+  {type: string
+    sql:${TABLE}.TRX_NUMBER;;}
+
+  dimension: cost
   {type: number
-    sql:${TABLE}. unit_price;;}
+    sql:${TABLE}.cost;;}
+
+  dimension: delivered_quantity
+  {type: number
+    sql:${TABLE}.delivered_quantity;;}
+
+  dimension: payable_amt
+  {type: number
+    sql:${TABLE}.payable_amt;;}
+
+  dimension: delivery_payment_status
+  {type: string
+    sql:${TABLE}.delivery_payment_status;;}
+
+
+  dimension: cost_price
+  {type: number
+    sql:${TABLE}.cost_price;;}
 
   dimension: total_amount
   {type: number
-    sql:${TABLE}. total_amount;;}
+    sql:${TABLE}.total_amount;;}
 
-  dimension: total_billing_amount
+  dimension: legal_entity_name
+  {type: string
+    sql:${TABLE}.legal_entity_name;;}
+
+  dimension: order_id
   {type: number
-    sql:${TABLE}. total_billing_amount;;}
-
-  dimension: bill_run_number
+    sql:${TABLE}.order_id;;}
+  dimension: order_number
   {type: string
-    sql:${TABLE}. bill_run_number;;}
+    sql:${TABLE}.order_number;;
+    html:
+    <a href="https://preview.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}" target="_blank">{{order_number}}</a>;;
+  }
 
-  dimension: status
+  dimension: reference_number
   {type: string
-    sql:${TABLE}. status;;}
+    sql:${TABLE}.reference_number;;}
 
-  dimension_group: bill_through_date
-  {type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. bill_through_date;;}
+  dimension: deal_number
+  {type: string
+    sql:${TABLE}.deal_number;;}
 
-  dimension_group: invoice_date
-  { type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql:${TABLE}. invoice_date;;}
+  dimension: order_category
+  {type: string
+    sql:${TABLE}.order_category;;}
 
+  dimension: order_type
+  {type: string
+    sql:${TABLE}.order_type;;}
 
+  dimension: payment_status
+  {type: string
+    sql:${TABLE}.payment_status;;}
+
+  dimension: line_type
+  {type: string
+    sql:${TABLE}.line_type;;}
+
+  dimension: line_status
+  {type: string
+    sql:${TABLE}.line_status;;}
+
+  dimension: order_status
+  {type: string
+    sql:${TABLE}.order_status;;}
+
+  measure: order_count {
+    type: count_distinct
+    sql: ${order_id} ;;
+    drill_fields: [payments*]
+  }
+
+  measure: payment_line_id_count {
+    type: count_distinct
+    sql: ${payment_line_id} ;;
+    drill_fields: [payments*]
+  }
 
   measure: sum_total_quantity {
     type: sum
     sql: ${quantity} ;;
+    drill_fields: [payments*]
   }
 
-  measure: sum_unit_price {
+  measure: sum_cost_price {
     type: sum
-    sql: ${unit_price} ;;
+    sql: ${cost_price} ;;
+    drill_fields: [payments*]
   }
 
   measure: sum_total_amount {
     type: sum
     sql: ${total_amount} ;;
+    drill_fields: [payments*]
   }
 
-  measure: sum_total_billing_amount {
+
+  measure: sum_cost {
     type: sum
-    sql: ${total_billing_amount} ;;
+    sql: ${cost} ;;
+    drill_fields: [payments*]
   }
+
+  measure: sum_delivered_quantity {
+    type: sum
+    sql: ${delivered_quantity} ;;
+    drill_fields: [payments*]
+  }
+
+  measure: sum_payable_amt {
+    type: sum
+    sql: ${payable_amt} ;;
+    drill_fields: [payments*]
+  }
+
 
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
@@ -493,6 +298,31 @@ view: usages {
   #   type: sum
   #   sql: ${lifetime_orders} ;;
   # }
+
+  ##Sets##
+  ##=====================================##
+
+  set: payments {
+    fields: [
+      supplier_name
+      ,order_number
+      ,order_status
+      ,order_category
+      ,line_number
+      ,item_name
+      ,line_type
+      ,line_status
+      ,Delivery_Reference
+      ,delivery_payment_status
+      ,Delivery_Date_From
+      ,Delivery_Date_To
+      ,TRX_NUMBER
+      ,cost
+      ,delivered_quantity
+      ,payable_amt
+    ]
+  }
+
 }
 
 # view: usages {
