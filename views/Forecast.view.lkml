@@ -750,33 +750,33 @@ view: forecast {
   #### comments
 
   measure: Max_Comments_TO {
-    type: max
-    sql: ${comments_to} ;;
+    type: string
+    sql: MAX(${comments_to}) ;;
   }
 
   measure: Max_Calc_Metric {
-      type: max
-      sql: ${calc_metric} ;;
+      type: string
+      sql: MAX${calc_metric}) ;;
     }
 
   measure: Max_Scheme_Type {
-    type: max
-    sql: ${scheme_type} ;;
+    type: string
+    sql: MAX${scheme_type}) ;;
   }
 
   measure: Max_Fi_Earnings {
-    type: max
-    sql: ${fi_earnings} ;;
+    type: string
+    sql: MAX${fi_earnings}) ;;
   }
 
   measure: Max_gur_earning_rate {
-    type: max
-    sql: ${gur_earning_rate} ;;
+    type: string
+    sql: MAX${gur_earning_rate}) ;;
   }
 
   measure: Max_Notes {
-    type: max
-    sql: ${notes} ;;
+    type: string
+    sql: MAX${notes}) ;;
   }
 
 
