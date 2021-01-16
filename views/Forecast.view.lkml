@@ -109,27 +109,27 @@ view: forecast {
 
   dimension: partner
   {type: string
-    sql:${TABLE}. partner;;}
+    sql:${TABLE}.partner;;}
 
   dimension: department
   {type: string
-    sql:${TABLE}. department;;
+    sql:${TABLE}.department;;
   }
   dimension: rank
   {type: string
-    sql:${TABLE}. rank;;}
+    sql:${TABLE}.rank;;}
 
   dimension: supplier
   {type: string
-    sql:${TABLE}. supplier;;
+    sql:${TABLE}.supplier;;
   }
   dimension: scheme_code
   {type: string
-    sql:${TABLE}. scheme_code;;}
+    sql:${TABLE}.scheme_code;;}
 
   dimension: scheme_start_date
   {type: string
-    sql:${TABLE}. scheme_start_date;;
+    sql:${TABLE}.scheme_start_date;;
   }
   dimension: scheme_end_date
   {type: string
@@ -147,7 +147,7 @@ view: forecast {
     ]
     convert_tz: no
     datatype: date
-    sql:${TABLE}. scheme_start_date;;}
+    sql:${TABLE}.scheme_start_date;;}
 
   dimension_group: scheme_end_date_grp
   {type: time
@@ -161,42 +161,42 @@ view: forecast {
     ]
     convert_tz: no
     datatype: date
-    sql:${TABLE}. scheme_end_date;;}
+    sql:${TABLE}.scheme_end_date;;}
 
   dimension: scheme_dates
   {type: string
-    sql:${TABLE}. scheme_dates;;
+    sql:${TABLE}.scheme_dates;;
   }
 
 
   dimension: comments_to
   {type: string
-    sql:${TABLE}. comments_to;;}
+    sql:${TABLE}.comments_to;;}
 
   dimension: calc_metric
   {type: string
-    sql:${TABLE}. calc_metric;;
+    sql:${TABLE}.calc_metric;;
   }
   dimension: scheme_type
   {type: string
-    sql:${TABLE}. scheme_type;;}
+    sql:${TABLE}.scheme_type;;}
 
   dimension: fi_earnings
   {type: string
-    sql:${TABLE}. fi_earnings;;
+    sql:${TABLE}.fi_earnings;;
   }
   dimension: notes
   {type: string
-    sql:${TABLE}. notes;;}
+    sql:${TABLE}.notes;;}
 
   dimension: gur_earning_rate
   {type: string
-    sql:${TABLE}. gur_earning_rate;;
+    sql:${TABLE}.gur_earning_rate;;
   }
 
   dimension: forecast_to
   {type: string
-    sql:${TABLE}. forecast_to;;}
+    sql:${TABLE}.forecast_to;;}
 
   dimension: base_to_gre
   {type: string
@@ -205,72 +205,72 @@ view: forecast {
 
   dimension: forecast_to_per
   {type: string
-    sql:${TABLE}. forecast_to_per;;
+    sql:${TABLE}.forecast_to_per;;
   }
 
   dimension: curr_grw_tier_ind
   {type: string
-    sql:${TABLE}. curr_grw_tier_ind;;
+    sql:${TABLE}.curr_grw_tier_ind;;
   }
 
   dimension: forecast_grw_tier
   {type: string
-    sql:${TABLE}. forecast_grw_tier;;
+    sql:${TABLE}.forecast_grw_tier;;
   }
 
   dimension: forecast_grw_earning_rt
   {type: string
-    sql:${TABLE}. forecast_grw_earning_rt;;
+    sql:${TABLE}.forecast_grw_earning_rt;;
   }
 
   dimension: forecast_earning
   {type: string
-    sql:${TABLE}. forecast_earning;;
+    sql:${TABLE}.forecast_earning;;
   }
 
   dimension: ly_earning
   {type: string
-    sql:${TABLE}. ly_earning;;
+    sql:${TABLE}.ly_earning;;
   }
 
   dimension: ty_ly_earning_diff_per
   {type: string
-    sql:${TABLE}. ty_ly_earning_diff_per;;
+    sql:${TABLE}.ty_ly_earning_diff_per;;
   }
 
   dimension: rsk_to_req_low_tier
   {type: string
-    sql:${TABLE}. rsk_to_req_low_tier;;
+    sql:${TABLE}.rsk_to_req_low_tier;;
   }
 
   dimension: opr_low_gr_tier
   {type: string
-    sql:${TABLE}. opr_low_gr_tier;;
+    sql:${TABLE}.opr_low_gr_tier;;
   }
 
   dimension: opr_low_grw_earnings_rt
   {type: string
-    sql:${TABLE}. opr_low_grw_earnings_rt;;
+    sql:${TABLE}.opr_low_grw_earnings_rt;;
   }
 
   dimension: rsk_to_forecast_earnings
   {type: string
-    sql:${TABLE}. rsk_to_forecast_earnings;;
+    sql:${TABLE}.rsk_to_forecast_earnings;;
   }
 
   dimension: rsk_total_forecast_earnings
   {type: string
-    sql:${TABLE}. rsk_total_forecast_earnings;;
+    sql:${TABLE}.rsk_total_forecast_earnings;;
   }
 
   dimension: opr_to_req_hgh_tier
   {type: string
-    sql:${TABLE}. opr_to_req_hgh_tier;;
+    sql:${TABLE}.opr_to_req_hgh_tier;;
   }
 
   dimension: opr_hgh_gr_tier
   {type: string
-    sql:${TABLE}. opr_hgh_gr_tier;;
+    sql:${TABLE}.opr_hgh_gr_tier;;
   }
 
   dimension: opr_hgh_grw_earnings_rt
@@ -280,251 +280,251 @@ view: forecast {
 
   dimension: opr_to_forecast_earnings
   {type: string
-    sql:${TABLE}. opr_to_forecast_earnings;;
+    sql:${TABLE}.opr_to_forecast_earnings;;
   }
 
   dimension: opr_total_forecast_earnings
   {type: string
-    sql:${TABLE}. opr_total_forecast_earnings;;
+    sql:${TABLE}.opr_total_forecast_earnings;;
   }
 
   dimension: rdc_commit
   {type: string
-    sql:${TABLE}. rdc_commit;;
+    sql:${TABLE}.rdc_commit;;
   }
 
   dimension: ty_total_to_ytd
   {type: string
-    sql:${TABLE}. ty_total_to_ytd;;
+    sql:${TABLE}.ty_total_to_ytd;;
   }
 
   dimension: ly_total_to_ytd
   {type: string
-    sql:${TABLE}. ly_total_to_ytd;;
+    sql:${TABLE}.ly_total_to_ytd;;
   }
 
   dimension: ty_ly_diff_per
   {type: string
-    sql:${TABLE}. ty_ly_diff_per;;
+    sql:${TABLE}.ty_ly_diff_per;;
   }
 
   dimension: ty_ytd_dates
   {type: string
-    sql:${TABLE}. ty_ytd_dates;;
+    sql:${TABLE}.ty_ytd_dates;;
   }
 
   dimension: ly_total_to
   {type: string
-    sql:${TABLE}. ly_total_to;;
+    sql:${TABLE}.ly_total_to;;
   }
 
   dimension: prvy_total_to
   {type: string
-    sql:${TABLE}. prvy_total_to;;
+    sql:${TABLE}.prvy_total_to;;
   }
 
   dimension: ty_prvy_diff_per
   {type: string
-    sql:${TABLE}. ty_prvy_diff_per;;
+    sql:${TABLE}.ty_prvy_diff_per;;
   }
 
   dimension: tyto_period_1
   {type: string
-    sql:${TABLE}. tyto_period_1;;
+    sql:${TABLE}.tyto_period_1;;
   }
 
   dimension: lyto_period_1
   {type: string
-    sql:${TABLE}. lyto_period_1;;
+    sql:${TABLE}.lyto_period_1;;
   }
 
   dimension: perf_per_period_1
   {type: string
-    sql:${TABLE}. perf_per_period_1;;
+    sql:${TABLE}.perf_per_period_1;;
   }
 
   dimension: tyto_period_2
   {type: string
-    sql:${TABLE}. tyto_period_2;;
+    sql:${TABLE}.tyto_period_2;;
   }
 
   dimension: lyto_period_2
   {type: string
-    sql:${TABLE}. lyto_period_2;;
+    sql:${TABLE}.lyto_period_2;;
   }
 
   dimension: perf_per_period_2
   {type: string
-    sql:${TABLE}. perf_per_period_2;;
+    sql:${TABLE}.perf_per_period_2;;
   }
 
   dimension: tyto_period_3
   {type: string
-    sql:${TABLE}. tyto_period_3;;
+    sql:${TABLE}.tyto_period_3;;
   }
 
   dimension: lyto_period_3
   {type: string
-    sql:${TABLE}. lyto_period_3;;
+    sql:${TABLE}.lyto_period_3;;
   }
 
   dimension: perf_per_period_3
   {type: string
-    sql:${TABLE}. perf_per_period_3;;
+    sql:${TABLE}.perf_per_period_3;;
   }
 
 
   dimension: tyto_period_4
   {type: string
-    sql:${TABLE}. tyto_period_4;;
+    sql:${TABLE}.tyto_period_4;;
   }
 
   dimension: lyto_period_4
   {type: string
-    sql:${TABLE}. lyto_period_4;;
+    sql:${TABLE}.lyto_period_4;;
   }
 
   dimension: perf_per_period_4
   {type: string
-    sql:${TABLE}. perf_per_period_4;;
+    sql:${TABLE}.perf_per_period_4;;
   }
 
 
   dimension: tyto_period_5
   {type: string
-    sql:${TABLE}. tyto_period_5;;
+    sql:${TABLE}.tyto_period_5;;
   }
 
   dimension: lyto_period_5
   {type: string
-    sql:${TABLE}. lyto_period_5;;
+    sql:${TABLE}.lyto_period_5;;
   }
 
   dimension: perf_per_period_5
   {type: string
-    sql:${TABLE}. perf_per_period_5;;
+    sql:${TABLE}.perf_per_period_5;;
   }
 
 
   dimension: tyto_period_6
   {type: string
-    sql:${TABLE}. tyto_period_6;;
+    sql:${TABLE}.tyto_period_6;;
   }
 
   dimension: lyto_period_6
   {type: string
-    sql:${TABLE}. lyto_period_6;;
+    sql:${TABLE}.lyto_period_6;;
   }
 
   dimension: perf_per_period_6
   {type: string
-    sql:${TABLE}. perf_per_period_6;;
+    sql:${TABLE}.perf_per_period_6;;
   }
 
 
   dimension: tyto_period_7
   {type: string
-    sql:${TABLE}. tyto_period_7;;
+    sql:${TABLE}.tyto_period_7;;
   }
 
   dimension: lyto_period_7
   {type: string
-    sql:${TABLE}. lyto_period_7;;
+    sql:${TABLE}.lyto_period_7;;
   }
 
   dimension: perf_per_period_7
   {type: string
-    sql:${TABLE}. perf_per_period_7;;
+    sql:${TABLE}.perf_per_period_7;;
   }
 
 
   dimension: tyto_period_8
   {type: string
-    sql:${TABLE}. tyto_period_8;;
+    sql:${TABLE}.tyto_period_8;;
   }
 
   dimension: lyto_period_8
   {type: string
-    sql:${TABLE}. lyto_period_8;;
+    sql:${TABLE}.lyto_period_8;;
   }
 
   dimension: perf_per_period_8
   {type: string
-    sql:${TABLE}. perf_per_period_8;;
+    sql:${TABLE}.perf_per_period_8;;
   }
 
 
   dimension: tyto_period_9
   {type: string
-    sql:${TABLE}. tyto_period_9;;
+    sql:${TABLE}.tyto_period_9;;
   }
 
   dimension: lyto_period_9
   {type: string
-    sql:${TABLE}. lyto_period_9;;
+    sql:${TABLE}.lyto_period_9;;
   }
 
   dimension: perf_per_period_9
   {type: string
-    sql:${TABLE}. perf_per_period_9;;
+    sql:${TABLE}.perf_per_period_9;;
   }
 
 
   dimension: tyto_period_10
   {type: string
-    sql:${TABLE}. tyto_period_10;;
+    sql:${TABLE}.tyto_period_10;;
   }
 
   dimension: lyto_period_10
   {type: string
-    sql:${TABLE}. lyto_period_10;;
+    sql:${TABLE}.lyto_period_10;;
   }
 
   dimension: perf_per_period_10
   {type: string
-    sql:${TABLE}. perf_per_period_10;;
+    sql:${TABLE}.perf_per_period_10;;
   }
 
 
   dimension: tyto_period_11
   {type: string
-    sql:${TABLE}. tyto_period_11;;
+    sql:${TABLE}.tyto_period_11;;
   }
 
   dimension: lyto_period_11
   {type: string
-    sql:${TABLE}. lyto_period_11;;
+    sql:${TABLE}.lyto_period_11;;
   }
 
   dimension: perf_per_period_11
   {type: string
-    sql:${TABLE}. perf_per_period_11;;
+    sql:${TABLE}.perf_per_period_11;;
   }
 
 
   dimension: tyto_period_12
   {type: string
-    sql:${TABLE}. tyto_period_12;;
+    sql:${TABLE}.tyto_period_12;;
   }
 
   dimension: lyto_period_12
   {type: string
-    sql:${TABLE}. lyto_period_12;;
+    sql:${TABLE}.lyto_period_12;;
   }
 
   dimension: perf_per_period_12
   {type: string
-    sql:${TABLE}. perf_per_period_12;;
+    sql:${TABLE}.perf_per_period_12;;
   }
 
   dimension: total_ty_to_ytd_all
   {type: string
-    sql:${TABLE}. total_ty_to_ytd_all;;
+    sql:${TABLE}.total_ty_to_ytd_all;;
   }
 
   dimension: total_ly_to_ytd_all
   {type: string
-    sql:${TABLE}. total_ly_to_ytd_all;;
+    sql:${TABLE}.total_ly_to_ytd_all;;
   }
 
   measure: sum_total_ty_to_ytd_all {
