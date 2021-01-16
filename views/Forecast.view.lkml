@@ -46,51 +46,63 @@ view: forecast {
           ,tyto_period_1
           ,lyto_period_1
           ,case when lyto_period_1 > 0 then
-                   (tyto_period_1 - ,lyto_period_1)/lyto_period_1
+                   (tyto_period_1-lyto_period_1)/lyto_period_1
            else 0 end * 100  perf_per_period_1
           ,tyto_period_2
           ,lyto_period_2
           ,case when lyto_period_2 > 0 then
-                   (tyto_period_2 - ,lyto_period_2)/lyto_period_2
+                   (tyto_period_2 -lyto_period_2)/lyto_period_2
            else 0 end * 100  perf_per_period_2
           ,tyto_period_3
           ,lyto_period_3
           ,case when lyto_period_3 > 0 then
-                   (tyto_period_3 - ,lyto_period_3)/lyto_period_3
+                   (tyto_period_3 - lyto_period_3)/lyto_period_3
            else 0 end * 100  perf_per_period_3
           ,tyto_period_4
           ,lyto_period_4
           ,case when lyto_period_4 > 0 then
-                   (tyto_period_4 - ,lyto_period_4)/lyto_period_4
+                   (tyto_period_4 - lyto_period_4)/lyto_period_4
            else 0 end * 100  perf_per_period_4
           ,tyto_period_5
           ,lyto_period_5
           ,case when lyto_period_5 > 0 then
-                   (tyto_period_5 - ,lyto_period_5)/lyto_period_5
+                   (tyto_period_5 - lyto_period_5)/lyto_period_5
            else 0 end * 100  perf_per_period_5
           ,tyto_period_6
           ,lyto_period_6
-          ,case when lyto_period_5 > 0 then
-                   (tyto_period_5 - ,lyto_period_5)/lyto_period_5
-           else 0 end * 100  perf_per_period_5
+          ,(case when lyto_period_6 > 0 then
+                   (tyto_period_6 - lyto_period_6)/lyto_period_6
+           else 0 end * 100) perf_per_period_5
           ,tyto_period_7
           ,lyto_period_7
-          ,perf_per_period_7
+          ,(case when lyto_period_7 > 0 then
+                   (tyto_period_7 - lyto_period_7)/lyto_period_7
+           else 0 end * 100) perf_per_period_7
           ,tyto_period_8
           ,lyto_period_8
-          ,perf_per_period_8
+          ,(case when lyto_period_8 > 0 then
+                   (tyto_period_8 - lyto_period_8)/lyto_period_8
+           else 0 end * 100)perf_per_period_8
           ,tyto_period_9
           ,lyto_period_9
-          ,perf_per_period_9
+          ,(case when lyto_period_9 > 0 then
+                   (tyto_period_9 - lyto_period_9)/lyto_period_9
+           else 0 end * 100)perf_per_period_9
           ,tyto_period_10
           ,lyto_period_10
-          ,perf_per_period_10
+          ,(case when lyto_period_10 > 0 then
+                   (tyto_period_10 - lyto_period_10)/lyto_period_10
+           else 0 end * 100)perf_per_period_10
           ,tyto_period_11
           ,lyto_period_11
-          ,perf_per_period_11
+          ,(case when lyto_period_11 > 0 then
+                   (tyto_period_11 - lyto_period_11)/lyto_period_11
+           else 0 end * 100)perf_per_period_11
           ,tyto_period_12
           ,lyto_period_12
-          ,perf_per_period_12
+          ,(case when lyto_period_12 > 0 then
+                   (tyto_period_12 - lyto_period_12)/lyto_period_12
+           else 0 end * 100)perf_per_period_12
            from custom_hook.performance_details
        ;;
   }
@@ -503,6 +515,215 @@ view: forecast {
   dimension: perf_per_period_12
   {type: string
     sql:${TABLE}. perf_per_period_12;;
+  }
+
+  measure: sum_ly_earning {
+    type: sum
+    sql: ${ly_earning} ;;
+  }
+
+  measure: sum_forecast_to {
+    type: sum
+    sql: ${forecast_to} ;;
+  }
+
+  measure: sum_base_to_gre {
+    type: sum
+    sql: ${base_to_gre} ;;
+  }
+
+  measure: sum_forecast_earning {
+    type: sum
+    sql: ${forecast_earning} ;;
+  }
+
+  measure: sum_rsk_to_req_low_tier {
+    type: sum
+    sql: ${rsk_to_req_low_tier} ;;
+  }
+
+  measure: sum_opr_low_gr_tier {
+    type: sum
+    sql: ${opr_low_gr_tier} ;;
+  }
+
+  measure: sum_opr_low_grw_earnings_rt {
+    type: sum
+    sql: ${opr_low_grw_earnings_rt} ;;
+  }
+
+  measure: sum_rsk_to_forecast_earnings {
+    type: sum
+    sql: ${rsk_to_forecast_earnings} ;;
+  }
+
+  measure: sum_rsk_total_forecast_earnings {
+    type: sum
+    sql: ${rsk_total_forecast_earnings} ;;
+  }
+
+  measure: sum_opr_to_req_hgh_tier {
+    type: sum
+    sql: ${opr_to_req_hgh_tier} ;;
+  }
+
+  measure: sum_opr_hgh_gr_tier {
+    type: sum
+    sql: ${opr_hgh_gr_tier} ;;
+  }
+  measure: sum_opr_hgh_grw_earnings_rt {
+    type: sum
+    sql: ${opr_hgh_grw_earnings_rt} ;;
+  }
+
+  measure: sum_opr_to_forecast_earnings {
+    type: sum
+    sql: ${opr_to_forecast_earnings} ;;
+  }
+
+  measure: sum_opr_total_forecast_earnings {
+    type: sum
+    sql: ${opr_total_forecast_earnings} ;;
+  }
+
+  measure: sum_ty_total_to_ytd {
+    type: sum
+    sql: ${ty_total_to_ytd} ;;
+  }
+
+  measure: sum_ly_total_to_ytd {
+    type: sum
+    sql: ${ly_total_to_ytd} ;;
+  }
+
+  measure: sum_ly_total_to {
+    type: sum
+    sql: ${ly_total_to} ;;
+  }
+
+  measure: sum_prvy_total_to {
+    type: sum
+    sql: ${prvy_total_to} ;;
+  }
+
+  measure: sum_tyto_period_1 {
+    type: sum
+    sql: ${tyto_period_1} ;;
+  }
+
+  measure: sum_lyto_period_1 {
+    type: sum
+    sql: ${lyto_period_1} ;;
+  }
+
+  measure: sum_tyto_period_2 {
+    type: sum
+    sql: ${tyto_period_2} ;;
+  }
+
+  measure: sum_lyto_period_2 {
+    type: sum
+    sql: ${lyto_period_2} ;;
+  }
+
+  measure: sum_tyto_period_3 {
+    type: sum
+    sql: ${tyto_period_3} ;;
+  }
+
+  measure: sum_lyto_period_3 {
+    type: sum
+    sql: ${lyto_period_3} ;;
+  }
+
+  measure: sum_tyto_period_4 {
+    type: sum
+    sql: ${tyto_period_4} ;;
+  }
+
+  measure: sum_lyto_period_4 {
+    type: sum
+    sql: ${lyto_period_4} ;;
+  }
+
+  measure: sum_tyto_period_5 {
+    type: sum
+    sql: ${tyto_period_5} ;;
+  }
+
+  measure: sum_lyto_period_5 {
+    type: sum
+    sql: ${lyto_period_5} ;;
+  }
+
+  measure: sum_tyto_period_6 {
+    type: sum
+    sql: ${tyto_period_6} ;;
+  }
+
+  measure: sum_lyto_period_6 {
+    type: sum
+    sql: ${lyto_period_6} ;;
+  }
+
+  measure: sum_tyto_period_7 {
+    type: sum
+    sql: ${tyto_period_7} ;;
+  }
+
+  measure: sum_lyto_period_7 {
+    type: sum
+    sql: ${lyto_period_7} ;;
+  }
+
+  measure: sum_tyto_period_8 {
+    type: sum
+    sql: ${tyto_period_8} ;;
+  }
+
+  measure: sum_lyto_period_8 {
+    type: sum
+    sql: ${lyto_period_8} ;;
+  }
+
+  measure: sum_tyto_period_9 {
+    type: sum
+    sql: ${tyto_period_9} ;;
+  }
+
+  measure: sum_lyto_period_9 {
+    type: sum
+    sql: ${lyto_period_9} ;;
+  }
+
+  measure: sum_tyto_period_10 {
+    type: sum
+    sql: ${tyto_period_10} ;;
+  }
+
+  measure: sum_lyto_period_10 {
+    type: sum
+    sql: ${lyto_period_10} ;;
+  }
+
+  measure: sum_tyto_period_11 {
+    type: sum
+    sql: ${tyto_period_11} ;;
+  }
+
+  measure: sum_lyto_period_11 {
+    type: sum
+    sql: ${lyto_period_11} ;;
+  }
+
+  measure: sum_tyto_period_12 {
+    type: sum
+    sql: ${tyto_period_12} ;;
+  }
+
+  measure: sum_lyto_period_12 {
+    type: sum
+    sql: ${lyto_period_12} ;;
   }
 
 
