@@ -756,27 +756,27 @@ view: forecast {
 
   measure: Max_Calc_Metric {
       type: string
-      sql: MAX${calc_metric}) ;;
+      sql: MAX(${calc_metric}) ;;
     }
 
   measure: Max_Scheme_Type {
     type: string
-    sql: MAX${scheme_type}) ;;
+    sql: MAX(${scheme_type}) ;;
   }
 
   measure: Max_Fi_Earnings {
     type: string
-    sql: MAX${fi_earnings}) ;;
+    sql: MAX(${fi_earnings}) ;;
   }
 
   measure: Max_gur_earning_rate {
     type: string
-    sql: MAX${gur_earning_rate}) ;;
+    sql: MAX(${gur_earning_rate}) ;;
   }
 
   measure: Max_Notes {
     type: string
-    sql: MAX${notes}) ;;
+    sql: MAX(${notes}) ;;
   }
 
 
