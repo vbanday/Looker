@@ -768,16 +768,19 @@ view: forecast {
   }
 
   measure: Max_Fi_Earnings {
+    label: "Fixed Income:"
     type: string
     sql: MAX(${fi_earnings}) ;;
   }
 
   measure: Max_gur_earning_rate {
+    label: "Guarantee Earnings Rate:"
     type: string
     sql: MAX(${gur_earning_rate}) ;;
   }
 
   measure: Max_Notes {
+    label: "Notes:"
     type: string
     sql: MAX(${notes}) ;;
   }
