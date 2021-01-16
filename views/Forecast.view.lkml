@@ -750,16 +750,19 @@ view: forecast {
   #### comments
 
   measure: Max_Comments_TO {
+    label: "Comments for T/O:"
     type: string
     sql: MAX(${comments_to}) ;;
   }
 
   measure: Max_Calc_Metric {
+    label: "Calculation Metric:"
       type: string
       sql: MAX(${calc_metric}) ;;
     }
 
   measure: Max_Scheme_Type {
+    label: "Scheme Type:"
     type: string
     sql: MAX(${scheme_type}) ;;
   }
