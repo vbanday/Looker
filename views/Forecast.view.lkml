@@ -45,22 +45,34 @@ view: forecast {
           ,ty_prvy_diff_per
           ,tyto_period_1
           ,lyto_period_1
-          ,perf_per_period_1
+          ,case when lyto_period_1 > 0 then
+                   (tyto_period_1 - ,lyto_period_1)/lyto_period_1
+           else 0 end * 100  perf_per_period_1
           ,tyto_period_2
           ,lyto_period_2
-          ,perf_per_period_2
+          ,case when lyto_period_2 > 0 then
+                   (tyto_period_2 - ,lyto_period_2)/lyto_period_2
+           else 0 end * 100  perf_per_period_2
           ,tyto_period_3
           ,lyto_period_3
-          ,perf_per_period_3
+          ,case when lyto_period_3 > 0 then
+                   (tyto_period_3 - ,lyto_period_3)/lyto_period_3
+           else 0 end * 100  perf_per_period_3
           ,tyto_period_4
           ,lyto_period_4
-          ,perf_per_period_4
+          ,case when lyto_period_4 > 0 then
+                   (tyto_period_4 - ,lyto_period_4)/lyto_period_4
+           else 0 end * 100  perf_per_period_4
           ,tyto_period_5
           ,lyto_period_5
-          ,perf_per_period_5
+          ,case when lyto_period_5 > 0 then
+                   (tyto_period_5 - ,lyto_period_5)/lyto_period_5
+           else 0 end * 100  perf_per_period_5
           ,tyto_period_6
           ,lyto_period_6
-          ,perf_per_period_6
+          ,case when lyto_period_5 > 0 then
+                   (tyto_period_5 - ,lyto_period_5)/lyto_period_5
+           else 0 end * 100  perf_per_period_5
           ,tyto_period_7
           ,lyto_period_7
           ,perf_per_period_7
