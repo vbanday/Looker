@@ -753,6 +753,37 @@ view: forecast {
     sql: ${lyto_period_12} ;;
   }
 
+  #### comments
+
+  measure: Max_Comments_TO {
+    type: max
+    sql: ${comments_to} ;;
+  }
+
+  measure: Max_Calc_Metric {
+      type: max
+      sql: ${calc_metric} ;;
+    }
+
+  measure: Max_Scheme_Type {
+    type: max
+    sql: ${scheme_type} ;;
+  }
+
+  measure: Max_Fi_Earnings {
+    type: max
+    sql: ${fi_earnings} ;;
+  }
+
+  measure: Max_gur_earning_rate {
+    type: max
+    sql: ${gur_earning_rate} ;;
+  }
+
+  measure: Max_Notes {
+    type: max
+    sql: ${notes} ;;
+  }
 
 
 }
