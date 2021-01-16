@@ -103,6 +103,12 @@ view: forecast {
           ,(case when lyto_period_12 > 0 then
                    (tyto_period_12 - lyto_period_12)/lyto_period_12
            else 0 end * 100)perf_per_period_12
+          , (nvl(tyto_period_1,0)+nvl(tyto_period_2,0)+nvl(tyto_period_3,0)+nvl(tyto_period_4,0)+nvl(tyto_period_5,0)+
+         nvl(tyto_period_6,0)+nvl(tyto_period_7,0)+nvl(tyto_period_8,0)+nvl(tyto_period_9,0)
+          +nvl(tyto_period_10,0)+nvl(tyto_period_11,0)+nvl(tyto_period_12,0))  TOTAL_TY_TO_YTD_ALL,
+          (nvl(lyto_period_1,0)+nvl(lyto_period_2,0)+nvl(lyto_period_3,0)+nvl(lyto_period_4,0)+nvl(lyto_period_5,0)+
+         nvl(lyto_period_6,0)+nvl(lyto_period_7,0)+nvl(lyto_period_8,0)+nvl(lyto_period_9,0)
+          +nvl(lyto_period_10,0)+nvl(lyto_period_11,0)+nvl(lyto_period_12,0))  TOTAL_LY_TO_YTD_ALL
            from custom_hook.performance_details
        ;;
   }
@@ -516,6 +522,27 @@ view: forecast {
   {type: string
     sql:${TABLE}. perf_per_period_12;;
   }
+
+  dimension: total_ty_to_ytd_all
+  {type: string
+    sql:${TABLE}. total_ty_to_ytd_all;;
+  }
+
+  dimension: total_ly_to_ytd_all
+  {type: string
+    sql:${TABLE}. total_ly_to_ytd_all;;
+  }
+
+  measure: sum_total_ty_to_ytd_all {
+    type: sum
+    sql: ${total_ty_to_ytd_all} ;;
+  }
+
+  measure: sum_total_ly_to_ytd_all {
+    type: sum
+    sql: ${total_ly_to_ytd_all} ;;
+  }
+
 
   measure: sum_ly_earning {
     type: sum
