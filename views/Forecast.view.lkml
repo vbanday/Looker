@@ -21,7 +21,30 @@ view: forecast {
            else 0 end * 100 forecast_to_per
           ,curr_grw_tier_ind
           ,forecast_grw_tier
-          ,forecast_grw_earning_rt
+          ,CASE
+          WHEN scheme_type = 'Individual'
+          THEN
+             (SELECT earnings_rate
+                FROM Growth_Matrix g
+               WHERE     g.scheme_code = p.scheme_code
+                     AND g.growth_tier = p.forecast_grw_tier)
+          --
+          WHEN scheme_type = 'Group'
+          THEN
+             (SELECT MAX (earnings_rate)
+                FROM Growth_Matrix g
+               WHERE g.scheme_code = scheme_code)
+          --
+          --
+          WHEN scheme_type = 'Aggregated'
+          THEN
+             (SELECT MAX (earnings_rate)
+                FROM Growth_Matrix g
+               WHERE g.scheme_code = scheme_code)
+          --
+          ELSE
+             TO_CHAR (GUR_EARNING_RATE)
+          END  forecast_grw_earning_rt
           ,forecast_earning
           ,ly_earning
           ,ty_ly_earning_diff_per
@@ -103,7 +126,7 @@ view: forecast {
           ,(case when lyto_period_12 > 0 then
                    (tyto_period_12 - lyto_period_12)/lyto_period_12
            else 0 end * 100)perf_per_period_12
-           from custom_hook.performance_details
+           from custom_hook.performance_details p
        ;;
   }
 
