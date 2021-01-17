@@ -117,11 +117,13 @@ view: forecast {
     sql:${TABLE}.rank;;}
 
   dimension: supplier
-  {type: string
+  { label: "RDC"
+    type: string
     sql:${TABLE}.supplier;;
   }
   dimension: scheme_code
-  {type: string
+  {label:"Scheme Code"
+    type: string
     sql:${TABLE}.scheme_code;;}
 
   dimension: scheme_start_date
