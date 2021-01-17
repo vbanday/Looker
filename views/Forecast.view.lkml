@@ -195,11 +195,11 @@ view: forecast {
   }
 
   dimension: forecast_to
-  {type: string
+  {type: number
     sql:${TABLE}.forecast_to;;}
 
   dimension: base_to_gre
-  {type: string
+  {type: number
     sql:${TABLE}. base_to_gre;;
   }
 
