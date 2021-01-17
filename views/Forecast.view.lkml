@@ -750,7 +750,7 @@ view: forecast {
 
   measure: forecast_to_per_m{
     type: sum
-    sql:${TABLE}.forecast_to_per;;
+    sql: ${forecast_to_per} ;;
   }
 
 
