@@ -196,11 +196,12 @@ view: forecast {
 
   dimension: forecast_to
   {type: number
-    sql:${TABLE}.forecast_to;;}
+    sql:${TABLE}.forecast_to;;
+    }
 
   dimension: base_to_gre
   {type: number
-    sql:${TABLE}. base_to_gre;;
+    sql:${TABLE}.base_to_gre;;
   }
 
   dimension: forecast_to_per
@@ -543,12 +544,12 @@ view: forecast {
     sql: ${ly_earning} ;;
   }
 
-  measure: forecast_to_m{
+  measure: sum_forecast_to{
     type: sum
     sql: ${forecast_to} ;;
   }
 
-  measure: base_to_gre_m {
+  measure: sum_base_to_gre{
     type: sum
     sql: ${base_to_gre} ;;
   }
@@ -748,7 +749,7 @@ view: forecast {
     sql: ${lyto_period_12} ;;
   }
 
-  measure: forecast_to_per_m{
+  measure: sum_forecast_to_per{
     type: sum
     sql: ${forecast_to_per} ;;
   }
