@@ -748,9 +748,9 @@ view: forecast {
     sql: ${lyto_period_12} ;;
   }
 
-  measure: sum_forecast_to_per{
-    type: sum
-    sql: ${forecast_to_per} ;;
+  measure: forecast_to_per_m{
+    type: number
+    sql:${TABLE}.forecast_to_per;;
   }
 
 
