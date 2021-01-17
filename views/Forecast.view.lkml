@@ -592,6 +592,7 @@ view: forecast {
     type: sum
     sql: ${opr_hgh_gr_tier} ;;
   }
+
   measure: sum_opr_hgh_grw_earnings_rt {
     type: sum
     sql: ${opr_hgh_grw_earnings_rt} ;;
@@ -746,6 +747,12 @@ view: forecast {
     type: sum
     sql: ${lyto_period_12} ;;
   }
+
+  measure: sum_forecast_to_per {
+    type: sum
+    sql: ${forecast_to_per} ;;
+  }
+
 
   #### comments
 
