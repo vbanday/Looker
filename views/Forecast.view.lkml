@@ -16,6 +16,8 @@ view: forecast {
           ,gur_earning_rate
           ,forecast_to
           ,base_to_gre
+          ,curr_grw_tier_ind
+          ,forecast_grw_tier
           ,forecast_grw_earning_rt
           ,forecast_earning
           ,ly_earning
@@ -208,6 +210,7 @@ view: forecast {
   {type: string
     sql:${TABLE}.curr_grw_tier_ind;;
   }
+
 
   dimension: forecast_grw_tier
   {type: string
