@@ -16,35 +16,7 @@ view: forecast {
           ,gur_earning_rate
           ,forecast_to
           ,base_to_gre
-          ,case when base_to_gre > 0 then
-                   (forecast_to - base_to_gre)/base_to_gre
-           else 0 end * 100 forecast_to_per
-          ,curr_grw_tier_ind
-          ,forecast_grw_tier
-          ,CASE
-          WHEN scheme_type = 'Individual'
-          THEN
-             (SELECT earnings_rate
-                FROM Growth_Matrix g
-               WHERE     g.scheme_code = p.scheme_code
-                     AND g.growth_tier = p.forecast_grw_tier)
-          --
-          WHEN scheme_type = 'Group'
-          THEN
-             (SELECT MAX (earnings_rate)
-                FROM Growth_Matrix g
-               WHERE g.scheme_code = scheme_code)
-          --
-          --
-          WHEN scheme_type = 'Aggregated'
-          THEN
-             (SELECT MAX (earnings_rate)
-                FROM Growth_Matrix g
-               WHERE g.scheme_code = scheme_code)
-          --
-          ELSE
-             TO_CHAR (GUR_EARNING_RATE)
-          END  forecast_grw_earning_rt
+          ,forecast_grw_earning_rt
           ,forecast_earning
           ,ly_earning
           ,ty_ly_earning_diff_per
