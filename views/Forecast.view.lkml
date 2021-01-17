@@ -749,12 +749,6 @@ view: forecast {
     sql: ${lyto_period_12} ;;
   }
 
-  measure: forecast_to_per_m{
-    type: sum
-    sql: ${forecast_to_per} ;;
-  }
-
-
   #### comments
 
   measure: Max_Comments_TO {
