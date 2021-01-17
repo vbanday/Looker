@@ -543,12 +543,12 @@ view: forecast {
     sql: ${ly_earning} ;;
   }
 
-  measure: sum_forecast_to {
+  measure: forecast_to_m{
     type: sum
     sql: ${forecast_to} ;;
   }
 
-  measure: sum_base_to_gre {
+  measure: base_to_gre_m {
     type: sum
     sql: ${base_to_gre} ;;
   }
