@@ -16,9 +16,6 @@ view: forecast {
           ,gur_earning_rate
           ,forecast_to
           ,base_to_gre
-          ,case when base_to_gre > 0 then
-                   (forecast_to - base_to_gre)/base_to_gre
-           else 0 end * 100 forecast_to_per
           ,curr_grw_tier_ind
           ,forecast_grw_tier
           ,forecast_grw_earning_rt
@@ -103,7 +100,7 @@ view: forecast {
           ,(case when lyto_period_12 > 0 then
                    (tyto_period_12 - lyto_period_12)/lyto_period_12
            else 0 end * 100)perf_per_period_12
-           from custom_hook.performance_details
+           from custom_hook.performance_details p
        ;;
   }
 
@@ -121,11 +118,13 @@ view: forecast {
     sql:${TABLE}.rank;;}
 
   dimension: supplier
-  {type: string
+  { label: "RDC"
+    type: string
     sql:${TABLE}.supplier;;
   }
   dimension: scheme_code
-  {type: string
+  {label:"Scheme Code"
+    type: string
     sql:${TABLE}.scheme_code;;}
 
   dimension: scheme_start_date
@@ -214,6 +213,7 @@ view: forecast {
   {type: string
     sql:${TABLE}.curr_grw_tier_ind;;
   }
+
 
   dimension: forecast_grw_tier
   {type: string
