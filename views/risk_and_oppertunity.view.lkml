@@ -79,17 +79,17 @@ view: rsk_and_opr {
   }
 
   dimension: to_forecast_earnings {
-    type: string
+    type: number
     sql: ${TABLE}.TO_FORECAST_EARNINGS ;;
   }
 
   dimension: to_req_tier {
-    type: string
+    type: number
     sql: ${TABLE}.TO_REQ_TIER ;;
   }
 
   dimension: total_forecast_earnings {
-    type: string
+    type: number
     sql: ${TABLE}.TOTAL_FORECAST_EARNINGS ;;
   }
 
@@ -97,7 +97,6 @@ view: rsk_and_opr {
     type: string
     sql: ${TABLE}.TYPE ;;
   }
-
 
   measure: sum_to_req_tier {
     type: sum
@@ -108,9 +107,11 @@ view: rsk_and_opr {
     type: sum
     sql: ${to_forecast_earnings} ;;
   }
+
   measure: sum_total_forecast_earnings {
     type: sum
     sql: ${total_forecast_earnings} ;;
   }
+
 
 }
