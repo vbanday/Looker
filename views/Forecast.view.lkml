@@ -551,7 +551,7 @@ view: forecast {
     sql: ${ly_earning} ;;
   }
 
-  measure: sum_ty_earning {
+  measure: sum_ty_earning_M {
     type: sum
     sql: ${ty_earning} ;;
   }
