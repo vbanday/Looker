@@ -53,16 +53,28 @@ view: rskopr {
     sql: ${TABLE}.grw_earnings_rt ;;
   }
 
+  #measure: sgr_tier {
+  #  type: sum
+  #  sql: ${gr_tier} ;;
+  #}
+
+  #measure: sgrw_earnings_rt {
+  #  type: sum
+  #  sql: ${grw_earnings_rt} ;;
+  #}
+
+
   measure: sgr_tier {
-    type: sum
-    sql: ${gr_tier} ;;
+    label: "Growth Tier:"
+    type: string
+    sql: MAX(${gr_tier}) ;;
   }
 
   measure: sgrw_earnings_rt {
-    type: sum
-    sql: ${grw_earnings_rt} ;;
+    label: "Frowth Earnings Rate:"
+    type: string
+    sql: MAX(${grw_earnings_rt}) ;;
   }
-
 
   dimension: partner {
     type: string
