@@ -108,7 +108,8 @@ view: forecast {
   }
 
   dimension: partner
-  {type: string
+  { label: "RDC"
+    type: string
     sql:${TABLE}.partner;;}
 
   dimension: department
@@ -220,7 +221,7 @@ view: forecast {
   }
 
   dimension: forecast_grw_earning_rt
-  {type: string
+  {type: number
     sql:${TABLE}.forecast_grw_earning_rt;;
   }
 
