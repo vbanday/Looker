@@ -1,6 +1,24 @@
 view: rsk_and_opr {
-  sql_table_name: CUSTOM_HOOK.RSK_AND_OPR ;;
-
+ # sql_table_name: CUSTOM_HOOK.RSK_AND_OPR ;;
+  derived_table: {
+    sql:   SELECT department,
+               RANK,
+               supplier,
+               scheme_code,
+               scheme_dates,
+               comments_to,
+               calc_metric,
+               scheme_type,
+               fi_earnings,
+               TYPE,
+               to_req_tier,
+               gr_tier,
+               grw_earnings_rt,
+               to_forecast_earnings,
+               total_forecast_earnings
+          FROM custom_hook.RSK_AND_OPR
+       ;;
+  }
   dimension: calc_metric {
     type: string
     sql: ${TABLE}.CALC_METRIC ;;
@@ -86,7 +104,7 @@ view: rsk_and_opr {
     drill_fields: []
   }
 
-
+#MEASURES
   measure: sum_to_req_tier {
     type: sum
     sql: ${to_req_tier} ;;
