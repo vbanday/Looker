@@ -21,7 +21,7 @@ view: forecast {
           ,forecast_grw_earning_rt
           ,forecast_earning
           ,ly_earning
-          ,(to_number(forecast_grw_earning_Rt)*to_number(forecast_to)) ty_earning
+          ,((to_number(forecast_grw_earning_Rt)*to_number(forecast_to))/100) ty_earning
           ,ty_ly_earning_diff_per
           ,rsk_to_req_low_tier
           ,opr_low_gr_tier
