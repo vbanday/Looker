@@ -85,4 +85,19 @@ view: rsk_and_opr {
     type: count
     drill_fields: []
   }
+
+
+  measure: sum_to_req_tier {
+    type: sum
+    sql: ${to_req_tier} ;;
+  }
+  measure: sum_to_forecast_earnings {
+    type: sum
+    sql: ${to_forecast_earnings} ;;
+  }
+  measure: sum_total_forecast_earnings {
+    type: sum
+    sql: ${total_forecast_earnings} ;;
+  }
+
 }
