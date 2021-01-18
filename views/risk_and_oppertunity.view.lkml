@@ -1,6 +1,5 @@
 view: rsk_and_opr {
- # sql_table_name: CUSTOM_HOOK.RSK_AND_OPR ;;
-  derived_table: {
+   derived_table: {
     sql:   SELECT department,
                RANK,
                supplier,
@@ -99,16 +98,12 @@ view: rsk_and_opr {
     sql: ${TABLE}.TYPE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
 
-#MEASURES
   measure: sum_to_req_tier {
     type: sum
     sql: ${to_req_tier} ;;
   }
+
   measure: sum_to_forecast_earnings {
     type: sum
     sql: ${to_forecast_earnings} ;;
