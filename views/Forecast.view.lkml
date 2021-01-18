@@ -21,6 +21,7 @@ view: forecast {
           ,forecast_grw_earning_rt
           ,forecast_earning
           ,ly_earning
+          ,(to_number(forecast_grw_earning_Rt)*to_number(forecast_to)) ty_earning
           ,ty_ly_earning_diff_per
           ,rsk_to_req_low_tier
           ,opr_low_gr_tier
@@ -233,6 +234,10 @@ view: forecast {
   dimension: ly_earning
   {type: number
     sql:${TABLE}.ly_earning;;
+  }
+  dimension: ty_earning
+  {type: number
+    sql:${TABLE}.ty_earning;;
   }
 
   dimension: ty_ly_earning_diff_per
@@ -545,6 +550,10 @@ view: forecast {
     sql: ${ly_earning} ;;
   }
 
+  measure: sum_ty_earning {
+    type: sum
+    sql: ${ty_earning} ;;
+  }
 
   measure: sum_forecast_to{
     type: sum
