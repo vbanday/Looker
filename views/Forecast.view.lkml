@@ -119,7 +119,7 @@ view: forecast {
     sql:${TABLE}.rank;;}
 
   dimension: supplier
-  { label: "RDC"
+  { label: "Supplier"
     type: string
     sql:${TABLE}.supplier;;
   }
