@@ -22,6 +22,7 @@ view: rskopr {
        ;;
    }
 
+
   dimension: calc_metric {
     type: string
     sql: ${TABLE}.CALC_METRIC ;;
@@ -44,13 +45,24 @@ view: rskopr {
 
   dimension: gr_tier {
     type: string
-    sql: ${TABLE}.GR_TIER ;;
+    sql: ${TABLE}.gr_tier ;;
   }
 
   dimension: grw_earnings_rt {
     type: string
-    sql: ${TABLE}.GRW_EARNINGS_RT ;;
+    sql: ${TABLE}.grw_earnings_rt ;;
   }
+
+  measure: sgr_tier {
+    type: sum
+    sql: ${gr_tier} ;;
+  }
+
+  measure: sgrw_earnings_rt {
+    type: sum
+    sql: ${grw_earnings_rt} ;;
+  }
+
 
   dimension: partner {
     type: string
