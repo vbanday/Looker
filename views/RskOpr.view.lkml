@@ -124,6 +124,7 @@ view: rskopr {
   dimension: type {
     type: string
     sql: ${TABLE}.TYPE ;;
+    html:   <font color="green">{{ value }}</font>;
   }
 
   measure: sum_to_req_tier {
