@@ -154,9 +154,9 @@ view: rskopr {
     sql: ${TABLE}.TYPE;;
     html:
     {% if value == 'Risk' %}
-    <p style="color: black; background-color: red; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    <p style="background-color: #8f92de; font-size:100%; text-align:center">{{ rendered_value }}</p>
     {% else %}
-    <p style="color: black; background-color: #8f92de; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    <p style="background-color: #8f92de; font-size:100%; text-align:center">{{ rendered_value }}</p>
     {% endif %}
     ;;
   }
