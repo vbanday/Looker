@@ -111,6 +111,13 @@ view: rskopr {
   dimension: type {
     type: string
     sql: ${TABLE}.TYPE;;
+    html:
+    {% if value == 'Risk' %}
+    <p style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% else %}
+    <p style="color: black; background-color: orange; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% endif %}
+    ;;
   }
 
   measure: sum_to_req_tier {
