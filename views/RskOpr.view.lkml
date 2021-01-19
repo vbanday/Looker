@@ -2,7 +2,7 @@
 view: rskopr {
 #   # Or, you could make this view a derived table, like this:
    derived_table: {
-     sql:  SELECT partner,
+     sql:   SELECT partner,
                department,
                RANK,
                supplier,
@@ -13,11 +13,22 @@ view: rskopr {
                scheme_type,
                fi_earnings,
                TYPE,
-               to_req_tier,
-               gr_tier,
-               grw_earnings_rt,
-               to_forecast_earnings,
-               total_forecast_earnings
+               case when to_number(to_req_tier)=-1 then 0
+               end to_req_tier,
+               case when to_number(gr_tier)=-1 then 0
+                    when to_number(gr_tier)=-2 then 0
+               end gr_tier,
+               case when to_number(grw_earnings_rt)=-1 then 0
+               end  grw_earnings_rt,
+               case when to_number(to_forecast_earnings)=-1 then 0
+               end to_forecast_earnings,
+               case when to_number(total_forecast_earnings)=-1 then 0
+               end total_forecast_earnings,
+               to_req_tier to_req_tier_c,
+               gr_tier gr_tier_c,
+               grw_earnings_rt grw_earnings_rt_c,
+               to_forecast_earnings to_forecast_earnings_c,
+               total_forecast_earnings total_forecast_earnings_c
           FROM custom_hook.RSK_AND_OPR
        ;;
    }
