@@ -124,10 +124,10 @@ view: rskopr {
   dimension: type {
     type: string
     sql: ${TABLE}.TYPE;;
-    html: {% if value = 'Risk'} <font color="red">{{ value }}</font>
-    {% else %} <font color="green">{{ value }}</font>
-     {% endif %}
-    ;;
+    #html: {% if value = 'Risk'} <font color="red">{{ value }}</font>
+    #{% else %} <font color="green">{{ value }}</font>
+    # {% endif %}
+    #;;
   }
 
   measure: sum_to_req_tier {
