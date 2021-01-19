@@ -63,19 +63,6 @@ view: rskopr {
   #  sql: ${grw_earnings_rt} ;;
   #}
 
-
-  measure: sgr_tier {
-    label: "Growth Tier:"
-    type: string
-    sql: MAX(${gr_tier}) ;;
-  }
-
-  measure: sgrw_earnings_rt {
-    label: "Frowth Earnings Rate:"
-    type: string
-    sql: MAX(${grw_earnings_rt}) ;;
-  }
-
   dimension: partner {
     type: string
     sql: ${TABLE}.PARTNER ;;
@@ -144,6 +131,19 @@ view: rskopr {
     type: sum
     sql: ${total_forecast_earnings} ;;
   }
+
+  measure: sgr_tier {
+    label: "Growth Tier"
+    type: string
+    sql: max(${gr_tier}) ;;
+  }
+
+  measure: sgrw_earnings_rt {
+    label: "Growth Earnings Rate"
+    type: string
+    sql: max(${grw_earnings_rt}) ;;
+  }
+
 
   }
 #
