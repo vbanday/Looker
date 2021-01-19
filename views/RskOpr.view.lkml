@@ -38,6 +38,31 @@ view: rskopr {
        ;;
    }
 
+  dimension: to_req_tier_c {
+    type: string
+    sql: ${TABLE}.to_req_tier_c ;;
+  }
+
+  dimension: gr_tier_c {
+    type: string
+    sql: ${TABLE}.gr_tier_c ;;
+  }
+
+  dimension: grw_earnings_rt_c {
+    type: string
+    sql: ${TABLE}.grw_earnings_rt_c ;;
+  }
+
+  dimension: to_forecast_earnings_c {
+    type: string
+    sql: ${TABLE}.to_forecast_earnings_c ;;
+  }
+
+  dimension: total_forecast_earnings_c {
+    type: string
+    sql: ${TABLE}.total_forecast_earnings_c ;;
+  }
+
 
   dimension: calc_metric {
     type: string
