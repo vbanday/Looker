@@ -199,6 +199,7 @@ view: rskopr {
   }
 
   measure: sum_total_forecast_earnings_O {
+    label: "Sum of Forecast Earnings"
     type: sum
     sql: ${total_forecast_earnings_O} ;;
   }
