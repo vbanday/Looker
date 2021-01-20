@@ -12,7 +12,7 @@ view: rskopr {
                calc_metric,
                scheme_type,
                fi_earnings,
-               TYPE,
+               decode(TYPE,'Risk','Risk to Hit Lower Tier','Opportunity to Hit Higher Tier')TYPE,
                case when to_number(to_req_tier)=-1 then 0
                else to_number(to_req_tier)
                end to_req_tier,
