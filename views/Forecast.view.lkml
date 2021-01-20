@@ -1,7 +1,7 @@
 view: forecast {
    derived_table: {
     sql:   select partner
-          ,department
+          ,DECODE(department,'G','Grocery','W','Licensed','H','Fresh','F','Frozen',department) department
           ,rank
           ,supplier
           ,scheme_code

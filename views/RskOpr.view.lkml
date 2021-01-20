@@ -3,7 +3,7 @@ view: rskopr {
 #   # Or, you could make this view a derived table, like this:
    derived_table: {
      sql:   SELECT partner,
-               department,
+               DECODE(department,'G','Grocery','W','Licensed','H','Fresh','F','Frozen',department) department,
                RANK,
                supplier,
                scheme_code,
