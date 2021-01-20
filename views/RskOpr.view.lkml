@@ -33,7 +33,9 @@ view: rskopr {
                gr_tier gr_tier_c,
                grw_earnings_rt grw_earnings_rt_c,
                to_forecast_earnings to_forecast_earnings_c,
-               total_forecast_earnings total_forecast_earnings_c
+               total_forecast_earnings total_forecast_earnings_c,
+               DECODE(TYPE,'Risk',total_forecast_earnings') total_forecast_earnings_R,
+               DECODE(TYPE,'Opportunity',total_forecast_earnings) total_forecast_earnings_O
           FROM custom_hook.RSK_AND_OPR
        ;;
    }
@@ -63,6 +65,15 @@ view: rskopr {
     sql: ${TABLE}.total_forecast_earnings_c ;;
   }
 
+  dimension: total_forecast_earnings_R {
+    type: string
+    sql: ${TABLE}.total_forecast_earnings_R ;;
+  }
+
+  dimension: total_forecast_earnings_O {
+    type: string
+    sql: ${TABLE}.total_forecast_earnings_O ;;
+  }
 
   dimension: calc_metric {
     type: string
@@ -174,6 +185,17 @@ view: rskopr {
   measure: sum_total_forecast_earnings {
     type: sum
     sql: ${total_forecast_earnings} ;;
+  }
+
+
+  measure: sum_total_forecast_earnings_R {
+    type: sum
+    sql: ${total_forecast_earnings_R} ;;
+  }
+
+  measure: sum_total_forecast_earnings_O {
+    type: sum
+    sql: ${total_forecast_earnings_O} ;;
   }
 
   measure: sgr_tier {
