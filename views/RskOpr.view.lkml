@@ -12,7 +12,7 @@ view: rskopr {
                calc_metric,
                scheme_type,
                fi_earnings,
-               decode(TYPE,'Risk','Risk to Hit Lower Tier','Opportunity to Hit Higher Tier')TYPE,
+               decode(TYPE,'Risk','Risk to Hit Lower Tier','Opportunity','Opportunity to Hit Higher Tier')TYPE,
                case when to_number(to_req_tier)=-1 then 0
                else to_number(to_req_tier)
                end to_req_tier,
@@ -153,7 +153,7 @@ view: rskopr {
     type: string
     sql: ${TABLE}.TYPE;;
     html:
-    {% if value == 'Risk' %}
+    {% if value == 'Risk to Hit Lower Tier' %}
     <p style="background-color: #de657a; font-size:100%; text-align:center">{{ rendered_value }}</p>
     {% else %}
     <p style="background-color: #1dde77; font-size:100%; text-align:center">{{ rendered_value }}</p>
