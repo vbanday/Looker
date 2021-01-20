@@ -34,8 +34,14 @@ view: rskopr {
                grw_earnings_rt grw_earnings_rt_c,
                to_forecast_earnings to_forecast_earnings_c,
                total_forecast_earnings total_forecast_earnings_c,
-               DECODE(TYPE,'Risk',total_forecast_earnings') total_forecast_earnings_R,
-               DECODE(TYPE,'Opportunity',total_forecast_earnings) total_forecast_earnings_O
+               DECODE(TYPE,'Risk',
+                (case when to_number(total_forecast_earnings)=-1 then 0
+                  else to_number(total_forecast_earnings)
+               end))  total_forecast_earnings_R,
+                DECODE(TYPE,'Opportunity',
+                (case when to_number(total_forecast_earnings)=-1 then 0
+                  else to_number(total_forecast_earnings)
+               end))  total_forecast_earnings_O
           FROM custom_hook.RSK_AND_OPR
        ;;
    }
@@ -186,7 +192,6 @@ view: rskopr {
     type: sum
     sql: ${total_forecast_earnings} ;;
   }
-
 
   measure: sum_total_forecast_earnings_R {
     type: sum
