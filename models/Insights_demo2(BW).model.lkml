@@ -1,7 +1,9 @@
-connection: "recvue_preview"
+connection: "demo02"
 
-include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
-# include: "/**/view.lkml"                   # include all views in this project
+# include all the views
+include: "/views/*.view"
+
+# include: "/**/*.view.lkml"                 # include all views in this project
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
 datagroup: recvue_analytics_default_datagroup {
@@ -9,7 +11,7 @@ datagroup: recvue_analytics_default_datagroup {
   max_cache_age: "1 hour"
 }
 
-#persist_with: recvue_analytics_default_datagroup
+persist_with: recvue_analytics_default_datagroup
 
 explore: contracts {}
 explore: usages {}
@@ -17,9 +19,6 @@ explore: billing {}
 explore: revenue {}
 explore: payments {}
 explore: geturl {}
-explore: forecast {}
-explore: rskopr {}
-
 
 # # Select the views that should be a part of this model,
 # # and define the joins that connect them together.
