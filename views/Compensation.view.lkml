@@ -12,7 +12,7 @@ view: compensation {
         pma.item_name,
         pla.quantity,
         pla.cost_price,
-        pla.total_amount payable_amt,
+        NVL(pla.total_amount,0) payable_amt,
         le.legal_entity_name,
         oha.order_id,
         oha.order_number,
@@ -32,11 +32,11 @@ view: compensation {
         pla.TRX_NUMBER,
         NVL(oda.cost,pla.cost_price) cost,
         NVL(oda.delivered_quantity, pla.quantity) delivered_quantity,
-        oda.payable_amt delivered_amt,
+        NVL(oda.payable_amt,0) delivered_amt,
         oda.payment_status delivery_payment_status,
         oda.delivery_Status,
         ppr.RULE_NAME Costing_rule_Name,
-        adj.Bill_Amount AdjAmt
+        NVL(adj.Bill_Amount,0) AdjAmt
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
