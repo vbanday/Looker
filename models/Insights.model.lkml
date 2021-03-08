@@ -1,4 +1,4 @@
-connection: "recvue_preview"
+connection: "hertz_ic_dev"
 
 # include all the views
 include: "/views/*.view.lkml"
@@ -19,3 +19,4 @@ explore: payments {}
 explore: geturl {}
 explore: forecast {}
 explore: rskopr {}
+explore: compensation {}
