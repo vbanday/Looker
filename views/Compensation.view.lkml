@@ -75,7 +75,7 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND ssa.supplier_site_id(+)=opp.supplier_site_id
   AND oda.COSTING_RULE_ID = ppr.RULE_ID
   AND otl.INTENT='BUY'
-  AND oha.order_id=1713
+  --AND oha.order_id=1713
   AND otl.COMPENSATION_TYPE_FLAG='Y'
   AND oda.delivery_id =  adj.delivery_id(+)
   AND oda.delivery_Status in ('PENDING','DRAFT','BILLED','PENDING_APPROVAL')
