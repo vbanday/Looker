@@ -12,7 +12,7 @@ view: compensation {
         pma.item_name,
         pla.quantity,
         pla.cost_price,
-        pla.total_amount,
+        pla.total_amount payable_amt,
         le.legal_entity_name,
         oha.order_id,
         oha.order_number,
@@ -32,7 +32,7 @@ view: compensation {
         pla.TRX_NUMBER,
         NVL(oda.cost,pla.cost_price) cost,
         NVL(oda.delivered_quantity, pla.quantity) delivered_quantity,
-        NVL(oda.payable_amt,pla.total_amount) payable_amt,
+        oda.payable_amt delivered_amt,
         oda.payment_status delivery_payment_status,
         oda.delivery_Status,
         ppr.RULE_NAME Costing_rule_Name,
@@ -182,9 +182,9 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   {type: number
     sql:${TABLE}.cost_price;;}
 
-  dimension: total_amount
+  dimension: delivered_amt
   {type: number
-    sql:${TABLE}.total_amount;;}
+    sql:${TABLE}.delivered_amt;;}
 
   dimension: legal_entity_name
   {type: string
@@ -274,9 +274,9 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     drill_fields: [payments*]
   }
 
-  measure: sum_total_amount {
+  measure: sum_payable_amt {
     type: sum
-    sql: ${total_amount} ;;
+    sql: ${payable_amt} ;;
     drill_fields: [payments*]
   }
 
@@ -293,9 +293,9 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     drill_fields: [payments*]
   }
 
-  measure: sum_payable_amt {
+  measure: sum_delivered_amt {
     type: sum
-    sql: ${payable_amt} ;;
+    sql: ${delivered_amt} ;;
     drill_fields: [payments*]
   }
 
