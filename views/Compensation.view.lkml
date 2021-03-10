@@ -345,8 +345,8 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
       ,line_status
       ,Delivery_Reference
       ,delivered_quantity
+      ,cost
       ,delivered_amt
-      ,payable_amt
       ,delivery_payment_status
       ,Delivery_Date_From
       ,Delivery_Date_To
