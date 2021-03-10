@@ -193,6 +193,7 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   dimension: order_id
   {type: number
     sql:${TABLE}.order_id;;}
+
   dimension: order_number
   {type: string
     sql:${TABLE}.order_number;;
@@ -343,14 +344,13 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
       ,line_type
       ,line_status
       ,Delivery_Reference
+      ,delivered_quantity
+      ,delivered_amt
+      ,payable_amt
       ,delivery_payment_status
       ,Delivery_Date_From
       ,Delivery_Date_To
-      ,TRX_NUMBER
-      ,cost
-      ,delivered_quantity
-      ,payable_amt
-    ]
+      ]
   }
 
   # # You can specify the table name if it's different from the view name:
