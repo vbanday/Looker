@@ -335,10 +335,10 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
 
   set: payments {
     fields: [
-      supplier_name
+       order_type
       ,order_number
+      ,supplier_name
       ,order_status
-      ,order_category
       ,line_number
       ,item_name
       ,line_type
