@@ -795,6 +795,8 @@ view: order_header_all {
   dimension: order_number {
     type: string
     sql: ${TABLE}.ORDER_NUMBER ;;
+    html:
+    <a href="https://preview.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}" target="_blank">{{order_number}}</a>;;
   }
 
   dimension: order_type {
