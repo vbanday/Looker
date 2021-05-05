@@ -1212,6 +1212,13 @@ view: rev_lines_all {
     sql: ${TABLE}.REVENUE_AMOUNT ;;
   }
 
+
+  measure: total_revenue_amount {
+    type: sum
+    sql:  ${revenue_amount} ;;
+    value_format_name: usd_0
+  }
+
   dimension: revenue_recognized_to_date {
     type: number
     sql: ${TABLE}.REVENUE_RECOGNIZED_TO_DATE ;;
