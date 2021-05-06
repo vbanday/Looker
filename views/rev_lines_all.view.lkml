@@ -1449,6 +1449,7 @@ view: rev_lines_all {
       order_header_all.effective_start_date,
       order_header_all.effective_end_date,
       order_lines_all.line_type,
+      rev_lines_all.rev_contract_number,
       rev_lines_all.bill_to_customer_name,
       rev_lines_all.item_name,
       rev_lines_all.ledger_name,
