@@ -1212,13 +1212,6 @@ view: rev_lines_all {
     sql: ${TABLE}.REVENUE_AMOUNT ;;
   }
 
-
-  measure: total_revenue_amount {
-    type: sum
-    sql:  ${revenue_amount} ;;
-    value_format_name: usd_0
-  }
-
   dimension: revenue_recognized_to_date {
     type: number
     sql: ${TABLE}.REVENUE_RECOGNIZED_TO_DATE ;;
@@ -1434,6 +1427,13 @@ view: rev_lines_all {
     sql: ${TABLE}.UOM ;;
   }
 
+  measure: total_revenue_amount {
+    type: sum
+    sql:  ${revenue_amount} ;;
+    value_format_name: usd_0
+    drill_fields: [detail*]
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -1442,6 +1442,7 @@ view: rev_lines_all {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
+      order_header_all.order_number,
       bill_to_customer_name,
       item_name,
       ledger_name,
