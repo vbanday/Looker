@@ -36,6 +36,11 @@ view: rev_schedules_all {
     sql: ${TABLE}.ACTUAL_AMOUNT ;;
   }
 
+  measure: sum_actual_amount {
+    type: sum
+    sql: ${actual_amount} ;;
+  }
+
   dimension: adjustment_liability_acct {
     type: string
     sql: ${TABLE}.ADJUSTMENT_LIABILITY_ACCT ;;
@@ -231,6 +236,11 @@ view: rev_schedules_all {
     sql: ${TABLE}.BILL_SCH_AMT ;;
   }
 
+  measure: sum_bill_sch_amt {
+    type: sum
+    sql: ${bill_sch_amt} ;;
+  }
+
   dimension: billing_id {
     type: number
     sql: ${TABLE}.BILLING_ID ;;
@@ -250,6 +260,12 @@ view: rev_schedules_all {
     type: number
     sql: ${TABLE}.CASH_RECEIPT_AMOUNT ;;
   }
+
+  measure: sum_cash_receipt_amount {
+    type: sum
+    sql: ${cash_receipt_amount} ;;
+  }
+
 
   dimension_group: cash_receipt {
     type: time
@@ -561,9 +577,19 @@ view: rev_schedules_all {
     sql: ${TABLE}.QUANTITY ;;
   }
 
+  measure: sum_quantity {
+    type: sum
+    sql: ${quantity};;
+  }
+
   dimension: reclass_amount {
     type: number
     sql: ${TABLE}.RECLASS_AMOUNT ;;
+  }
+
+  measure: sum_reclass_amount {
+    type: sum
+    sql: ${reclass_amount} ;;
   }
 
   dimension: recog_sch_id {
@@ -645,6 +671,11 @@ view: rev_schedules_all {
   dimension: revenue_amount {
     type: number
     sql: ${TABLE}.REVENUE_AMOUNT ;;
+  }
+
+  measure: sum_revenue_amount {
+    type: sum
+    sql: ${revenue_amount} ;;
   }
 
   dimension_group: revenue_from {
@@ -735,6 +766,11 @@ view: rev_schedules_all {
   dimension: unrecognized_rev {
     type: number
     sql: ${TABLE}.UNRECOGNIZED_REV ;;
+  }
+
+  measure: sum_unrecognized_rev {
+    type: sum
+    sql: ${unrecognized_rev} ;;
   }
 
   measure: count {

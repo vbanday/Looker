@@ -1527,6 +1527,11 @@ view: order_lines_all {
     sql: ${TABLE}.TERMINATED_QUANTITY ;;
   }
 
+  measure: sum_terminated_quantity {
+    type: sum
+    sql: ${terminated_quantity} ;;
+  }
+
   dimension_group: termination {
     type: time
     timeframes: [

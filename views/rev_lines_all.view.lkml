@@ -636,6 +636,11 @@ view: rev_lines_all {
     sql: ${TABLE}.CONTRACTUAL_IMPAIRMENT_AMOUNT ;;
   }
 
+  measure: sum_contractual_impairment_amount {
+    type: sum
+    sql: ${contractual_impairment_amount}. ;;
+  }
+
   dimension: contractual_rev_recog_to_date {
     type: number
     sql: ${TABLE}.CONTRACTUAL_REV_RECOG_TO_DATE ;;
@@ -671,9 +676,19 @@ view: rev_lines_all {
     sql: ${TABLE}.CUMU_NET_REVENUE ;;
   }
 
+  measure: sum_cumu_net_revenue {
+    type: sum
+    sql: ${cumu_net_revenue} ;;
+  }
+
   dimension: cumu_revenue_amount {
     type: number
     sql: ${TABLE}.CUMU_REVENUE_AMOUNT ;;
+  }
+
+  measure: sum_cumu_revenue_amount {
+    type: sum
+    sql: ${cumu_revenue_amount} ;;
   }
 
   dimension: cumulative_carve_amount {
@@ -681,14 +696,30 @@ view: rev_lines_all {
     sql: ${TABLE}.CUMULATIVE_CARVE_AMOUNT ;;
   }
 
+  measure: sum_cumulative_carve_amount {
+    type: sum
+    sql: ${cumulative_carve_amount} ;;
+  }
+
   dimension: cumulative_net_revenue {
     type: number
     sql: ${TABLE}.CUMULATIVE_NET_REVENUE ;;
   }
 
+  measure: sum_cumulative_net_revenue {
+    type: sum
+    sql: ${cumulative_net_revenue} ;;
+  }
+
+
   dimension: curr_rem_carve_rev_amt {
     type: number
     sql: ${TABLE}.CURR_REM_CARVE_REV_AMT ;;
+  }
+
+  measure: sum_curr_rem_carve_rev_amt {
+    type: sum
+    sql: ${curr_rem_carve_rev_amt} ;;
   }
 
   dimension: curr_rem_contractual_rev_amt {
@@ -696,9 +727,19 @@ view: rev_lines_all {
     sql: ${TABLE}.CURR_REM_CONTRACTUAL_REV_AMT ;;
   }
 
+  measure: sum_curr_rem_contractual_rev_amt {
+    type: sum
+    sql: ${curr_rem_contractual_rev_amt} ;;
+  }
+
   dimension: current_net_revenue {
     type: number
     sql: ${TABLE}.CURRENT_NET_REVENUE ;;
+  }
+
+  measure: sum_current_net_revenue {
+    type: sum
+    sql: ${current_net_revenue} ;;
   }
 
   dimension: current_ssp_price {
@@ -709,6 +750,11 @@ view: rev_lines_all {
   dimension: discount_amount {
     type: number
     sql: ${TABLE}.DISCOUNT_AMOUNT ;;
+  }
+
+  measure: sum_discount_amount {
+    type: sum
+    sql: ${discount_amount} ;;
   }
 
   dimension: discount_percent {
@@ -1051,9 +1097,19 @@ view: rev_lines_all {
     sql: ${TABLE}.PREV_CUMULATIVE_NET_REVENUE ;;
   }
 
+  measure: sum_prev_cumulative_net_revenue {
+    type: sum
+    sql: ${prev_cumulative_net_revenue} ;;
+  }
+
   dimension: prev_current_net_revenue {
     type: number
     sql: ${TABLE}.PREV_CURRENT_NET_REVENUE ;;
+  }
+
+  measure: sum_prev_current_net_revenue {
+    type: sum
+    sql: ${prev_current_net_revenue} ;;
   }
 
   dimension: prev_revenue_amount {
@@ -1061,9 +1117,19 @@ view: rev_lines_all {
     sql: ${TABLE}.PREV_REVENUE_AMOUNT ;;
   }
 
+  measure: sum_prev_revenue_amount {
+    type: sum
+    sql: ${prev_revenue_amount} ;;
+  }
+
   dimension: prior_net_revenue {
     type: number
     sql: ${TABLE}.PRIOR_NET_REVENUE ;;
+  }
+
+  measure: sum_prior_net_revenue {
+    type: sum
+    sql: ${prior_net_revenue} ;;
   }
 
   dimension: prior_rem_carve_amt {
@@ -1075,6 +1141,7 @@ view: rev_lines_all {
     type: number
     sql: ${TABLE}.PRIOR_REM_CONTRACTUAL_REV_AMT ;;
   }
+
 
   dimension: prior_ssp_price {
     type: number
@@ -1095,6 +1162,12 @@ view: rev_lines_all {
     type: number
     sql: ${TABLE}.QUANTITY ;;
   }
+
+  measure: sum_quantity {
+    type: sum
+    sql: ${quantity} ;;
+  }
+
 
   dimension: reclass_eligible {
     type: string
@@ -1131,21 +1204,21 @@ view: rev_lines_all {
     sql: ${TABLE}.REV_ALLOC_REFRESH ;;
   }
 
+  dimension: rev_header_id {
+    type: number
+    sql: ${TABLE}.REV_HEADER_ID ;;
+  }
+
   dimension: rev_contract_number {
     type: string
     sql: ${TABLE}.REV_CONTARCT_NUMBER ;;
     html:
-    <a href="https://demo2.recvue.com/pages/rev/WorkbenchPG.xhtml?tab=0&rev_contarct_number={{rev_contract_number}}" target="_blank">{{rev_contract_number}}</a>;;
+    <a href="https://demo2.recvue.com/pages/rev/WorkbenchPG.xhtml?tab=0&rev_contarct_number={{rev_header_id}}" target="_blank">{{rev_contract_number}}</a>;;
    }
 
   dimension: rev_contract_version {
     type: number
     sql: ${TABLE}.REV_CONTRACT_VERSION ;;
-  }
-
-  dimension: rev_header_id {
-    type: number
-    sql: ${TABLE}.REV_HEADER_ID ;;
   }
 
   dimension: rev_line_id {
@@ -1174,6 +1247,11 @@ view: rev_lines_all {
     sql: ${TABLE}.REV_RELEASE_AMOUNT ;;
   }
 
+  measure: sum_rev_release_amount {
+    type: sum
+    sql: ${rev_release_amount} ;;
+  }
+
   dimension: rev_release_percent {
     type: number
     sql: ${TABLE}.REV_RELEASE_PERCENT ;;
@@ -1182,6 +1260,11 @@ view: rev_lines_all {
   dimension: rev_release_quantity {
     type: number
     sql: ${TABLE}.REV_RELEASE_QUANTITY ;;
+  }
+
+  measure: sum_rev_release_quantity {
+    type: sum
+    sql: ${rev_release_quantity} ;;
   }
 
   dimension: rev_sch_type {
@@ -1212,6 +1295,16 @@ view: rev_lines_all {
   dimension: revenue_amount {
     type: number
     sql: ${TABLE}.REVENUE_AMOUNT ;;
+  }
+
+  measure: sum_rev_unrelease_quantity {
+    type: sum
+    sql: ${rev_unrelease_quantity} ;;
+  }
+
+  measure: sum_rev_unrelease_revenue {
+    type: sum
+    sql: ${rev_unrelease_revenue} ;;
   }
 
   dimension: revenue_recognized_to_date {
@@ -1369,6 +1462,11 @@ view: rev_lines_all {
     sql: ${TABLE}.TOTAL_BILLED_AMOUNT ;;
   }
 
+  measure: sum_total_billed_amount {
+    type: sum
+    sql: ${total_billed_amount} ;;
+  }
+
   dimension: total_list_price {
     type: number
     sql: ${TABLE}.TOTAL_LIST_PRICE ;;
@@ -1383,6 +1481,12 @@ view: rev_lines_all {
     type: number
     sql: ${TABLE}.TOTAL_UNBILLED_AMOUNT ;;
   }
+
+  measure: sum_total_unbilled_amount {
+    type: sum
+    sql: ${total_unbilled_amount} ;;
+  }
+
 
   dimension: tran_currency_precision {
     type: number
