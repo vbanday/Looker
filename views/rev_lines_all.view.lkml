@@ -1443,6 +1443,10 @@ view: rev_lines_all {
   set: detail {
     fields: [
       order_header_all.order_number,
+      order_header_all.order_type,
+      order_header_all.effective_start_date,
+      order_header_all.effective_end_date,
+      order_lines_all.line_type,
       bill_to_customer_name,
       item_name,
       ledger_name,
