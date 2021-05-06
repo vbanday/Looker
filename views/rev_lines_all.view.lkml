@@ -1135,8 +1135,8 @@ view: rev_lines_all {
     type: string
     sql: ${TABLE}.REV_CONTARCT_NUMBER ;;
     html:
-    <a href="https://demo2.recvue.com/api/v2.0/workSpaces/dataGrid/RevContracts/headers?rev_contarct_number={{rev_contract_number}}" target="_blank">{{rev_contract_number}}</a>;;
-  }
+    <a href="https://demo2.recvue.com/pages/rev/WorkbenchPG.xhtml?tab=0&rev_contarct_number={{rev_contract_number}}" target="_blank">{{rev_contract_number}}</a>;;
+   }
 
   dimension: rev_contract_version {
     type: number
