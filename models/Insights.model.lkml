@@ -1,4 +1,4 @@
-connection: "recvue_preview"
+connection: "demo02_broadway"
 
 # include all the views
 include: "/views/*.view.lkml"
