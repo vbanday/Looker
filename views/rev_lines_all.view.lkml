@@ -1131,9 +1131,11 @@ view: rev_lines_all {
     sql: ${TABLE}.REV_ALLOC_REFRESH ;;
   }
 
-  dimension: rev_contarct_number {
+  dimension: rev_contract_number {
     type: string
     sql: ${TABLE}.REV_CONTARCT_NUMBER ;;
+    html:
+    <a https://demo2.recvue.com/api/v2.0/workSpaces/dataGrid/RevContracts/headers?rev_contarct_number={{rev_contract_number}}" target="_blank">{{rev_contract_number}}</a>;;
   }
 
   dimension: rev_contract_version {
