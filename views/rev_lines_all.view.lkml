@@ -1536,7 +1536,6 @@ view: rev_lines_all {
   measure: total_revenue_amount {
     type: sum
     sql:  ${revenue_amount} ;;
-    value_format_name: usd_0
     drill_fields: [detail*]
   }
 

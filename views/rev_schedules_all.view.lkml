@@ -39,6 +39,7 @@ view: rev_schedules_all {
   measure: sum_actual_amount {
     type: sum
     sql: ${actual_amount} ;;
+    drill_fields: [detail*]
   }
 
   dimension: adjustment_liability_acct {
@@ -239,6 +240,7 @@ view: rev_schedules_all {
   measure: sum_bill_sch_amt {
     type: sum
     sql: ${bill_sch_amt} ;;
+    drill_fields: [detail*]
   }
 
   dimension: billing_id {
@@ -676,6 +678,7 @@ view: rev_schedules_all {
   measure: sum_revenue_amount {
     type: sum
     sql: ${revenue_amount} ;;
+    drill_fields: [detail*]
   }
 
   dimension_group: revenue_from {
@@ -777,4 +780,24 @@ view: rev_schedules_all {
     type: count
     drill_fields: []
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      order_header_all.order_number,
+      order_header_all.order_type,
+      order_header_all.effective_start_date,
+      order_header_all.effective_end_date,
+      order_lines_all.line_type,
+      rev_lines_all.rev_contract_number,
+      rev_lines_all.bill_to_customer_name,
+      rev_lines_all.item_name,
+      rev_lines_all.ledger_name,
+      rev_lines_all.ssp_rule_name,
+      rev_lines_all.ssp_group_name,
+      rev_lines_all.pob_rule_name
+    ]
+  }
+
+
 }
