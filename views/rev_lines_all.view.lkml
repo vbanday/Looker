@@ -1539,6 +1539,12 @@ view: rev_lines_all {
     drill_fields: [detail*]
   }
 
+  measure: rev_line_id_count {
+    type: count_distinct
+    sql: ${rev_line_id} ;;
+    drill_fields: [detail*]
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
