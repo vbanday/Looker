@@ -1558,7 +1558,9 @@ view: rev_lines_all {
       rev_lines_all.ledger_name,
       rev_lines_all.ssp_rule_name,
       rev_lines_all.ssp_group_name,
-      rev_lines_all.pob_rule_name
+      rev_lines_all.pob_rule_name,
+      rev_lines_all.revenue_amount,
+      rev_schedules_all.bill_sch_amt
     ]
   }
 }
