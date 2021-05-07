@@ -776,7 +776,7 @@ view: rev_schedules_all {
     sql: ${unrecognized_rev} ;;
   }
 
-  dimension: bill_unsch_amount {
+  measure: bill_unsch_amount {
     type: number
     sql:  ${revenue_amount}-${rev_schedules_all.bill_sch_amt} ;;
   }
@@ -799,7 +799,6 @@ view: rev_schedules_all {
       rev_lines_all.item_name,
       rev_lines_all.ledger_name,
       rev_lines_all.ssp_rule_name,
-      rev_lines_all.ssp_group_name,
       rev_lines_all.pob_rule_name,
       rev_lines_all.revenue_amount,
       rev_schedules_all.bill_sch_amt,
