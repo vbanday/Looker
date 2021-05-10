@@ -766,6 +766,17 @@ view: rev_schedules_all {
     sql: ${TABLE}.TENANT_ID ;;
   }
 
+
+  dimension_group: gl_date_month{
+    type: time
+    timeframes: [
+      month_name ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.GL_DATE ;;
+  }
+
+
   dimension: unrecognized_rev {
     type: number
     sql: ${TABLE}.UNRECOGNIZED_REV ;;
