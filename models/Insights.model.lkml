@@ -1,4 +1,4 @@
-connection: "demo02_broadway"
+connection: "dp_test"
 
 # include all the views
 include: "/views/*.view.lkml"
