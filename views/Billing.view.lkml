@@ -140,8 +140,7 @@ view: billing
          AND bsa.billing_sch_id=bda.billing_sch_id(+)
          AND bda.bill_run_id=brh.bill_run_id(+)
          AND bsa.bill_run_id=brh.bill_run_id(+)
-                 AND bsa.bill_run_id=brh.bill_run_id(+)
-and oha.order_number IN ('LS103073','LS102029')
+         AND bsa.bill_run_id=brh.bill_run_id(+)
 ORDER BY oha.order_number, ola.line_number
        ;;
   }
