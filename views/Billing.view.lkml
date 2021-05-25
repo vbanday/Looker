@@ -55,7 +55,7 @@ view: billing
          bsa.cal_month,
          bsa.quantity,
          bsa.unit_price,
-         bsa.total_amount,
+         NVL(bsa.total_amount,pla.total_amount) total_amount,
          bsa.total_billing_amount,
          decode(bss.meaning,'Billed',bsa.total_amount,0) actual_billing_amount,
          brh.bill_run_id,
@@ -93,8 +93,11 @@ view: billing
          adorb.ar_invoicing_rule_v lir,
          adorb.billing_schedules_all bsa,
          adorb.order_billing_details_all bda,
-         adorb.bill_run_header brh
+         adorb.bill_run_header brh,
+         adorb.payment_lines_all pla
    WHERE  1=1
+       AND pla.line_id(+)=ola.line_id
+         AND pla.order_id(+)=ola.order_id
          AND oha.order_id = ola.order_id
          AND oha.org_id = bu.org_id
          AND ola.org_id = bu.org_id
