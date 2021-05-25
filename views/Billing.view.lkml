@@ -2,7 +2,7 @@ view: billing
 {
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql:   SELECT source.meaning source,
+    sql: SELECT source.meaning source,
          oha.order_id,
          oha.order_number,
          otl.meaning  order_type,
