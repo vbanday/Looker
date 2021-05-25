@@ -55,7 +55,7 @@ view: contracts{
          bsa.cal_month,
          bsa.quantity,
          bsa.unit_price,
-         bsa.total_amount,
+         NVL(bsa.total_amount,pla.total_amount)TOTAL_AMOUNT,
          bsa.total_billing_amount,
          prd.product_group,
          prd.attribute1 Product_type
@@ -81,8 +81,11 @@ view: contracts{
          adorb.cust_accounts lbcus,
          adorb.cust_acct_sites_all lbsit,
          adorb.ar_invoicing_rule_v lir,
-         adorb.billing_schedules_all bsa
+         adorb.billing_schedules_all bsa,
+         adorb.payment_lines_all pla
     WHERE  1=1
+         AND pla.line_id(+)=ola.line_id
+         AND pla.order_id(+)=ola.order_id
          AND oha.order_id = ola.order_id
          AND oha.org_id = bu.org_id
          AND ola.org_id = bu.org_id
