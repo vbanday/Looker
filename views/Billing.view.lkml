@@ -384,6 +384,7 @@ ORDER BY oha.order_number, ola.line_number
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
@@ -398,6 +399,7 @@ ORDER BY oha.order_number, ola.line_number
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
@@ -412,6 +414,7 @@ ORDER BY oha.order_number, ola.line_number
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
@@ -426,6 +429,7 @@ ORDER BY oha.order_number, ola.line_number
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
@@ -440,6 +444,7 @@ ORDER BY oha.order_number, ola.line_number
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
