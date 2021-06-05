@@ -809,6 +809,8 @@ view: rev_schedules_all {
 
   set: pobdtl {
     fields: [
+       rev_header_all.rev_contract_number,
+       rev_lines_all.line_number,
        rev_lines_all.pob_rule_name,
        rev_lines_all.revenue_amount,
        rev_lines_all.cumulative_net_revenue,
