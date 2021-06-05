@@ -672,7 +672,7 @@ view: rev_schedules_all {
   }
 
   dimension: revenue_amount {
-    label: "Scheduled Revenue Amount"
+    label: "Scheduled Revenue"
     type: number
     sql: ${TABLE}.REVENUE_AMOUNT ;;
   }
