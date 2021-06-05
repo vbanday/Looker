@@ -37,26 +37,21 @@ explore: rev_lines_all{
     sql_on:  ${rev_lines_all.rev_line_id}=${rev_schedules_all.rev_line_id} ;;
     relationship: one_to_many
   }
-
   join: rev_def_schedules_all {
     type: left_outer
     sql_on:  ${rev_lines_all.rev_line_id}=${rev_def_schedules_all.rev_line_id} ;;
     relationship: one_to_many
   }
-
   join: gl_subledger_acct_entries_def {
     from: gl_subledger_acct_entries
     type: left_outer
     sql_on: ${rev_def_schedules_all.def_sch_id}=${gl_subledger_acct_entries_def.identifier_id} AND ${gl_subledger_acct_entries_def.identifier_source} = "REV_DEF_SCHEDULES_ALL";;
     relationship: one_to_many
   }
-
   join: gl_subledger_acct_entries_sch {
     from: gl_subledger_acct_entries
     type: left_outer
     sql_on: ${rev_schedules_all.rev_sch_id}=${gl_subledger_acct_entries_def.identifier_id} AND ${gl_subledger_acct_entries_def.identifier_source} = "REV_DEF_SCHEDULES_ALL";;
     relationship: one_to_many
   }
-
-
 }
