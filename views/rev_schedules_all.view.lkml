@@ -782,9 +782,15 @@ view: rev_schedules_all {
     sql:  ${revenue_amount}-${bill_sch_amt} ;;
   }
 
+  measure: sum_unrecognized_revenue{
+    type: sum
+    sql:  ${rev_lines_all.cumulative_net_revenue}-${rev_schedules_all.revenue_amount} ;;
+    drill_fields: [pobdtl*]
+  }
+
   measure: count {
     type: count
-    drill_fields: []
+    drill_fields: [detail*]
   }
 
   # ----- Sets of fields for drilling ------
