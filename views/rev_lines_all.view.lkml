@@ -1577,7 +1577,7 @@ view: rev_lines_all {
       rev_lines_all.revenue_amount,
       rev_lines_all.cumulative_net_revenue,
       rev_schedules_all.revenue_amount,
-      rev_def_schedules_all.sum_entered_amount
+      rev_def_schedules_all.entered_amount
     ]
   }
 
