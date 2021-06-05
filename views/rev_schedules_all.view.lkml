@@ -679,7 +679,7 @@ view: rev_schedules_all {
   measure: sum_revenue_amount {
     type: sum
     sql: ${revenue_amount} ;;
-    drill_fields: [detail*]
+    drill_fields: [pobdtl*]
   }
 
   dimension_group: revenue_from {
@@ -779,7 +779,7 @@ view: rev_schedules_all {
 
   measure: bill_unsch_amount {
     type: number
-    sql:  ${revenue_amount}-${rev_schedules_all.bill_sch_amt} ;;
+    sql:  ${revenue_amount}-${bill_sch_amt} ;;
   }
 
   measure: count {
@@ -804,6 +804,16 @@ view: rev_schedules_all {
       rev_lines_all.revenue_amount,
       rev_schedules_all.bill_sch_amt,
       rev_schedules_all.bill_unsch_amount
+    ]
+  }
+
+  set: pobdtl {
+    fields: [
+       rev_lines_all.pob_rule_name,
+       rev_lines_all.revenue_amount,
+       rev_lines_all.cumulative_net_revenue,
+       rev_schedules_all.revenue_amount,
+       rev_def_schedules_all.sum_entered_amount
     ]
   }
 

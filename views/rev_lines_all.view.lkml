@@ -709,7 +709,7 @@ view: rev_lines_all {
   measure: sum_cumulative_net_revenue {
     type: sum
     sql: ${cumulative_net_revenue} ;;
-    drill_fields: [detail*]
+    drill_fields: [pobdtl*]
   }
 
 
@@ -1570,4 +1570,15 @@ view: rev_lines_all {
       rev_schedules_all.bill_sch_amt
     ]
   }
+
+  set: pobdtl {
+    fields: [
+      rev_lines_all.pob_rule_name,
+      rev_lines_all.revenue_amount,
+      rev_lines_all.cumulative_net_revenue,
+      rev_schedules_all.revenue_amount,
+      rev_def_schedules_all.sum_entered_amount
+    ]
+  }
+
 }
