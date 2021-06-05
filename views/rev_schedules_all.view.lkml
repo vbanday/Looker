@@ -672,7 +672,7 @@ view: rev_schedules_all {
   }
 
   dimension: revenue_amount {
-    label: "Scheduled_Revenue_Amount"
+    label: "Scheduled Revenue Amount"
     type: number
     sql: ${TABLE}.REVENUE_AMOUNT ;;
   }
@@ -822,7 +822,8 @@ view: rev_schedules_all {
        rev_lines_all.revenue_amount,
        rev_lines_all.cumulative_net_revenue,
        rev_schedules_all.revenue_amount,
-       rev_def_schedules_all.entered_amount
+       rev_def_schedules_all.entered_amount,
+       rev_def_schedules_all.Unbilled_Revenue
     ]
   }
 

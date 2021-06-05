@@ -58,6 +58,7 @@ view: rev_def_schedules_all {
   }
 
   dimension: entered_amount {
+    label: "Billed Revenue"
     type: number
     sql: ${TABLE}.ENTERED_AMOUNT ;;
   }
@@ -227,7 +228,7 @@ view: rev_def_schedules_all {
     drill_fields: [detail*]
   }
 
-  measure: sum_entered_amount {
+  measure: sum_billed_amount {
     type: sum
     sql: ${entered_amount} ;;
     drill_fields: [detail*]
@@ -235,9 +236,18 @@ view: rev_def_schedules_all {
 
   measure: sum_invoice_amount {
     type: sum
-    sql:  ${invoice_amount};;
+    sql: ${invoice_amount};;
     drill_fields: [detail*]
   }
+
+
+  measure: Unbilled_Revenue{
+    label: "Unbilled Revenue"
+    type: number
+    sql: ${rev_lines_all.cumulative_net_revenue}-${rev_def_schedules_all.entered_amount};;
+    drill_fields: [detail*]
+    }
+
 
 
 # ----- Sets of fields for drilling ------
@@ -257,7 +267,7 @@ view: rev_def_schedules_all {
       rev_lines_all.pob_rule_name,
       rev_lines_all.revenue_amount,
       rev_schedules_all.bill_sch_amt
-    ]
+     ]
   }
 
 }
