@@ -224,7 +224,7 @@ view: rev_def_schedules_all {
 
   measure: count {
     type: count
-    drill_fields: []
+    drill_fields: [detail*]
   }
 
   measure: sum_entered_amount {
