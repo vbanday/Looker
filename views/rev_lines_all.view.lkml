@@ -709,6 +709,7 @@ view: rev_lines_all {
   measure: sum_cumulative_net_revenue {
     type: sum
     sql: ${cumulative_net_revenue} ;;
+    drill_fields: [detail*]
   }
 
 
