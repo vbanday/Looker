@@ -1547,12 +1547,6 @@ view: rev_lines_all {
     drill_fields: [detail*]
   }
 
-  measure: sum_unrecognized_revenue{
-    type: sum
-    sql:  ${rev_lines_all.cumulative_net_revenue}-${rev_schedules_all.revenue_amount} ;;
-    drill_fields: [pobdtl*]
-  }
-
 
   measure: count {
     type: count
@@ -1584,9 +1578,9 @@ view: rev_lines_all {
       order_header_all.order_number,
       order_lines_all.line_number,
       rev_lines_all.pob_rule_name,
-      rev_lines_all.booked_value,
+      rev_lines_all.revenue_amount,
       rev_lines_all.cumulative_net_revenue,
-      rev_schedules_all.Scheduled_Revenue,
+      rev_schedules_all.revenue_amount,
       rev_def_schedules_all.entered_amount
     ]
   }

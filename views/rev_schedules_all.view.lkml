@@ -672,7 +672,7 @@ view: rev_schedules_all {
   }
 
   dimension: revenue_amount {
-    label: "Scheduled_Revenue"
+    label: "Scheduled_Revenue_Amount"
     type: number
     sql: ${TABLE}.REVENUE_AMOUNT ;;
   }
@@ -784,8 +784,8 @@ view: rev_schedules_all {
   }
 
   measure: sum_unrecognized_revenue{
-    type: sum
-    sql:  ${rev_lines_all.cumulative_net_revenue}-${rev_schedules_all.revenue_amount} ;;
+    type: number
+    sql:  ${rev_lines_all.sum_cumulative_net_revenue}-${rev_schedules_all.sum_revenue_amount} ;;
     drill_fields: [pobdtl*]
   }
 
@@ -819,9 +819,9 @@ view: rev_schedules_all {
        order_header_all.order_number,
        order_lines_all.line_number,
        rev_lines_all.pob_rule_name,
-       rev_lines_all.booked_value,
+       rev_lines_all.revenue_amount,
        rev_lines_all.cumulative_net_revenue,
-       rev_schedules_all.Scheduled_Revenue,
+       rev_schedules_all.revenue_amount,
        rev_def_schedules_all.entered_amount
     ]
   }
