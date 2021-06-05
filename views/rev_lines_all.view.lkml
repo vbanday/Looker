@@ -1294,6 +1294,7 @@ view: rev_lines_all {
   }
 
   dimension: revenue_amount {
+    label: "booked_value"
     type: number
     sql: ${TABLE}.REVENUE_AMOUNT ;;
   }
@@ -1583,9 +1584,9 @@ view: rev_lines_all {
       order_header_all.order_number,
       order_lines_all.line_number,
       rev_lines_all.pob_rule_name,
-      rev_lines_all.revenue_amount,
+      rev_lines_all.booked_value,
       rev_lines_all.cumulative_net_revenue,
-      rev_schedules_all.revenue_amount,
+      rev_schedules_all.Scheduled_Revenue,
       rev_def_schedules_all.entered_amount
     ]
   }
