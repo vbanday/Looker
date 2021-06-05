@@ -226,4 +226,38 @@ view: rev_def_schedules_all {
     type: count
     drill_fields: []
   }
+
+  measure: sum_entered_amount {
+    type: sum
+    sql: ${entered_amount} ;;
+    drill_fields: [detail*]
+  }
+
+  measure: sum_invoice_amount {
+    type: sum
+    sql:  ${invoice_amount};;
+    drill_fields: [detail*]
+  }
+
+
+# ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      order_header_all.order_number,
+      order_header_all.order_type,
+      order_header_all.effective_start_date,
+      order_header_all.effective_end_date,
+      order_lines_all.line_type,
+      rev_lines_all.rev_contract_number,
+      rev_lines_all.bill_to_customer_name,
+      rev_lines_all.item_name,
+      rev_lines_all.ledger_name,
+      rev_lines_all.ssp_rule_name,
+      rev_lines_all.ssp_group_name,
+      rev_lines_all.pob_rule_name,
+      rev_lines_all.revenue_amount,
+      rev_schedules_all.bill_sch_amt
+    ]
+  }
+
 }
