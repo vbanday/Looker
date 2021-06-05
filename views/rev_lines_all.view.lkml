@@ -1546,6 +1546,13 @@ view: rev_lines_all {
     drill_fields: [detail*]
   }
 
+  measure: sum_unrecognized_revenue{
+    type: sum
+    sql:  ${rev_lines_all.cumulative_net_revenue}-${rev_schedules_all.revenue_amount} ;;
+    drill_fields: [pobdtl*]
+  }
+
+
   measure: count {
     type: count
     drill_fields: [detail*]
