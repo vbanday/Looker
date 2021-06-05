@@ -54,4 +54,5 @@ explore: rev_lines_all{
     sql_on: ${rev_schedules_all.rev_sch_id}=${gl_subledger_acct_entries_def.identifier_id} AND ${gl_subledger_acct_entries_def.identifier_source} = 'REV_SCHEDULES_ALL';;
     relationship: one_to_many
   }
+
 }
