@@ -58,7 +58,8 @@ view: contracts{
          NVL(bsa.total_amount,pla.total_amount)TOTAL_AMOUNT,
          bsa.total_billing_amount,
          prd.product_group,
-         prd.attribute1 Product_type
+         prd.attribute1 Product_type,
+         ola.BILLING_CHANNEL_ID
     FROM adorb.order_header_all oha,
          adorb.order_lines_all ola,
          adorb.business_units bu,
@@ -567,6 +568,11 @@ ORDER BY oha.order_number, ola.line_number
   {type: string
     sql:${TABLE}.Product_type;;}
 
+
+  dimension: billing_channel_id {
+    type: string
+    sql: ${TABLE}.BILLING_CHANNEL_ID ;;
+  }
 
   ##Measures##
   ##==================================##
