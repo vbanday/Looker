@@ -33,7 +33,8 @@ view: usages {
         NVL(oda.cost,pla.cost_price) cost,
         NVL(oda.delivered_quantity, pla.quantity) delivered_quantity,
         NVL(oda.payable_amt,pla.total_amount) payable_amt,
-        oda.payment_status delivery_payment_status
+        oda.payment_status delivery_payment_status,
+        ola.BILLING_CHANNEL_ID
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -165,6 +166,10 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   {type: string
     sql:${TABLE}.delivery_payment_status;;}
 
+  dimension: billing_channel_id {
+    type: string
+    sql: ${TABLE}.BILLING_CHANNEL_ID ;;
+  }
 
   dimension: cost_price
   {type: number
