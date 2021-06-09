@@ -249,7 +249,6 @@ view: rev_def_schedules_all {
     }
 
 
-
 # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

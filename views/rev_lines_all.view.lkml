@@ -1553,6 +1553,14 @@ view: rev_lines_all {
     drill_fields: [detail*]
   }
 
+  measure: sch_revenue_amount{
+    label: "SCH Revenue Amount"
+    type: number
+    sql: ${rev_schedules_all.revenue_amount};;
+    drill_fields: [detail*]
+  }
+
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
