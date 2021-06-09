@@ -616,6 +616,7 @@ ORDER BY oha.order_number, ola.line_number
   {type: date
     sql:${TABLE}. trx_date;;}
 
+
   dimension: gl_date
   {type: date
     sql:${TABLE}. gl_date;;}
