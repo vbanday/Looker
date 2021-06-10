@@ -34,7 +34,10 @@ view: usages {
         NVL(oda.delivered_quantity, pla.quantity) delivered_quantity,
         NVL(oda.payable_amt,pla.total_amount) payable_amt,
         oda.payment_status delivery_payment_status,
-        ola.BILLING_CHANNEL_ID
+        ola.BILLING_CHANNEL_ID,
+        ola.BILLING_CHANNEL,
+        lbcus.account_number,
+        lbcus.account_name
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -43,6 +46,7 @@ FROM adorb.payment_lines_all pla,
     -- adorb.order_payment_lines_all opla,
      adorb.suppliers sup,
      adorb.supplier_sites_all ssa,
+     adorb.cust_accounts lbcus,
      adorb.core_lookup_values category,
      adorb.core_lookup_values llt,
      adorb.order_types_all otl,
@@ -66,6 +70,7 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND ola.item_id=pma.item_id
   AND oda.line_id(+) =ola.line_id
  -- AND opla.line_id(+)= ola.line_id
+  AND ola.bill_to_customer_id = lbcus.cust_account_id (+)
   AND opp.line_id(+)=ola.line_id
   AND sup.supplier_id(+)=opp.supplier_id
   AND ssa.supplier_site_id(+)=opp.supplier_site_id;;
