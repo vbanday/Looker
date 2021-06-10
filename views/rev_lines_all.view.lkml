@@ -1549,12 +1549,14 @@ view: rev_lines_all {
 
 
   measure: attribute1_n_M {
+    label: "Contract Liability Balance"
     type: sum
     sql:  ${attribute1_n} ;;
     drill_fields: [detail*]
   }
 
   measure: attribute2_n_M {
+    label: "Contract Asset Balance"
     type: sum
     sql:  ${attribute2_n} ;;
     drill_fields: [detail*]
