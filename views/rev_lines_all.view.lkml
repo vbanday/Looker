@@ -1548,6 +1548,18 @@ view: rev_lines_all {
   }
 
 
+  measure: attribute1_n_M {
+    type: sum
+    sql:  ${attribute1_n} ;;
+    drill_fields: [detail*]
+  }
+
+  measure: attribute2_n_M {
+    type: sum
+    sql:  ${attribute2_n} ;;
+    drill_fields: [detail*]
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
