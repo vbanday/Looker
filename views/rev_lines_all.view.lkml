@@ -1553,12 +1553,36 @@ view: rev_lines_all {
     drill_fields: [detail*]
   }
 
-  measure: sch_revenue_amount{
+  measure: sch_revenue_amount_sum{
     label: "SCH Revenue Amount"
     type: number
     sql: ${rev_schedules_all.sum_revenue_amount};;
     drill_fields: [detail*]
   }
+
+  measure: sch_revenue_amount{
+    label: "SCH Revenue Amount"
+    type: number
+    sql: ${rev_schedules_all.revenue_amount};;
+    drill_fields: [detail*]
+  }
+
+  measure: def_billed_amount{
+    label: "SCH Revenue Amount"
+    type: number
+    sql: ${rev_def_schedules_all.entered_amount};;
+    drill_fields: [detail*]
+  }
+
+  measure: def_billed_amount_sum{
+    label: "SCH Revenue Amount"
+    type: number
+    sql: ${rev_def_schedules_all.sum_billed_amount};;
+    drill_fields: [detail*]
+  }
+
+
+
 
 
   # ----- Sets of fields for drilling ------

@@ -234,6 +234,7 @@ view: rev_def_schedules_all {
     drill_fields: [detail*]
   }
 
+
   measure: sum_invoice_amount {
     type: sum
     sql: ${invoice_amount};;
