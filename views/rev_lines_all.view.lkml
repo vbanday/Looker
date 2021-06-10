@@ -1554,7 +1554,7 @@ view: rev_lines_all {
   }
 
   measure: sch_revenue_amount_sum{
-    label: "SCH Revenue Amount"
+    label: "SCH Revenue Amount SUM"
     type: number
     sql: ${rev_schedules_all.sum_revenue_amount};;
     drill_fields: [detail*]
@@ -1568,14 +1568,14 @@ view: rev_lines_all {
   }
 
   measure: def_billed_amount{
-    label: "SCH Revenue Amount"
+    label: "DEF Billed Amount"
     type: number
     sql: ${rev_def_schedules_all.entered_amount};;
     drill_fields: [detail*]
   }
 
   measure: def_billed_amount_sum{
-    label: "SCH Revenue Amount"
+    label: "DEF Billed Amount SUM"
     type: number
     sql: ${rev_def_schedules_all.sum_billed_amount};;
     drill_fields: [detail*]
