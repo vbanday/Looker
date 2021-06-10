@@ -176,6 +176,24 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     sql: ${TABLE}.BILLING_CHANNEL_ID ;;
   }
 
+  dimension: Billing_Channel{
+    type: string
+    sql: ${TABLE}.BILLING_CHANNEL ;;
+  }
+
+
+  dimension: account_number {
+    type: string
+    sql: ${TABLE}.account_number ;;
+  }
+
+
+  dimension: account_name {
+    type: string
+    sql: ${TABLE}.account_name ;;
+  }
+
+
   dimension: cost_price
   {type: number
     sql:${TABLE}.cost_price;;}
