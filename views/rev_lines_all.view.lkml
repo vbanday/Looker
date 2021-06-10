@@ -1556,7 +1556,7 @@ view: rev_lines_all {
   measure: sch_revenue_amount{
     label: "SCH Revenue Amount"
     type: number
-    sql: ${rev_schedules_all.revenue_amount};;
+    sql: ${rev_schedules_all.sum_revenue_amount};;
     drill_fields: [detail*]
   }
 
