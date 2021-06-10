@@ -54,6 +54,7 @@ view: rev_def_schedules_all {
 
   dimension: def_sch_id {
     type: number
+    primary_key: yes
     sql: ${TABLE}.DEF_SCH_ID ;;
   }
 
