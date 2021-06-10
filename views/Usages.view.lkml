@@ -37,7 +37,8 @@ view: usages {
         ola.BILLING_CHANNEL_ID,
         ola.BILLING_CHANNEL,
         lbcus.account_number,
-        lbcus.account_name
+        lbcus.account_name,
+        oda.price
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -84,6 +85,10 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   dimension: payment_line_id
   {type: number
     sql:${TABLE}.payment_line_id;;}
+
+  dimension: price
+  {type: number
+    sql:${TABLE}.price;;}
 
   dimension: supplier_name
   {type: string
@@ -279,6 +284,12 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   }
 
 
+  measure: sum_price {
+    type: sum
+    sql: ${price} ;;
+    drill_fields: [payments*]
+  }
+
   measure: sum_cost {
     type: sum
     sql: ${cost} ;;
@@ -332,7 +343,8 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
 
   set: payments {
     fields: [
-      supplier_name
+      account_name
+      ,supplier_name
       ,order_number
       ,order_status
       ,order_category
