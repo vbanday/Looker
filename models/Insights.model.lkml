@@ -12,13 +12,7 @@ persist_with: recvue_analytics_default_datagroup
 
 
 explore: contracts {}
-explore: usages {
-  join: order_lines_all  {
-    type: full_outer
-    sql_on: ${order_lines_all.line_id}=${usages.line_id} ;;
-    relationship: one_to_many
-  }
-}
+explore: usages {}
 explore: billing {}
 explore: revenue {}
 explore: payments {}

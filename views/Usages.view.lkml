@@ -39,7 +39,8 @@ view: usages {
         lbcus.account_number,
         lbcus.account_name,
         oda.price,
-        oda.line_id
+        oda.line_id,
+        (select sum(revenue_amount) from adorb.order_lines_all ola1 where  AND oda1.line_id=ola.line_id ) line_revenue_amount
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -205,6 +206,11 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   }
 
 
+  dimension: line_revenue_amount
+  {type: number
+    sql:${TABLE}.line_revenue_amount;;
+  }
+
   dimension: cost_price
   {type: number
     sql:${TABLE}.cost_price;;}
@@ -314,6 +320,11 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     drill_fields: [payments*]
   }
 
+  measure: sum_line_revenue_amount {
+    type: sum
+    sql: ${line_revenue_amount} ;;
+    drill_fields: [payments*]
+  }
 
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
