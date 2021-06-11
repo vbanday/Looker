@@ -770,7 +770,7 @@ view: rev_lines_all {
 
   dimension_group: effective_end {
     type: time
-    label: "Revenue End Date"
+    label: "Revenue End"
     timeframes: [
       raw,
       date,
@@ -786,7 +786,7 @@ view: rev_lines_all {
 
   dimension_group: effective_start {
     type: time
-    label: "Revenue Start Date"
+    label: "Revenue Start"
     timeframes: [
       raw,
       date,
