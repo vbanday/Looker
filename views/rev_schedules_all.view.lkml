@@ -857,9 +857,9 @@ view: rev_schedules_all {
       rev_lines_all.transaction_currency,
       rev_lines_all.functional_currency,
       rev_lines_all.cumulative_net_revenue,
-      rev_schedules_all.period_carve_in_out,
       rev_schedules_all.revenue_amount,
-      rev_schedules_all.sum_unrecognized_revenue,
+      rev_schedules_all.unscheduled_revenue,
+      rev_def_schedules_all.entered_amount,
       rev_def_schedules_all.Unbilled_Revenue,
       rev_def_schedules_all.invoice_amount
     ]
