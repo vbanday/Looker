@@ -40,7 +40,7 @@ view: usages {
         lbcus.account_name,
         oda.price,
         oda.line_id,
-        SUM(ola.revenue_amount) OVER (PARTITION BY ola.order_id) AS line_revenue_amount
+        SUM(ola.unit_price) OVER (PARTITION BY ola.order_id) AS line_revenue_amount
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
