@@ -1592,7 +1592,7 @@ view: rev_lines_all {
 
    set: pobdtl {
     fields: [
-      order_header_all.order_number,
+            order_header_all.order_number,
       order_lines_all.line_number,
       order_header_all.booked_date,
       order_header_all.effective_start_date,
