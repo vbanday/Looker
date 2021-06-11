@@ -828,8 +828,9 @@ view: rev_schedules_all {
       order_header_all.order_number,
       order_lines_all.line_number,
       order_header_all.booked_date,
-      order_header_all.effective_start_date,
-      order_header_all.effective_end_date,
+      rev_lines_all.effective_start,
+      rev_lines_all.effective_end,
+      rev_schedules_all.quantity,
       rev_schedules_all.gl_date,
       rev_lines_all.bill_to_customer_name,
       rev_lines_all.rev_contract_number,
@@ -843,7 +844,9 @@ view: rev_schedules_all {
       rev_lines_all.functional_currency,
       rev_lines_all.cumulative_net_revenue,
       rev_schedules_all.revenue_amount,
-      rev_schedules_all.sum_unrecognized_revenue
+      rev_schedules_all.sum_unrecognized_revenue,
+      rev_def_schedules_all.entered_amount,
+      rev_def_schedules_all.Unbilled_Revenue
     ]
   }
 
