@@ -1592,7 +1592,7 @@ view: rev_lines_all {
 
    set: pobdtl {
     fields: [
-            order_header_all.order_number,
+      order_header_all.order_number,
       order_lines_all.line_number,
       order_header_all.booked_date,
       order_header_all.effective_start_date,
@@ -1611,8 +1611,10 @@ view: rev_lines_all {
       rev_lines_all.transaction_currency,
       rev_lines_all.functional_currency,
       rev_lines_all.cumulative_net_revenue,
+      rev_schedules_all.period_carve_in_out,
       rev_schedules_all.revenue_amount,
-      rev_schedules_all.unscheduled_revenue,
+      rev_schedules_all.sum_unrecognized_revenue,
+      rev_def_schedules_all.entered_amount,
       rev_def_schedules_all.Unbilled_Revenue,
       rev_def_schedules_all.invoice_amount
     ]
