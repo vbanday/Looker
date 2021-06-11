@@ -1580,10 +1580,13 @@ view: rev_lines_all {
       rev_lines_all.rev_contract_number,
       rev_lines_all.item_name,
       rev_lines_all.pob_type,
+      rev_lines_all.pob_sch_type,
+      rev_lines_all.pob_rel_method,
       rev_lines_all.pob_rule_name,
       rev_lines_all.ledger_name,
       rev_lines_all.transaction_currency,
       rev_lines_all.functional_currency,
+      rev_lines_all.cumulative_net_revenue,
       rev_schedules_all.revenue_amount
     ]
   }
