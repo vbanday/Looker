@@ -40,7 +40,9 @@ view: usages {
         lbcus.account_name,
         oda.price,
         oda.line_id,
-        SUM(ola.unit_price) OVER (PARTITION BY ola.order_id) AS line_revenue_amount
+        ola.ordered_quantity,
+        ola.unit_price,
+        SUM(NVL(ola.unit_price,1)*NVL(ordered_quantity,1)) OVER (PARTITION BY ola.order_id) AS line_revenue_amount
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -96,6 +98,17 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   dimension: price
   {type: number
     sql:${TABLE}.price;;}
+
+
+  dimension: unit_price
+  {type: number
+    sql:${TABLE}.unit_price;;}
+
+
+  dimension: ordered_quantity
+  {type: number
+    sql:${TABLE}.ordered_quantity;;}
+
 
   dimension: supplier_name
   {type: string
@@ -325,6 +338,21 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     sql: ${line_revenue_amount} ;;
     drill_fields: [payments*]
   }
+
+
+  measure: sum_unit_price {
+    type: sum
+    sql: ${unit_price} ;;
+    drill_fields: [payments*]
+  }
+
+   measure: sum_ordered_quantity {
+    type: sum
+    sql: ${ordered_quantity} ;;
+    drill_fields: [payments*]
+  }
+
+
 
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
