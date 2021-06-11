@@ -789,6 +789,14 @@ view: rev_schedules_all {
     drill_fields: [pobdtl*]
   }
 
+
+  measure: sum_recognized_amount{
+    type: sum
+    filters: [status: "RECOGNIZED"]
+    sql: ${revenue_amount} ;;
+    drill_fields: [pobdtl*]
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
