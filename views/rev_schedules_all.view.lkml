@@ -855,7 +855,8 @@ view: rev_schedules_all {
       rev_schedules_all.revenue_amount,
       rev_schedules_all.sum_unrecognized_revenue,
       rev_def_schedules_all.entered_amount,
-      rev_def_schedules_all.Unbilled_Revenue
+      rev_def_schedules_all.Unbilled_Revenue,
+      rev_def_schedules_all.invoice_amount
     ]
   }
 
