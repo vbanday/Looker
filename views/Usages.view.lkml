@@ -29,7 +29,7 @@ view: usages {
         oda.DELIVERY_DATE_FROM  Delivery_Date_From,
         oda.DELIVERY_DATE_TO  Delivery_Date_To,
         oda.DELIVERY_REFERENCE Delivery_Reference,
-        pla.TRX_NUMBER,
+        pla.trx_number,
         NVL(oda.cost,pla.cost_price) cost,
         NVL(oda.delivered_quantity, pla.quantity) delivered_quantity,
         NVL(oda.payable_amt,pla.total_amount) payable_amt,
@@ -38,7 +38,8 @@ view: usages {
         ola.BILLING_CHANNEL,
         lbcus.account_number,
         lbcus.account_name,
-        oda.price
+        oda.price,
+        oda.line_id
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -77,6 +78,11 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   AND ssa.supplier_site_id(+)=opp.supplier_site_id;;
   }
 
+
+
+ dimension: line_id
+  {type: number
+    sql:${TABLE}.line_id;;}
 
   dimension: partner_payment_id
   {type: number
