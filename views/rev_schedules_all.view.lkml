@@ -792,8 +792,8 @@ view: rev_schedules_all {
 
   measure: sum_recognized_amount{
     type: sum
-   # filters: [status: "RECOGNIZED"]
-    filters: [status: "DEFERRED"]
+    filters: [status: "RECOGNIZED"]
+   # filters: [status: "DEFERRED"]
     sql: ${revenue_amount} ;;
     drill_fields: [pobdtl*]
   }
