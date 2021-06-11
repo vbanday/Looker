@@ -783,7 +783,7 @@ view: rev_schedules_all {
     sql:  ${revenue_amount}-${bill_sch_amt} ;;
   }
 
-  measure: sum_unrecognized_revenue{
+  measure: sum_unscheduled_revenue{
     type: number
     sql:  ${rev_lines_all.sum_cumulative_net_revenue}-${rev_schedules_all.sum_revenue_amount} ;;
     drill_fields: [pobdtl*]
@@ -794,6 +794,13 @@ view: rev_schedules_all {
     type: sum
     filters: [status: "RECOGNIZED"]
    # filters: [status: "DEFERRED"]
+    sql: ${revenue_amount} ;;
+    drill_fields: [pobdtl*]
+  }
+
+  measure: sum_unrecognized_amount{
+    type: sum
+    filters: [status: "DEFERRED"]
     sql: ${revenue_amount} ;;
     drill_fields: [pobdtl*]
   }
@@ -843,12 +850,12 @@ view: rev_schedules_all {
       rev_lines_all.transaction_currency,
       rev_lines_all.functional_currency,
       rev_lines_all.cumulative_net_revenue,
+      rev_schedules_all.period_carve_in_out,
       rev_schedules_all.revenue_amount,
       rev_schedules_all.sum_unrecognized_revenue,
       rev_def_schedules_all.entered_amount,
       rev_def_schedules_all.Unbilled_Revenue
     ]
   }
-
 
 }
