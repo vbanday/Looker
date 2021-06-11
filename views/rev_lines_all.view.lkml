@@ -1571,19 +1571,20 @@ view: rev_lines_all {
   set: detail {
     fields: [
       order_header_all.order_number,
-      order_header_all.order_type,
+      order_lines_all.line_number,
+      order_header_all.booked_date,
       order_header_all.effective_start_date,
       order_header_all.effective_end_date,
-      order_lines_all.line_type,
-      rev_lines_all.rev_contract_number,
+      rev_schedules_all.gl_date,
       rev_lines_all.bill_to_customer_name,
+      rev_lines_all.rev_contract_number,
       rev_lines_all.item_name,
-      rev_lines_all.ledger_name,
-      rev_lines_all.ssp_rule_name,
-      rev_lines_all.ssp_group_name,
+      rev_lines_all.pob_type,
       rev_lines_all.pob_rule_name,
-      rev_lines_all.revenue_amount,
-      rev_schedules_all.bill_sch_amt
+      rev_lines_all.ledger_name,
+      rev_lines_all.transaction_currency,
+      rev_lines_all.functional_currency,
+      rev_schedules_all.revenue_amount
     ]
   }
 
