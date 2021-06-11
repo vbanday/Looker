@@ -838,6 +838,7 @@ view: rev_schedules_all {
       rev_lines_all.effective_start,
       rev_lines_all.effective_end,
       rev_schedules_all.quantity,
+      rev_lines_all.revenue_amount,
       rev_schedules_all.gl_date,
       rev_lines_all.bill_to_customer_name,
       rev_lines_all.rev_contract_number,
