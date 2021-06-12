@@ -42,7 +42,12 @@ view: usages {
         oda.line_id,
         ola.ordered_quantity,
         ola.unit_price,
-        SUM(NVL(ola.unit_price,1)*NVL(ordered_quantity,1)) OVER (PARTITION BY ola.order_id) AS line_revenue_amount
+        (SELECT SUM(ola.unit_price*NVL(ola.ordered_quantity,1)) Amount
+           FROM adorb.order_lines_all ola,
+                adorb.billing_schedules_all bsa
+         WHERE ola.order_id=oha.order_id
+           AND bsa.line_id=ola.line_id
+           AND bsa.order_id=oha.order_id) order_revenue_amount
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
@@ -219,9 +224,9 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   }
 
 
-  dimension: line_revenue_amount
+  dimension: order_revenue_amount
   {type: number
-    sql:${TABLE}.line_revenue_amount;;
+    sql:${TABLE}.order_revenue_amount;;
   }
 
   dimension: cost_price
@@ -333,9 +338,9 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     drill_fields: [payments*]
   }
 
-  measure: sum_line_revenue_amount {
-    type: sum
-    sql: ${line_revenue_amount} ;;
+  measure: order_revenue_amount_M {
+    type: number
+    sql: ${order_revenue_amount} ;;
     drill_fields: [payments*]
   }
 

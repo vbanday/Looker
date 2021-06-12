@@ -783,18 +783,18 @@ view: rev_schedules_all {
     sql:  ${revenue_amount}-${bill_sch_amt} ;;
   }
 
+  measure: unscheduled_revenue{
+    type: number
+    sql:  ${rev_lines_all.cumulative_net_revenue}-${rev_schedules_all.revenue_amount} ;;
+    drill_fields: [pobdtl*]
+  }
+
   measure: sum_unscheduled_revenue{
     type: number
     sql:  ${rev_lines_all.sum_cumulative_net_revenue}-${rev_schedules_all.sum_revenue_amount} ;;
     drill_fields: [pobdtl*]
   }
 
-
-  measure: unscheduled_revenue{
-    type: number
-    sql:  ${rev_lines_all.cumulative_net_revenue}-${rev_schedules_all.revenue_amount} ;;
-    drill_fields: [pobdtl*]
-  }
 
   measure: sum_recognized_amount{
     type: sum
