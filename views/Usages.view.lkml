@@ -338,12 +338,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     drill_fields: [payments*]
   }
 
-  measure: order_revenue_amount_M {
-    type: number
-    sql: ${order_revenue_amount} ;;
-    drill_fields: [payments*]
-  }
-
 
   measure: sum_unit_price {
     type: sum
