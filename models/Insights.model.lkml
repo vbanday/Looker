@@ -38,7 +38,7 @@ explore: rev_lines_all{
     relationship: one_to_many
   }
   join: rev_def_schedules_all {
-    type: full_outer
+    type: left_outer
     sql_on:  ${rev_lines_all.rev_line_id}=${rev_def_schedules_all.rev_line_id} ;;
     relationship: one_to_many
   }
