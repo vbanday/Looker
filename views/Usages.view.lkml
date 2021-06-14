@@ -339,7 +339,6 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     drill_fields: [payments*]
   }
 
-
   measure: sum_unit_price {
     type: sum
     sql: ${unit_price} ;;
@@ -352,7 +351,11 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
     drill_fields: [payments*]
   }
 
-
+  measure: sum_delivery_amount {
+    type: sum
+    sql: ${usages.delivered_quantity}*${usages.price} ;;
+    drill_fields: [payments*]
+  }
 
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
