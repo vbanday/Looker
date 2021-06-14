@@ -20,6 +20,7 @@ explore: geturl {}
 explore: forecast {}
 explore: rskopr {}
 explore: compensation {}
+explore: credits_waterfall {}
 
 explore: rev_lines_all{
   join: order_header_all {
