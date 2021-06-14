@@ -249,7 +249,7 @@ WHERE   oha.legal_entity_id = le.legal_entity_id (+)
   {type: string
     sql:${TABLE}.order_number;;
     html:
-    <a href="https://preview.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}" target="_blank">{{order_number}}</a>;;
+    <a href="https://https://demo2.recvue.com/pages/orderDashboard.xhtml?tab=0&orderId={{order_id}}" target="_blank">{{order_number}}</a>;;
   }
 
   dimension: reference_number
