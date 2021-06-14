@@ -46,8 +46,9 @@ view: usages {
            FROM adorb.order_lines_all ola,
                 adorb.billing_schedules_all bsa
          WHERE ola.order_id=oha.order_id
-           AND bsa.line_id=ola.line_id
-           AND bsa.order_id=oha.order_id) order_revenue_amount
+           AND bsa.line_id(+)=ola.line_id
+           AND bsa.order_id(+)=ola.order_id
+          ) order_revenue_amount
 FROM adorb.payment_lines_all pla,
      adorb.product_master_all pma,
      adorb.order_lines_all ola,
