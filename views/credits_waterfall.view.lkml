@@ -8,6 +8,7 @@ view: credits_waterfall {
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
@@ -48,6 +49,7 @@ view: credits_waterfall {
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
@@ -88,6 +90,7 @@ view: credits_waterfall {
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
@@ -113,6 +116,7 @@ view: credits_waterfall {
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
